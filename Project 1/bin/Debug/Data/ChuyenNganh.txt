@@ -1,0 +1,5 @@
+1#1251#Công Nghệ Web#12349876#Chuyên Về Web#Hoạt Động#125
+2#1252#Công Nghệ Mobile#17890783#Chuyên Về Mobile#Hoạt Động#125
+3#1253#Kiểm Thử#18764567#Chuyên Về Kiểm Thử Và Đảm Bảo Chất Lượng#Hoạt Động#125
+4#1011#Mạng Máy Tính Và Truyền Thông#56743445#Chuyên Về Mạng Và Truyền Thông#Hoạt Động#101
+5#1012#Iot#15678987#Chuyên Về Iot#Hoạt Động#101
