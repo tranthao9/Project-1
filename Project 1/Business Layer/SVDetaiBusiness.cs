@@ -211,5 +211,48 @@ namespace Project_1.Business_Layer
                 }
             return ok;
         }
+        public double Diemgvpb(SVDetai x)
+        {
+            double a = 0, b = 0;
+            if (x.Madetai == x.Tuandt.Madettai)
+            {
+                if (x.Tuandt.Matuan == 8)
+                    a = x.Tuandt.Diem;
+                if (x.Tuandt.Matuan == 12)
+                    b = x.Tuandt.Matuan;
+            }
+            if (a != 0 || b != 0)
+                return (a + b) / 2;
+            else
+                return .0;
+        }
+
+
+        public double TongDiem(SVDetai x)
+        {
+            return ((x.DiemGVHD + Diemgvpb(x)) / 2 + x.DiemBV) / 2;
+        }
+        public string xeploai(SVDetai x)
+        {
+            if (TongDiem(x) >= 9)
+                return "Xuất Sắc";
+            else if (TongDiem(x) >= 8)
+                return "Giỏi";
+            else if (TongDiem(x) >= 7)
+                return "Khá";
+            else if (TongDiem(x) >= 6)
+                return "Trung bình khá";
+            else if (TongDiem(x) >= 5)
+                return "Trung bình";
+            else
+                return "Yếu";
+        }
+        public string Danhgia(SVDetai x)
+        {
+            if (Diemgvpb(x) >= 5 && x.DiemBV >= 5 && x.DiemGVHD >= 5)
+                return "Đạt";
+            else
+                return "KHông đạt";
+        }
     }
 }

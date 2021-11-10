@@ -24,21 +24,21 @@ namespace Project_1
 			Console.SetWindowPosition(Console.CursorLeft, Console.CursorTop);
 			//FormKhoa a = new FormKhoa();
 			//FormSinhVien a = new FormSinhVien();
-			//FormGiangVien a = new FormGiangVien();
+			FormGiangVien a = new FormGiangVien();
 			//a.Menu();
 			//FormChuyenNganh a = new FormChuyenNganh();
 			//Formdetai a = new Formdetai();
 			//FormTuanDeTai a = new FormTuanDeTai();
-			FormSVdetai a = new FormSVdetai();
+			//FormSVdetai a = new FormSVdetai();
 			//FormLopHoc a = new FormLopHoc();
 			//FormNganh a = new FormNganh();
 			//FormLopSinhVien a = new FormLopSinhVien();
 			//FormDoAn a = new FormDoAn();
-			a.Nhap();
-			
+			//a.Nhap();
 
+			//FormSinhVien a = new FormSinhVien();
 			//FormMenu a = new FormMenu();
-			//a.GiaoDien();
+			a.Menu();
 			//do
 			//{
 			//	for(int i=0;i<50;i++)

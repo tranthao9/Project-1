@@ -19,5 +19,9 @@ namespace Project_1.Business_Layer.Interface
 		void Edit(int id, int ma, SVDetai newInfo);
 		bool ExistSV1(int ma);
 		bool ExistSV2(int ma,int msv);
+		double Diemgvpb(SVDetai x);
+		double TongDiem(SVDetai x);
+		string xeploai(SVDetai x);
+		string Danhgia(SVDetai x);
 	}
 }

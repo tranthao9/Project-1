@@ -150,49 +150,6 @@ namespace Project_1.Entities
 					diemgvhd = value;
 			}
 		}
-		public double Diemgvpb()
-		{
-			double a=0, b=0;
-			if (madtai == tuandt.Madettai)
-			{
-				if (tuandt.Matuan == 8)
-					a = tuandt.Diem;
-				if (tuandt.Matuan == 12)
-					b = tuandt.Matuan;
-			}	
-			if(a!=0 || b!=0)
-				return (a + b) / 2;
-			else
-				return .0;
-			
-		}
-		public double TongDiem()
-		{
-			return ((diemgvhd+Diemgvpb()) /2+ diembv) / 2; 
-		}
-		public string xeploai()
-		{
-			if (TongDiem() >= 9)
-				return "Xuất Sắc";
-			else if (TongDiem() >= 8)
-				return "Giỏi";
-			else if (TongDiem() >= 7)
-				return "Khá";
-			else if (TongDiem() >= 6)
-				return "Trung bình khá";
-			else if (TongDiem() >= 5)
-				return "Trung bình";
-			else
-				return "Yếu";
-
-		}
-		public string Danhgia()
-		{
-			if (tuandt.Diem >= 5 && this.diembv >= 5 && diemgvhd>=5)
-				return "Đạt";
-			else
-				return "KHông đạt";
-		}
 		#endregion
 
 		#region Các phương thức 

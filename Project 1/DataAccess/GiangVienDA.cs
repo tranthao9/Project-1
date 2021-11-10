@@ -72,15 +72,16 @@ namespace Project_1.DataAccess
 					int sttsv = Getma() + 1;
 					fw.Write(sttsv + "#" + gv.MaGV + "#" + gv.TenGV + "#" + gv.Namsinh + "#" + gv.Gioitinh + "#" + gv.Diachi + "#" + gv.SDT + "#" + gv.Email);
 				}
+			fw.Close();
 		}
 		//Thuật toán phương thức sửa trên danh sách, ghi lại tệp.
 		public void GhiLaiDanhsach(List<GiangVien> List)
 		{
 			StreamWriter fw = new StreamWriter(filetxt, false);
+			int i = 0;
 			foreach (GiangVien gv in List)
 			{
-				int sttsv = Getma() + 1;
-				fw.Write(sttsv + "#" + gv.MaGV + "#" + gv.TenGV + "#" + gv.Namsinh + "#" + gv.Gioitinh + "#" + gv.Diachi + "#" + gv.SDT + "#" + gv.Email);
+				fw.WriteLine(i++ + "#" + gv.MaGV + "#" + gv.TenGV + "#" + gv.Namsinh + "#" + gv.Gioitinh + "#" + gv.Diachi + "#" + gv.SDT + "#" + gv.Email); ;
 
 			}
 			fw.Close();
@@ -94,7 +95,8 @@ namespace Project_1.DataAccess
 			{
 				if (cn[i].MaGV == id)
 				{
-					cn[i] = new GiangVien(newInfo);
+					cn[i] = newInfo;
+					break;
 				}
 			}
 			GhiLaiDanhsach(cn);

@@ -149,7 +149,7 @@ namespace Project_1.UI
 				if (hoten == "") return;
 			} while (true);
 		}
-		static void Bang()
+		static void Bang(SinhVien a)
 		{
 			Console.Clear();
 			Console.SetCursorPosition(50, 5); Console.Write("╔══════════════════════════════════════════════════════════════════╗");
@@ -175,6 +175,13 @@ namespace Project_1.UI
 			Console.SetCursorPosition(50, 25); Console.Write("║   Email                  ║                                       ║");
 			Console.SetCursorPosition(50, 26); Console.Write("╚══════════════════════════════════════════════════════════════════╝");
 			Console.SetCursorPosition(50, 27); Console.WriteLine("Mời bạn bắt đầu nhập thông tin");
+			Console.SetCursorPosition(80, 7); Console.Write(a.MaSV);
+			Console.SetCursorPosition(80, 10); Console.Write(a.TenSV);
+			Console.SetCursorPosition(80, 13); Console.Write(a.Gioitinh);
+			Console.SetCursorPosition(80, 16); Console.Write("{0:d}", a.NamsinhSV);
+			Console.SetCursorPosition(80, 19); Console.Write(a.Diachi);
+			Console.SetCursorPosition(80, 22); Console.Write("0" + a.Sdt);
+			Console.SetCursorPosition(80, 25); Console.Write(a.Email);
 		}
 		public void Sua()
 		{
@@ -263,15 +270,10 @@ namespace Project_1.UI
 							switch (mode)
 							{
 								case 1:
-									Bang();
+									Bang(Bl.GetAllData()[i]);
 									while (true)
 									{
-										Console.SetCursorPosition(80, 10); Console.Write(Bl.GetAllData()[i].TenSV);
-										Console.SetCursorPosition(80, 13); Console.Write(Bl.GetAllData()[i].Gioitinh);
-										Console.SetCursorPosition(80, 16); Console.Write("{0:d}", Bl.GetAllData()[i].NamsinhSV);
-										Console.SetCursorPosition(80, 19); Console.Write(Bl.GetAllData()[i].Diachi);
-										Console.SetCursorPosition(80, 22); Console.Write("0" + Bl.GetAllData()[i].Sdt);
-										Console.SetCursorPosition(80, 25); Console.Write(Bl.GetAllData()[i].Email);
+										Console.SetCursorPosition(80, 7); Console.Write("                        ");
 										int tg = Project_1.Utility.Congcu.Ma(80, 7, 50, 28, Bl.GetAllData()[i].MaSV, 8, "Nhập sai dữ liệu mã sinh viên gồm 8 chữ số và khác 0 vui lòng nhập lại ! ");
 										SinhVien m = new SinhVien(tg, Bl.GetAllData()[i].TenSV, Bl.GetAllData()[i].NamsinhSV, Bl.GetAllData()[i].Gioitinh, Bl.GetAllData()[i].Diachi, Bl.GetAllData()[i].Sdt, Bl.GetAllData()[i].Email);
 										if (Bl.Exist(tg))
@@ -289,13 +291,8 @@ namespace Project_1.UI
 									}
 									break;
 								case 2:
-									Bang();
-									Console.SetCursorPosition(80, 7); Console.Write(Bl.GetAllData()[i].MaSV);
-									Console.SetCursorPosition(80, 13); Console.Write(Bl.GetAllData()[i].Gioitinh);
-									Console.SetCursorPosition(80, 16); Console.Write("{0:d}", Bl.GetAllData()[i].NamsinhSV);
-									Console.SetCursorPosition(80, 19); Console.Write(Bl.GetAllData()[i].Diachi);
-									Console.SetCursorPosition(80, 22); Console.Write("0" + Bl.GetAllData()[i].Sdt);
-									Console.SetCursorPosition(80, 25); Console.Write(Bl.GetAllData()[i].Email);
+									Bang(Bl.GetAllData()[i]);
+									Console.SetCursorPosition(80, 10); Console.Write("                        ");
 									string a = Project_1.Utility.Congcu.Ten(80, 10, 50, 28, Bl.GetAllData()[i].TenSV, "Tên sinh viên không được bỏ trống !");
 
 									Console.SetCursorPosition(50, 28); Console.WriteLine("Sinh Viên đã sửa thành công !!!                             ");
@@ -304,13 +301,8 @@ namespace Project_1.UI
 									Console.ReadKey();
 									break;
 								case 3:
-									Bang();
-									Console.SetCursorPosition(80, 7); Console.Write(Bl.GetAllData()[i].MaSV);
-									Console.SetCursorPosition(80, 10); Console.Write(Bl.GetAllData()[i].TenSV);
-									Console.SetCursorPosition(80, 16); Console.Write("{0:d}", Bl.GetAllData()[i].NamsinhSV);
-									Console.SetCursorPosition(80, 19); Console.Write(Bl.GetAllData()[i].Diachi);
-									Console.SetCursorPosition(80, 22); Console.Write("0" + Bl.GetAllData()[i].Sdt);
-									Console.SetCursorPosition(80, 25); Console.Write(Bl.GetAllData()[i].Email);
+									Bang(Bl.GetAllData()[i]);
+									Console.SetCursorPosition(80, 13); Console.Write("                        ");
 									string c = Project_1.Utility.Congcu.Gioitinh(80, 13, 50, 28, Bl.GetAllData()[i].Gioitinh);
 									SinhVien sv1 = new SinhVien(Bl.GetAllData()[i].MaSV, Bl.GetAllData()[i].TenSV, Bl.GetAllData()[i].NamsinhSV, c, Bl.GetAllData()[i].Diachi, Bl.GetAllData()[i].Sdt, Bl.GetAllData()[i].Email);
 									Console.SetCursorPosition(50, 28); Console.WriteLine("Sinh Viên đã sửa thành công !!!                                ");
@@ -319,13 +311,8 @@ namespace Project_1.UI
 									break;
 
 								case 4:
-									Bang();
-									Console.SetCursorPosition(80, 7); Console.Write(Bl.GetAllData()[i].MaSV);
-									Console.SetCursorPosition(80, 10); Console.Write(Bl.GetAllData()[i].TenSV);
-									Console.SetCursorPosition(80, 13); Console.Write(Bl.GetAllData()[i].Gioitinh);
-									Console.SetCursorPosition(80, 19); Console.Write(Bl.GetAllData()[i].Diachi);
-									Console.SetCursorPosition(80, 22); Console.Write("0" + Bl.GetAllData()[i].Sdt);
-									Console.SetCursorPosition(80, 25); Console.Write(Bl.GetAllData()[i].Email);
+									Bang(Bl.GetAllData()[i]);
+									Console.SetCursorPosition(80, 16); Console.Write("                        ");
 									DateTime dt = Project_1.Utility.Congcu.Namsinh(80, 16, 50, 28, Bl.GetAllData()[i].NamsinhSV);
 									SinhVien sv2 = new SinhVien(Bl.GetAllData()[i].MaSV, Bl.GetAllData()[i].TenSV, dt, Bl.GetAllData()[i].Gioitinh, Bl.GetAllData()[i].Diachi, Bl.GetAllData()[i].Sdt, Bl.GetAllData()[i].Email);
 									Console.SetCursorPosition(50, 28); Console.WriteLine("Sinh Viên đã sửa thành công !!!                            ");
@@ -333,13 +320,8 @@ namespace Project_1.UI
 									Console.ReadKey();
 									break;
 								case 5:
-									Bang();
-									Console.SetCursorPosition(80, 7); Console.Write(Bl.GetAllData()[i].MaSV);
-									Console.SetCursorPosition(80, 10); Console.Write(Bl.GetAllData()[i].TenSV);
-									Console.SetCursorPosition(80, 13); Console.Write(Bl.GetAllData()[i].Gioitinh);
-									Console.SetCursorPosition(80, 16); Console.Write("{0:d}", Bl.GetAllData()[i].NamsinhSV);
-									Console.SetCursorPosition(80, 22); Console.Write("0" + Bl.GetAllData()[i].Sdt);
-									Console.SetCursorPosition(80, 25); Console.Write(Bl.GetAllData()[i].Email);
+									Bang(Bl.GetAllData()[i]);
+									Console.SetCursorPosition(80,19); Console.Write("                        ");
 									string dc = Project_1.Utility.Congcu.Ten(80, 19, 50, 28, Bl.GetAllData()[i].Diachi, "Nhập sai dữ liệu, quê quán phải khác rỗng vui lòng nhập lại dữ liệu !");
 									SinhVien sv3 = new SinhVien(Bl.GetAllData()[i].MaSV, Bl.GetAllData()[i].TenSV, Bl.GetAllData()[i].NamsinhSV, Bl.GetAllData()[i].Gioitinh,dc, Bl.GetAllData()[i].Sdt, Bl.GetAllData()[i].Email);
 									Console.SetCursorPosition(50, 28); Console.WriteLine("Sinh Viên đã sửa thành công !!!                                 ");
@@ -347,13 +329,8 @@ namespace Project_1.UI
 									Console.ReadKey();
 									break;
 								case 6:
-									Bang();
-									Console.SetCursorPosition(80, 7); Console.Write(Bl.GetAllData()[i].MaSV);
-									Console.SetCursorPosition(80, 10); Console.Write(Bl.GetAllData()[i].TenSV);
-									Console.SetCursorPosition(80, 13); Console.Write(Bl.GetAllData()[i].Gioitinh);
-									Console.SetCursorPosition(80, 16); Console.Write("{0:d}", Bl.GetAllData()[i].NamsinhSV);
-									Console.SetCursorPosition(80, 19); Console.Write(Bl.GetAllData()[i].Diachi);
-									Console.SetCursorPosition(80, 25); Console.Write(Bl.GetAllData()[i].Email);
+									Bang(Bl.GetAllData()[i]);
+									Console.SetCursorPosition(80, 22); Console.Write("                        ");
 									int Sdt = Project_1.Utility.Congcu.Ma(80, 22, 50, 28, Bl.GetAllData()[i].Sdt, 9, "Nhập số điện thoại sai định dạng vui lòng nhập lại !");
 									SinhVien sv4 = new SinhVien(Bl.GetAllData()[i].MaSV, Bl.GetAllData()[i].TenSV, Bl.GetAllData()[i].NamsinhSV, Bl.GetAllData()[i].Gioitinh, Bl.GetAllData()[i].Diachi, Sdt, Bl.GetAllData()[i].Email);
 									Console.SetCursorPosition(50, 28); Console.WriteLine("Sinh Viên đã sửa thành công !!!                                   ");
@@ -361,21 +338,23 @@ namespace Project_1.UI
 									Console.ReadKey();
 									break;
 								case 7:
-									Bang();
-									Console.SetCursorPosition(80, 7); Console.Write(Bl.GetAllData()[i].MaSV);
-									Console.SetCursorPosition(80, 10); Console.Write(Bl.GetAllData()[i].TenSV);
-									Console.SetCursorPosition(80, 13); Console.Write(Bl.GetAllData()[i].Gioitinh);
-									Console.SetCursorPosition(80, 16); Console.Write("{0:d}", Bl.GetAllData()[i].NamsinhSV);
-									Console.SetCursorPosition(80, 19); Console.Write(Bl.GetAllData()[i].Diachi);
-									Console.SetCursorPosition(80, 22); Console.Write("0" + Bl.GetAllData()[i].Sdt);
+									Bang(Bl.GetAllData()[i]);
+									Console.SetCursorPosition(80, 25); Console.Write("                        ");
 									string Email = Project_1.Utility.Congcu.Email(80, 25, 20, 28, Bl.GetAllData()[i].Email);
-									SinhVien sv5 = new SinhVien(Bl.GetAllData()[i].MaSV, Bl.GetAllData()[i].TenSV, Bl.GetAllData()[i].NamsinhSV, Bl.GetAllData()[i].Gioitinh, Bl.GetAllData()[i].Diachi, Bl.GetAllData()[i].Sdt, Email);
+									SinhVien sv5 = new SinhVien(Bl.GetAllData()[i].MaSV, Bl.GetAllData()[i].TenSV, Bl.GetAllData()[i].NamsinhSV, Bl.GetAllData()[i].Gioitinh, Bl.GetAllData()[i].Diachi, Bl.GetAllData()[i].Sdt,Email);
 									Console.SetCursorPosition(50, 28); Console.WriteLine("Sinh Viên đã sửa thành công !!!                                   ");
 									Bl.Edit(Bl.GetAllData()[i].MaSV, Bl.GetAllData()[i]);
 									Console.ReadKey();
 									break;
 								case 8:
-									Bang();
+									Bang(Bl.GetAllData()[i]);
+									Console.SetCursorPosition(80, 7); Console.Write("                        ");
+									Console.SetCursorPosition(80,10); Console.Write("                        ");
+									Console.SetCursorPosition(80, 13); Console.Write("                        ");
+									Console.SetCursorPosition(80, 16); Console.Write("                        ");
+									Console.SetCursorPosition(80, 19); Console.Write("                        ");
+									Console.SetCursorPosition(80, 22); Console.Write("                        ");
+									Console.SetCursorPosition(80, 25); Console.Write("                        ");
 									while (true)
 									{
 										int ma1 = Project_1.Utility.Congcu.Ma(80, 7, 50, 28, Bl.GetAllData()[i].MaSV, 8, "Nhập sai dữ liệu mã sinh viên gồm 8 chữ số và khác 0 vui lòng nhập lại ! ");

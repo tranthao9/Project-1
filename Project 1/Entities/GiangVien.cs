@@ -24,7 +24,6 @@ namespace Project_1.Entities
 			get { return maGV; }
 			set
 			{
-				if (value >= 1 && value.ToString().Length == 8)
 					maGV = value;
 			}
 		}
@@ -41,7 +40,6 @@ namespace Project_1.Entities
 			get { return ngaysinhGV; }
 			set
 			{
-				if (value != null)
 					ngaysinhGV = value;
 			}
 		}
@@ -50,7 +48,6 @@ namespace Project_1.Entities
 			get { return hotenGV; }
 			set
 			{
-				if (value != "")
 					hotenGV = value;
 			}
 		}
@@ -59,7 +56,6 @@ namespace Project_1.Entities
 			get { return gioiTinh; }
 			set
 			{
-				if (value != "")
 					gioiTinh = value;
 			}
 		}
@@ -68,7 +64,6 @@ namespace Project_1.Entities
 			get { return diachi; }
 			set
 			{
-				if (value != "")
 					diachi = value;
 			}
 		}
@@ -77,7 +72,6 @@ namespace Project_1.Entities
 			get { return email; }
 			set
 			{
-				if (value != "")
 					email = value;
 			}
 		}

@@ -78,10 +78,10 @@ namespace Project_1.UI
 				Console.SetCursorPosition(x + 41 + tsv + tendt + tengvhd, y); Console.Write(list[i].GiangvienPB.TenGV);
 				Console.SetCursorPosition(x + 43 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(list[i].DiemBV);
 				Console.SetCursorPosition(x + 52 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(list[i].DiemGVHD);
-				Console.SetCursorPosition(x + 63 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(list[i].Diemgvpb());
-				Console.SetCursorPosition(x + 74 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(list[i].TongDiem());
-				Console.SetCursorPosition(x + 86 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(list[i].xeploai());
-				Console.SetCursorPosition(x + 100 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(list[i].Danhgia());
+				Console.SetCursorPosition(x + 63 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(BL.Diemgvpb( list[i]));
+				Console.SetCursorPosition(x + 74 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(BL.TongDiem( list[i]));
+				Console.SetCursorPosition(x + 86 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(BL.xeploai( list[i]));
+				Console.SetCursorPosition(x + 100 + tsv + tendt + tengvpb + tengvhd, y); Console.Write(BL.Danhgia( list[i]));
 				if ((d) == n + 1) break;
 			}
 			Console.WriteLine();
