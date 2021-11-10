@@ -76,10 +76,10 @@ namespace Project_1.DataAccess
 		public void GhiLaiDanhsach(List<ChuyenNganh> List)
 		{
 			StreamWriter fw = new StreamWriter(ftxt, false);
+			int t = 0;
 			foreach (ChuyenNganh cn in List)
 			{
-				int sttcn = STTchuyennganh() + 1;
-				fw.WriteLine(sttcn + "#" + cn.Machnganh + "#" + cn.Tenchnganh + "#" + cn.Maphutrach + "#" + cn.Mota + "#" + cn.Trangthai + "#" + cn.Manganh);
+				fw.WriteLine(t++ + "#" + cn.Machnganh + "#" + cn.Tenchnganh + "#" + cn.Maphutrach + "#" + cn.Mota + "#" + cn.Trangthai + "#" + cn.Manganh);
 
 			}
 			fw.Close();

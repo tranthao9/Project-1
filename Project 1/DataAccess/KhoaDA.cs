@@ -76,10 +76,10 @@ namespace Project_1.DataAccess.Interface
 		public void GhiLaiDanhsach(List<Khoa> List)
 		{
 			StreamWriter fw = new StreamWriter(ftxt, false);
+			int i = 0;
 			foreach (Khoa n in List)
 			{
-				int sttk = STTkhoa() + 1;
-				fw.Write(sttk + "#" + n.Makhoa + "#" + n.Tenkhoa + "#" + n.Matruongkhoa + "#" + n.Mota + "#" + n.Trangthai);
+				fw.Write(i++ + "#" + n.Makhoa + "#" + n.Tenkhoa + "#" + n.Matruongkhoa + "#" + n.Mota + "#" + n.Trangthai);
 
 			}
 			fw.Close();

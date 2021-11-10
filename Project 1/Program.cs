@@ -22,9 +22,9 @@ namespace Project_1
 			Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 			Console.SetCursorPosition(Console.CursorTop, Console.CursorLeft);
 			Console.SetWindowPosition(Console.CursorLeft, Console.CursorTop);
-			//FormKhoa a = new FormKhoa();
+			FormKhoa a = new FormKhoa();
 			//FormSinhVien a = new FormSinhVien();
-			FormGiangVien a = new FormGiangVien();
+			//FormGiangVien a = new FormGiangVien();
 			//a.Menu();
 			//FormChuyenNganh a = new FormChuyenNganh();
 			//Formdetai a = new Formdetai();

@@ -68,7 +68,7 @@ namespace Project_1.DataAccess
 				if (n.Manganh != mach)
 				{
 					int sttn = STTNganh() + 1;
-					fw.Write(sttn + "#" + n.Manganh + "#" + n.Tennganh + "#" + n.Matruongnganh + "#" + n.Mota + "#" + n.Trangthai+ "#" + n.Makhoa);
+					fw.WriteLine(sttn + "#" + n.Manganh + "#" + n.Tennganh + "#" + n.Matruongnganh + "#" + n.Mota + "#" + n.Trangthai+ "#" + n.Makhoa);
 				}
 			fw.Close();
 		}
@@ -76,10 +76,10 @@ namespace Project_1.DataAccess
 		public void GhiLaiDanhsach(List<Nganh> List)
 		{
 			StreamWriter fw = new StreamWriter(ftxt, false);
+			int i = 0;
 			foreach (Nganh n in List)
 			{
-				int sttn = STTNganh() + 1;
-				fw.Write(sttn + "#" + n.Manganh + "#" + n.Tennganh + "#" + n.Matruongnganh + "#" + n.Mota + "#" + n.Trangthai + "#" + n.Makhoa);
+				fw.WriteLine(i++ + "#" + n.Manganh + "#" + n.Tennganh + "#" + n.Matruongnganh + "#" + n.Mota + "#" + n.Trangthai + "#" + n.Makhoa);
 
 			}
 			fw.Close();

@@ -53,7 +53,7 @@ namespace Project_1.UI
 			Console.SetCursorPosition(x + 34+t+ten, y); Console.Write("MÃ NGÀNH");
 			Console.SetCursorPosition(x + 50+t+ten, y); Console.Write("MÔ TẢ");
 			Console.SetCursorPosition(x + 55+ten+t+mota, y); Console.Write("TRẠNG THÁI");
-			int d = 0;
+			int d = 1;
 			for(int i=list.Count-1;i>=0;i--)
 			{
 				y = y + 1;
@@ -64,7 +64,7 @@ namespace Project_1.UI
 				Console.SetCursorPosition(x + 34+ten+t, y); Console.Write(list[i].Manganh);
 				Console.SetCursorPosition(x + 50+ten+t, y); Console.Write(list[i].Mota);
 				Console.SetCursorPosition(x + 55 + t+ten + mota, y); Console.Write(list[i].Trangthai);
-				if ((d) == n) break;
+				if ((d) == n+1) break;
 			}
 			Console.WriteLine();
 			Console.WriteLine();
@@ -296,7 +296,7 @@ namespace Project_1.UI
 										}
 										else
 										{
-											Console.SetCursorPosition(50, 25); Console.WriteLine("Sinh Viên đã sửa thành công !!!                          ");
+											Console.SetCursorPosition(50, 25); Console.WriteLine("Chuyên ngành đã sửa thành công !!!                          ");
 											ChuyenNganh m = new ChuyenNganh(tg, BL.GetAllData()[i].Tenchnganh, BL.GetAllData()[i].Maphutrach, BL.GetAllData()[i].Mota, BL.GetAllData()[i].Trangthai, BL.GetAllData()[i].Manganh);
 											BL.Edit(ma, m);
 											break;
@@ -307,7 +307,7 @@ namespace Project_1.UI
 									Bang(BL.GetAllData()[i]);
 									Console.SetCursorPosition(80, 10); Console.Write("                        ");
 									string ten = Project_1.Utility.Congcu.Ten(80, 10, 50, 25, BL.GetAllData()[i].Tenchnganh, "Nhập sai dữ liệu, tên chuyên ngành phải khác rỗng vui lòng nhập lại dữ liệu !");
-									Console.SetCursorPosition(50, 25); Console.WriteLine("Sinh Viên đã sửa thành công !!!                             ");
+									Console.SetCursorPosition(50, 25); Console.WriteLine("Chuyên ngành đã sửa thành công !!!                             ");
 									ChuyenNganh m2 = new ChuyenNganh(BL.GetAllData()[i].Machnganh, ten, BL.GetAllData()[i].Maphutrach, BL.GetAllData()[i].Mota, BL.GetAllData()[i].Trangthai, BL.GetAllData()[i].Manganh);
 									BL.Edit(ma, m2);
 									Console.ReadKey();
@@ -317,7 +317,7 @@ namespace Project_1.UI
 									Console.SetCursorPosition(80, 13); Console.Write("                        ");
 									string mota = Project_1.Utility.Congcu.Ten(80, 13, 50, 25, BL.GetAllData()[i].Mota, "Nhập sai dữ liệu, mô tả phải khác rỗng vui lòng nhập lại dữ liệu !");
 									ChuyenNganh m3 = new ChuyenNganh(BL.GetAllData()[i].Machnganh, BL.GetAllData()[i].Tenchnganh, BL.GetAllData()[i].Maphutrach, mota, BL.GetAllData()[i].Trangthai, BL.GetAllData()[i].Manganh);
-									Console.SetCursorPosition(50, 25); Console.WriteLine("Sinh Viên đã sửa thành công !!!                                ");
+									Console.SetCursorPosition(50, 25); Console.WriteLine("Chuyên ngành đã sửa thành công !!!                                ");
 									BL.Edit(ma, m3);
 									Console.ReadKey();
 									break;
@@ -327,7 +327,7 @@ namespace Project_1.UI
 									Console.SetCursorPosition(80, 16); Console.Write("                        ");
 									string trangthai = Project_1.Utility.Congcu.Ten(80, 16, 50, 25, BL.GetAllData()[i].Trangthai, "Nhập sai dữ liệu, trạng thái phải khác rỗng vui lòng nhập lại dữ liệu !");
 									ChuyenNganh m4 = new ChuyenNganh(BL.GetAllData()[i].Machnganh, BL.GetAllData()[i].Tenchnganh, BL.GetAllData()[i].Maphutrach, BL.GetAllData()[i].Mota,trangthai, BL.GetAllData()[i].Manganh);
-									Console.SetCursorPosition(50, 25); Console.WriteLine("Sinh Viên đã sửa thành công !!!                            ");
+									Console.SetCursorPosition(50, 25); Console.WriteLine("Chuyên ngành đã sửa thành công !!!                            ");
 									BL.Edit(ma, m4);
 									Console.ReadKey();
 									break;
@@ -339,7 +339,7 @@ namespace Project_1.UI
 										int mpt = Project_1.Utility.Congcu.Ma(80, 19, 50, 25, BL.GetAllData()[i].Maphutrach, 8, "Nhập sai dữ liệu, mã giảng viên gồm 8 chữ số !");
 										if (BL.ExistKTGV(mpt))
 										{
-											Console.SetCursorPosition(50, 25); Console.WriteLine("Sinh Viên đã sửa thành công !!!                          ");
+											Console.SetCursorPosition(50, 25); Console.WriteLine("Chuyên ngành đã sửa thành công !!!                          ");
 											ChuyenNganh m5 = new ChuyenNganh(BL.GetAllData()[i].Machnganh, BL.GetAllData()[i].Tenchnganh,mpt, BL.GetAllData()[i].Mota, BL.GetAllData()[i].Trangthai, BL.GetAllData()[i].Manganh);
 											BL.Edit(ma, m5);
 											break;
@@ -359,7 +359,7 @@ namespace Project_1.UI
 										int mn = Project_1.Utility.Congcu.Ma(80, 22, 50, 25, BL.GetAllData()[i].Manganh, 3, "Nhập sai dữ liệu mã ngành gồm 3 chữ số và khác 0 vui lòng nhập lại ! ");
 										if (BL.ExistKTN(mn))
 										{
-											Console.SetCursorPosition(50, 25); Console.WriteLine("Sinh Viên đã sửa thành công !!!                          ");
+											Console.SetCursorPosition(50, 25); Console.WriteLine("Chuyên ngành đã sửa thành công !!!                          ");
 											ChuyenNganh m5 = new ChuyenNganh(BL.GetAllData()[i].Machnganh, BL.GetAllData()[i].Tenchnganh, BL.GetAllData()[i].Maphutrach, BL.GetAllData()[i].Mota, BL.GetAllData()[i].Trangthai, mn);
 											BL.Edit(ma, m5);
 											break;
@@ -437,7 +437,7 @@ namespace Project_1.UI
 							}
 						}
 						else
-							Console.SetCursorPosition(10, BL.GetAllData().Count + 2); Console.WriteLine("Mã sinh viên không tồn tại ");
+							Console.SetCursorPosition(10, BL.GetAllData().Count + 2); Console.WriteLine("Mã Chuyên ngành không tồn tại ");
 					}
 				}
 			} while (true);
