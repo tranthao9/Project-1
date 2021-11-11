@@ -14,6 +14,7 @@ namespace Project_1.Business_Layer
     public class DoAnBusiness : IDoAnBusiness
     {
         private IDoAnDA DA = new DoAnDA();
+        private IDetaiDA dtDA = new DetaiDA();
         //Thực thi các yêu cầu
         public List<DoAn> GetAllData()
         {
@@ -49,6 +50,16 @@ namespace Project_1.Business_Layer
         public void Edit(int id, DoAn newInfo)
         {
             DA.Edit(id, newInfo);
+            if(id != newInfo.Mada)
+			{
+                List<Detai> l = dtDA.GetAllData();
+                foreach(var s in l)
+				{
+                    if (s.Mada == id)
+                        s.Mada = newInfo.Mada;
+				}
+                dtDA.GhiLaiDanhsach(l);
+			}                
         }
         public List<DoAn> Tim(DoAn da)
         {

@@ -14,5 +14,6 @@ namespace Project_1.DataAccess.Interface
         void Insert(Detai da);
         void Delete(int mada);
         void Edit(int id, Detai newInfo);
+        void GhiLaiDanhsach(List<Detai> List);
     }
 }

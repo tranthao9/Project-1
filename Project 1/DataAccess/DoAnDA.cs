@@ -65,11 +65,11 @@ namespace Project_1.DataAccess
         {
             List<DoAn> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
+            int i = 1;
             foreach (DoAn t in list)
                 if (t.Mada != ma)
                 {
-                    int malh = Stt() + 1;
-                    fwrite.WriteLine(malh + "#" + t.Mada + "#" + t.Tenda + "#" + t.Sotc+ "#" + t.Mota);
+                    fwrite.WriteLine(i++ + "#" + t.Mada + "#" + t.Tenda + "#" + t.Sotc+ "#" + t.Mota);
                 }
 
             fwrite.Close();
@@ -78,10 +78,10 @@ namespace Project_1.DataAccess
         public void GhiLaiDanhsach(List<DoAn> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
+            int i = 1;
             foreach (DoAn t in List)
             {
-                int malh = Stt() + 1;
-                fw.WriteLine(malh + "#" + t.Mada + "#" + t.Tenda + "#" + t.Sotc + "#" + t.Mota);
+                fw.WriteLine(i++ + "#" + t.Mada + "#" + t.Tenda + "#" + t.Sotc + "#" + t.Mota);
 
             }
             fw.Close();
@@ -95,7 +95,8 @@ namespace Project_1.DataAccess
             {
                 if (cn[i].Mada == id)
                 {
-                    cn[i] = new DoAn(newInfo);
+                    cn[i] = newInfo;  
+                    break;
                 }
             }
             GhiLaiDanhsach(cn);

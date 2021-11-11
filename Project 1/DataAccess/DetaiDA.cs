@@ -95,7 +95,8 @@ namespace Project_1.DataAccess
             {
                 if (cn[i].Madetai == id)
                 {
-                    cn[i] = new Detai(newInfo);
+                    cn[i] = newInfo;
+                    break;
                 }
             }
             GhiLaiDanhsach(cn);

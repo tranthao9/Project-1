@@ -66,11 +66,12 @@ namespace Project_1.DataAccess
         {
             List<TuanDetai> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
+            int i = 0;
             foreach (TuanDetai da in list)
+                
                 if (da.Madettai != mada && da.Matuan!=mat)
                 {
-                    int sttda = Sttdoan() + 1;
-                    fwrite.WriteLine(sttda + "#" + da.Matuan + "#" + da.Madettai + "#" + da.Danhgia + "#" + da.Diem );
+                    fwrite.WriteLine(i++ + "#" + da.Matuan + "#" + da.Madettai + "#" + da.Danhgia + "#" + da.Diem );
                 }
 
             fwrite.Close();
@@ -79,10 +80,11 @@ namespace Project_1.DataAccess
         public void GhiLaiDanhsach(List<TuanDetai> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
+            int i = 0;
             foreach (TuanDetai da in List)
             {
-                int sttda = Sttdoan() + 1;
-                fw.WriteLine(sttda + "#" + da.Matuan + "#" + da.Madettai + "#" + da.Danhgia + "#" + da.Diem);
+               
+                fw.WriteLine(i++ + "#" + da.Matuan + "#" + da.Madettai + "#" + da.Danhgia + "#" + da.Diem);
 
             }
             fw.Close();
@@ -96,7 +98,8 @@ namespace Project_1.DataAccess
             {
                 if (cn[i].Madettai == id&& cn[i].Matuan==ma)
                 {
-                    cn[i] = new TuanDetai(newInfo);
+                    cn[i] = newInfo;
+                    break;
                 }
             }
             GhiLaiDanhsach(cn);

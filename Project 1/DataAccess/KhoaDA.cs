@@ -93,7 +93,8 @@ namespace Project_1.DataAccess.Interface
 			{
 				if (cn[i].Makhoa == id)
 				{
-					cn[i] = new Khoa(newInfo);
+					cn[i] =newInfo;
+					break;
 				}
 			}
 			GhiLaiDanhsach(cn);

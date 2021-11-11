@@ -14,6 +14,7 @@ namespace Project_1.DataAccess.Interface
         void DeleteLop(int mal);
         void DeleteLSV(int masv,int malop);
         void DeleteSV(int masv);
-        void Edit(int id,int ma, LopSinhVien newInfo);
+        void Edit(int id, LopSinhVien newInfo);
+        void GhiLaiDanhsach(List<LopSinhVien> List);
     }
 }

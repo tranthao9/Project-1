@@ -15,6 +15,6 @@ namespace Project_1.Business_Layer.Interface
 		List<LopSinhVien> Tim(LopSinhVien ng);
 		bool ExistL(int ma);
 		bool ExistSV(int ma);
-		void Edit(int id, int ma, LopSinhVien newInfo);
+		void Edit(int id, LopSinhVien newInfo);
 	}
 }

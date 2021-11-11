@@ -30,7 +30,7 @@ namespace Project_1.Business_Layer
 						{
                             lsv.Lop = new LopHoc(kh);
                             lsv.Sinhvien = new SinhVien(sv);
-                            break;
+                            
 						}                            
 					}
 				}
@@ -66,9 +66,9 @@ namespace Project_1.Business_Layer
             else
                 throw new Exception("Khong ton tai ma nay");
         }
-        public void Edit(int id,int ma, LopSinhVien newInfo)
+        public void Edit(int id, LopSinhVien newInfo)
         {
-            DA.Edit(id,ma, newInfo);
+            DA.Edit(id, newInfo);
         }
         public List<LopSinhVien> Tim(LopSinhVien ng)
         {

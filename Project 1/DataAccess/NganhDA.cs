@@ -64,11 +64,11 @@ namespace Project_1.DataAccess
 		{
 			List<Nganh> list = GetAllData();
 			StreamWriter fw = File.CreateText(ftxt);
+			int i = 1;
 			foreach (Nganh n in list)
 				if (n.Manganh != mach)
 				{
-					int sttn = STTNganh() + 1;
-					fw.WriteLine(sttn + "#" + n.Manganh + "#" + n.Tennganh + "#" + n.Matruongnganh + "#" + n.Mota + "#" + n.Trangthai+ "#" + n.Makhoa);
+					fw.WriteLine(i++ + "#" + n.Manganh + "#" + n.Tennganh + "#" + n.Matruongnganh + "#" + n.Mota + "#" + n.Trangthai+ "#" + n.Makhoa);
 				}
 			fw.Close();
 		}
@@ -76,7 +76,7 @@ namespace Project_1.DataAccess
 		public void GhiLaiDanhsach(List<Nganh> List)
 		{
 			StreamWriter fw = new StreamWriter(ftxt, false);
-			int i = 0;
+			int i = 1;
 			foreach (Nganh n in List)
 			{
 				fw.WriteLine(i++ + "#" + n.Manganh + "#" + n.Tennganh + "#" + n.Matruongnganh + "#" + n.Mota + "#" + n.Trangthai + "#" + n.Makhoa);
@@ -93,7 +93,8 @@ namespace Project_1.DataAccess
 			{
 				if (cn[i].Manganh == id)
 				{
-					cn[i] = new Nganh(newInfo);
+					cn[i] = (newInfo);
+					break;
 				}
 			}
 			GhiLaiDanhsach(cn);

@@ -66,11 +66,11 @@ namespace Project_1.DataAccess
         {
             List<SVDetai> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
+            int i = 0;
             foreach (SVDetai da in list)
                 if (da.Madetai != mada && da.MaSV !=m2)
                 {
-                    int sttda = Sttdoan() + 1;
-                    fwrite.WriteLine(sttda + "#" + da.Madetai + "#" + da.MaSV + "#" + da.MaGVHD + "#" + da.MaGVPB + "#" + da.DiemGVHD + "#" + da.DiemBV);
+                    fwrite.WriteLine(i++ + "#" + da.Madetai + "#" + da.MaSV + "#" + da.MaGVHD + "#" + da.MaGVPB + "#" + da.DiemGVHD + "#" + da.DiemBV);
                 }
 
             fwrite.Close();
@@ -79,10 +79,10 @@ namespace Project_1.DataAccess
         public void GhiLaiDanhsach(List<SVDetai> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
+            int i = 0;
             foreach (SVDetai da in List)
             {
-                int sttda = Sttdoan() + 1;
-                fw.WriteLine(sttda + "#" + da.Madetai + "#" + da.MaSV + "#" + da.MaGVHD + "#" + da.MaGVPB + "#" + da.DiemGVHD + "#" + da.DiemBV);
+                fw.WriteLine(i++ + "#" + da.Madetai + "#" + da.MaSV + "#" + da.MaGVHD + "#" + da.MaGVPB + "#" + da.DiemGVHD + "#" + da.DiemBV);
 
             }
             fw.Close();
@@ -96,7 +96,8 @@ namespace Project_1.DataAccess
             {
                 if (cn[i].MaSV == id&& cn[i].Madetai==ma)
                 {
-                    cn[i] = new SVDetai(newInfo);
+                    cn[i] = newInfo;
+                    break;
                 }
             }
             GhiLaiDanhsach(cn);

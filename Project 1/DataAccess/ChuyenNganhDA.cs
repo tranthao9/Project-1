@@ -64,11 +64,12 @@ namespace Project_1.DataAccess
 		{
 			List < ChuyenNganh > list = GetAllData();
 			StreamWriter fw = File.CreateText(ftxt);
+			int i = 1;
 			foreach (ChuyenNganh cn in list)
 				if (cn.Machnganh != mach)
 				{
 					int sttcn = STTchuyennganh() + 1;
-					fw.WriteLine(sttcn + "#" + cn.Machnganh + "#" + cn.Tenchnganh + "#" + cn.Maphutrach + "#" + cn.Mota + "#" + cn.Trangthai + "#" + cn.Manganh);
+					fw.WriteLine(i++ + "#" + cn.Machnganh + "#" + cn.Tenchnganh + "#" + cn.Maphutrach + "#" + cn.Mota + "#" + cn.Trangthai + "#" + cn.Manganh);
 				}
 			fw.Close();
 		}
@@ -76,7 +77,7 @@ namespace Project_1.DataAccess
 		public void GhiLaiDanhsach(List<ChuyenNganh> List)
 		{
 			StreamWriter fw = new StreamWriter(ftxt, false);
-			int t = 0;
+			int t = 1;
 			foreach (ChuyenNganh cn in List)
 			{
 				fw.WriteLine(t++ + "#" + cn.Machnganh + "#" + cn.Tenchnganh + "#" + cn.Maphutrach + "#" + cn.Mota + "#" + cn.Trangthai + "#" + cn.Manganh);
@@ -93,7 +94,9 @@ namespace Project_1.DataAccess
 			{
 				if (cn[i].Machnganh == id)
 				{
-					cn[i] = new ChuyenNganh(newInfo);
+					cn[i] = newInfo;
+					
+					break;
 				}
 			}
 			GhiLaiDanhsach(cn);

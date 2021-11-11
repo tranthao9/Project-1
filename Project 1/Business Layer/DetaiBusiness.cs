@@ -15,6 +15,8 @@ namespace Project_1.Business_Layer
     {
         private IDetaiDA lopDA = new DetaiDA();
         private IDoAnDA chDA = new DoAnDA();
+        private ITuanDetaiDA tDA = new TuanDetaiDA();
+        private ISVDetaiDA sDA = new SVDetaiDA();
         //Thực thi các yêu cầu
         public List<Detai> GetAllData()
         {
@@ -61,6 +63,27 @@ namespace Project_1.Business_Layer
         public void Edit(int id, Detai newInfo)
         {
             lopDA.Edit(id, newInfo);
+            if(id != newInfo.Madetai)
+			{
+                List<SVDetai> lsv = sDA.GetAllData();
+                List<TuanDetai> lt = tDA.GetAllData();
+                foreach(var a in lsv)
+				{
+                    if (a.Madetai == id)
+					{
+                        a.Madetai = newInfo.Madetai;
+                    }  
+				}
+                sDA.GhiLaiDanhsach(lsv);
+                foreach(var s in lt)
+				{
+                    if(s.Madettai==id)
+					{
+                        s.Madettai = newInfo.Madetai;
+					}                        
+				}
+                tDA.GhiLaiDanhsach(lt);
+			}                
         }
         public List<Detai> Tim(Detai dt)
         {

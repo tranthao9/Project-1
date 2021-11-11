@@ -14,5 +14,6 @@ namespace Project_1.DataAccess.Interface
         void Insert(SVDetai da);
         void Delete(int mada,int m2);
         void Edit(int id, int ma, SVDetai newInfo);
+        void GhiLaiDanhsach(List<SVDetai> List);
     }
 }

@@ -16,6 +16,10 @@ namespace Project_1.Business_Layer
     public class GiangVienBusiness : IGiangVienBusiness
     {
         private IGiangVienDA gvDA = new GiangVienDA();
+        private IChuyenNganhDA cnDA = new ChuyenNganhDA();
+        private INganhDA nDA = new NganhDA();
+        private IKhoaDA kDA = new KhoaDA();
+        private ISVDetaiDA svDA = new SVDetaiDA();
         //Thực thi các yêu cầu
         public List<GiangVien> GetAllData()
         {
@@ -48,6 +52,38 @@ namespace Project_1.Business_Layer
         public void Edit(int id, GiangVien newInfo)
         {
             gvDA.Edit(id, newInfo);
+            if(id != newInfo.MaGV)
+			{
+                List<ChuyenNganh> lcn = cnDA.GetAllData();
+                List<Nganh> ln = nDA.GetAllData();
+                List<Khoa> lk = kDA.GetAllData();
+                List<SVDetai> lsv = svDA.GetAllData();
+                foreach(var s in lcn)
+				{
+                    if (s.Maphutrach == id)
+                        s.Maphutrach = newInfo.MaGV;
+				}
+                cnDA.GhiLaiDanhsach(lcn);
+                foreach(var s in ln)
+				{
+                    if (s.Matruongnganh == id)
+                        s.Matruongnganh = newInfo.MaGV;
+				}
+                nDA.GhiLaiDanhsach(ln);
+                foreach(var s in lk)
+				{
+                    if (s.Matruongkhoa == id)
+                        s.Matruongkhoa = newInfo.MaGV;
+				}
+                kDA.GhiLaiDanhsach(lk);
+                foreach(var s in lsv)
+				{
+                    if (s.MaGVHD == id)
+                        s.MaGVHD = newInfo.MaGV;
+                    if (s.MaGVPB == id)
+                        s.MaGVPB = newInfo.MaGV;
+				}                    
+			}                
         }
         public List<GiangVien> TimGiangVien(GiangVien gv)
         {

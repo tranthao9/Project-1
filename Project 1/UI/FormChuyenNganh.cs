@@ -13,7 +13,7 @@ namespace Project_1.UI
 	public class FormChuyenNganh
 	{
 		private IChuyenNganhBusiness BL = new ChuyenNganhBusiness();
-		public void Max(List<ChuyenNganh> list, out int maxmt, out int maxtrangthai,out int maxten)
+		static void Max(List<ChuyenNganh> list, out int maxmt, out int maxtrangthai,out int maxten)
 		{
 			if (list.Count == 0)
 			{
@@ -37,13 +37,16 @@ namespace Project_1.UI
 				}
 			}
 		}
-		public int Hien(List<ChuyenNganh> list , int x,int y,string tieudedau,string tieudecuoi,int n)
+		public int Hien(List<ChuyenNganh> list , int x,int y,string tieudecuoi,int n)
 		{
 			int t, mota,ten;
 			Console.WriteLine();
 			Console.WriteLine();
-			Console.WriteLine(tieudedau);
-			Console.WriteLine("------------------------------------------------------");
+			Console.ForegroundColor = ConsoleColor.DarkRed;
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                    ");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐  DANH SÁCH CHUYÊN NGÀNH   ▌                                                    ");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                    ");
+			Console.ForegroundColor = ConsoleColor.Black;
 			y = y + 4;
 			Max(list,out mota,out t, out ten);
 			Console.SetCursorPosition(x + 1, y);Console.Write("STT");
@@ -92,7 +95,7 @@ namespace Project_1.UI
 				Console.WriteLine();
 				Console.WriteLine("Mã ngành :");
 				int x = 0, y = 15;
-				int v = Hien(BL.GetAllData(), x, y, "                       DANH SÁCH ĐÃ NHẬP", "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", 5);
+				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", 5);
 				ChuyenNganh s = new ChuyenNganh();
 				while (true)
 				{
@@ -150,11 +153,10 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				IChuyenNganhBusiness Bl = new ChuyenNganhBusiness();
-				Hien(Bl.GetAllData(), 0, 0, "                        DANH SÁCH CHUYÊN NGÀNH ", "Nhập MÃ Chuyên ngành cần xóa, thoát nhập 0!", 20);
+				Hien(BL.GetAllData(), 0, 0, "Nhập MÃ Chuyên ngành cần xóa, thoát nhập 0!", 20);
 				int ma = int.Parse("0" + Console.ReadLine());
 				if (ma == 0) return;
-				else Bl.Delete(ma);
+				else BL.Delete(ma);
 			} while (true);
 		}
 		public void Tim()
@@ -163,9 +165,8 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				IChuyenNganhBusiness BL = new ChuyenNganhBusiness();
 				List<ChuyenNganh> list = BL.TimChuyenNganh(new ChuyenNganh(0,ten,0,null,null,0));
-				Hien(list, 0, 0, "                 DANH SÁCH CHUYÊN NGÀNH                       ", "Nhấn Enter để thoát! Nhập tên chuyên ngành cần tìm : ", 30);
+				Hien(list, 0, 0, "Nhấn Enter để thoát! Nhập tên chuyên ngành cần tìm : ", 30);
 				ten=Console.ReadLine();
 				if (ten == "") return;
 			} while (true);
@@ -206,7 +207,7 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				Hien(BL.GetAllData(), 0, 0, "                        DANH SÁCH CHUYÊN NGÀNH ", "Nhập MÃ CN cần sửa, thoát nhập 0!", 20);
+				Hien(BL.GetAllData(), 0, 3, "Nhập MÃ CN cần sửa, thoát nhập 0!", 20);
 				int ma = int.Parse(Console.ReadLine());
 				if (ma == 0) return;
 				else
@@ -511,7 +512,7 @@ namespace Project_1.UI
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
-						Hien(BL.GetAllData(), 0, 11, "                       DANH SÁCH ĐÃ NHẬP", "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
+						Hien(BL.GetAllData(), 0, 11, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:
 						Console.Clear();

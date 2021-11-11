@@ -13,5 +13,6 @@ namespace Project_1.DataAccess.Interface
 		void Insert(Nganh n);
 		void Delete(int macn);
 		void Edit(int id, Nganh newInfo);
+		void GhiLaiDanhsach(List<Nganh> List);
 	}
 }

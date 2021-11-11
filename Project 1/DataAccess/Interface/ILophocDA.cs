@@ -13,5 +13,6 @@ namespace Project_1.DataAccess.Interface
         void Insert(LopHoc hs);
         void Delete(int malop);
         void Edit(int id, LopHoc newInfo);
+        void GhiLaiDanhsach(List<LopHoc> List);
     }
 }

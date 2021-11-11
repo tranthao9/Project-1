@@ -106,24 +106,26 @@ namespace Project_1.DataAccess
         public void GhiLaiDanhsach(List<LopSinhVien> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
+            int i = 0;
             foreach (LopSinhVien lsv in List)
             {
-                int malh = Sttlsv() + 1;
-                fw.WriteLine(malh + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                
+                fw.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
 
             }
             fw.Close();
         }
-        public void Edit(int id,int ma, LopSinhVien newInfo)
+        public void Edit(int id, LopSinhVien newInfo)
         {
             //Đọc toàn bộ tập lớn về
             List<LopSinhVien> cn = GetAllData();
             //Sửa trên DS và ghi đè vào tệp
             for (int i = 0; i < cn.Count; i++)
             {
-                if (cn[i].Malop == id&& cn[i].MaSV==ma)
+                if (cn[i].MaSV==id)
                 {
-                    cn[i] = new LopSinhVien(newInfo);
+                    cn[i] = newInfo;
+                    break;
                 }
             }
             GhiLaiDanhsach(cn);

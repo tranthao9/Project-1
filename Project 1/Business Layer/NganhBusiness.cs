@@ -16,6 +16,7 @@ namespace Project_1.Business_Layer
         private INganhDA ngDA = new NganhDA();
         private IKhoaDA khDA = new KhoaDA();
         private IGiangVienDA gvDA = new GiangVienDA();
+        private IChuyenNganhDA cnDA = new ChuyenNganhDA();
         //Thực thi các yêu cầu
         public List<Nganh> GetAllData()
         {
@@ -77,6 +78,16 @@ namespace Project_1.Business_Layer
         public void Edit(int id, Nganh newInfo)
         {
             ngDA.Edit(id, newInfo);
+            if(id != newInfo.Manganh)
+			{
+                List<ChuyenNganh> l = cnDA.GetAllData();
+                foreach(var s in l)
+				{
+                    if (s.Manganh == id)
+                        s.Machnganh = newInfo.Manganh;
+				}
+                cnDA.GhiLaiDanhsach(l);
+			}                
         }
         public List<Nganh> TimNganh(Nganh ng)
         {

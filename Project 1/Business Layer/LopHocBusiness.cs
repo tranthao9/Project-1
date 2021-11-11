@@ -15,6 +15,7 @@ namespace Project_1.Business_Layer
     {
         private ILopHocDA lopDA = new LopHocDA();
         private IChuyenNganhBusiness chDA = new ChuyenNganhBusiness();
+        private ILopSinhVienDA lDA = new LopSinhVienDA();
         //Thực thi các yêu cầu
         public List<LopHoc> GetAllData()
         {
@@ -67,6 +68,16 @@ namespace Project_1.Business_Layer
         public void Edit(int id, LopHoc newInfo)
         {
             lopDA.Edit(id, newInfo);
+            if(id != newInfo.Malop)
+			{
+                List<LopSinhVien> l = lDA.GetAllData();
+                foreach(var s in l)
+				{
+                    if (s.Malop == id)
+                        s.Malop = newInfo.Malop;
+				}
+                lDA.GhiLaiDanhsach(l);
+			}                
         }
         public List<LopHoc> TimLopHoc(LopHoc lop)
         {

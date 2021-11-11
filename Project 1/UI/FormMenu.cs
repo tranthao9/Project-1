@@ -15,8 +15,7 @@ namespace Project_1.UI
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Ứng dụng quản lý đồ án sinh viên khoa CNTT";
             //Console.CursorVisible = fa; //con trỏ có thể chia sẻ
-            //Console.ForegroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\t\t╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("\t\t║                                                                                                                               ║");
             Console.WriteLine("\t\t║                                            TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT HƯNG YÊN                                           ║");
@@ -61,7 +60,7 @@ namespace Project_1.UI
             Console.WriteLine("\t\t                                              Nhấn đúp phím bất kì để vào menu chính!!!");
             Console.ReadKey();
         }
-        static public void MenuQL()
+        public void MenuQL()
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Ứng dụng quản lý đồ án sinh viên khoa CNTT";
@@ -72,28 +71,22 @@ namespace Project_1.UI
             Console.WriteLine();
             Console.WriteLine("\t\t╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("\t\t║                                                                                                                               ║");
-            Console.WriteLine("\t\t║                                                                                                                               ║");
-            Console.WriteLine("\t\t║                                                                                                                               ║");
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Write("\t\t║                        ");
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("                                 ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                   ");
+            Console.Write("                                 ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                    ");
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("║");
             Console.Write("\t\t║                        ");
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("                                 ▐   MENU QUẢN LÍ  ▌                                                   ");
+            Console.Write("                                 ▐   MENU QUẢN LÝ  ▌                                                    ");
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("║");
             Console.Write("\t\t║                        ");
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write("                                 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                   ");
+            Console.Write("                                 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                    ");
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                                                  ╔════════════════════════════════╗                                             ║");
             Console.WriteLine("\t\t║                                                  ║     1.Quản Lý Sinh Viên        ║                                             ║");
@@ -129,19 +122,18 @@ namespace Project_1.UI
             Console.WriteLine("\t\t║                                                  ║     11.Quản Lý Sinh Viên Đề Tài║                                             ║");
             Console.WriteLine("\t\t║                                                  ╚════════════════════════════════╝                                             ║");
             Console.WriteLine("\t\t║                                                  ╔════════════════════════════════╗                                             ║");
-            Console.WriteLine("\t\t║                                                  ║     5.Thống kê                 ║                                             ║");
+            Console.WriteLine("\t\t║                                                  ║     12.Thống kê                ║                                             ║");
+            Console.WriteLine("\t\t║                                                  ╚════════════════════════════════╝                                             ║");
+            Console.WriteLine("\t\t║                                                  ╔════════════════════════════════╗                                             ║");
+            Console.WriteLine("\t\t║                                                  ║     0.Exit                     ║                                             ║");
             Console.WriteLine("\t\t║                                                  ╚════════════════════════════════╝                                             ║");
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
-            Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         }
         //ham dang nhap mat khau va tai khoan admin
         public void Dangnhap()
         {
+            Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Đăng nhập";
             int left = 79, top = 2;
@@ -179,7 +171,7 @@ namespace Project_1.UI
                     Console.SetCursorPosition(70 + i, 15); Console.Write("*");
                 }
             }
-
+            Console.ReadKey();
         }
     }
 }

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using Project_1.Entities;
 using Project_1.DataAccess.Interface;
+using Project_1.Business_Layer;
+using Project_1.Business_Layer.Interface;
 
 
 namespace Project_1.DataAccess
@@ -79,7 +81,7 @@ namespace Project_1.DataAccess
 		public void GhiLaiDanhsach(List<SinhVien> List)
 		{
 			StreamWriter fw = new StreamWriter(filetxt, false);
-			int i = 0;
+			int i = 1;
 			foreach (SinhVien sv in List)
 			{
 				fw.WriteLine(i++ + "#" + sv.MaSV + "#" + sv.TenSV + "#" + "{0:d}", (sv.NamsinhSV) + "#" + sv.Gioitinh + "#" + sv.Diachi + "#" + sv.Sdt + "#" + sv.Email);
@@ -97,7 +99,8 @@ namespace Project_1.DataAccess
 				if(sv[i].MaSV==id)
 				{
 					sv[i] = newInfo;
-				}	
+					break;
+				}
 			}
 			GhiLaiDanhsach(sv);
 		}

@@ -12,7 +12,7 @@ namespace Project_1.UI
 	public class FormGiangVien
 	{
 		private IGiangVienBusiness A = new GiangVienBusiness();
-		public void Max(List<GiangVien> list,out int maxht,out int maxdc)
+		static void Max(List<GiangVien> list,out int maxht,out int maxdc)
 		{
 			if(list.Count==0)
 			{
@@ -32,7 +32,7 @@ namespace Project_1.UI
 				}
 			}
 		}
-		public int Hien(List<GiangVien> list , int x,int y,string tieudedau,string tieudecuoi,int n)
+		public int Hien(List<GiangVien> list , int x,int y,string tieudecuoi,int n)
 		{
 
 			int maxht;
@@ -40,8 +40,11 @@ namespace Project_1.UI
 			Console.WriteLine();
 			Max(list, out maxht, out maxdc);
 			Console.WriteLine();
-			Console.WriteLine(tieudedau);
-			Console.WriteLine("------------------------------------------------------");
+			Console.ForegroundColor = ConsoleColor.DarkRed;
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                    ");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐    DANH SÁCH GIẢNG VIÊN   ▌                                                    ");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                    ");
+			Console.ForegroundColor = ConsoleColor.Black;
 			y = y + 4;
 			Console.SetCursorPosition(x + 1, y);Console.Write("STT");
 			Console.SetCursorPosition(x + 6, y);Console.Write("MÃGV");
@@ -87,7 +90,7 @@ namespace Project_1.UI
 				Console.WriteLine();
 				Console.WriteLine("SDT:                               Email:");
 				int x = 0, y = 13;
-				int v = Hien(BL.GetAllData(), x, y, "                       DANH SÁCH ĐÃ NHẬP", "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", 5);
+				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", 5);
 				GiangVien s = new GiangVien();
 				s.MaGV = Project_1.Utility.Congcu.Ma(14, 5, 0, 11, s.MaGV,8, "Nhập sai dữ liệu mã giảng viên gồm 8 chữ số và khác 0 vui lòng nhập lại ! ");
 				s.TenGV = Project_1.Utility.Congcu.Ten(44, 5, 0, 11, s.TenGV,"Nhập sai định dạng tên giảng viên phải khác rỗng vui lòng nhập lại!");
@@ -115,7 +118,7 @@ namespace Project_1.UI
 			{
 				Console.Clear();
 				IGiangVienBusiness Bl = new GiangVienBusiness();
-				Hien(Bl.GetAllData(), 0, 0, "                        DANH SÁCH GIẢNG VIÊN ", "Nhập MÃ GV cần xóa, thoát nhập 0!", 20);
+				Hien(Bl.GetAllData(), 0, 0, "Nhập MÃ GV cần xóa, thoát nhập 0!", 20);
 				int ma = int.Parse("0" + Console.ReadLine());
 				if (ma == 0) return;
 				else Bl.Delete(ma);
@@ -162,7 +165,7 @@ namespace Project_1.UI
 			{
 				Console.Clear();
 				IGiangVienBusiness Bl = new GiangVienBusiness();
-				Hien(Bl.GetAllData(), 0, 0, "                        DANH SÁCH GIẢNG VIÊN ", "Nhập MÃ GV cần sửa, thoát nhập 0!", 20);
+				Hien(Bl.GetAllData(), 0, 0, "Nhập MÃ GV cần sửa, thoát nhập 0!", 20);
 				int ma = int.Parse(Console.ReadLine());
 				if (ma == 0) return;
 				else
@@ -437,7 +440,7 @@ namespace Project_1.UI
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
-						Hien(BL.GetAllData(), 0, 11, "                       DANH SÁCH ĐÃ NHẬP", "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
+						Hien(BL.GetAllData(), 0, 11, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:
 						Console.Clear();

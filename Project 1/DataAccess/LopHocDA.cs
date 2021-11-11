@@ -65,10 +65,10 @@ namespace Project_1.DataAccess
         {
             List<LopHoc> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
+            int malh = 1;
             foreach (LopHoc lh in list)
                 if (lh.Malop != malop)
 				{
-                    int malh = Sttlh() + 1;
                     fwrite.WriteLine(malh + "#" + lh.Malop + "#" + lh.Tenlop + "#" + lh.Mach);
                 }
                     
@@ -78,10 +78,10 @@ namespace Project_1.DataAccess
         public void GhiLaiDanhsach(List<LopHoc> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
+            int i = 1;
             foreach (LopHoc lh in List)
-            {
-                int malh = Sttlh() + 1;
-                fw.WriteLine(malh + "#" + lh.Malop + "#" + lh.Tenlop + "#" + lh.Mach);
+            { 
+                fw.WriteLine(i++ + "#" + lh.Malop + "#" + lh.Tenlop + "#" + lh.Mach);
 
             }
             fw.Close();
@@ -96,6 +96,7 @@ namespace Project_1.DataAccess
                 if (cn[i].Malop == id)
                 {
                     cn[i] = new LopHoc(newInfo);
+                    break;
                 }
             }
             GhiLaiDanhsach(cn);

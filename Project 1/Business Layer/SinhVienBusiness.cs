@@ -14,6 +14,8 @@ namespace Project_1.Business_Layer
     public class SinhVienBusiness : ISinhVienBusiness
     {
         private ISinhVienDA svDA = new SinhVienDA();
+        private ILopSinhVienDA lsvDA = new LopSinhVienDA();
+        private ISVDetaiDA svdtDA=new SVDetaiDA();
         //Thực thi các yêu cầu
         public List<SinhVien> GetAllData()
         {
@@ -53,6 +55,23 @@ namespace Project_1.Business_Layer
         public void Edit(int id, SinhVien newInfo)
         {
             svDA.Edit(id, newInfo);
+            if(id != newInfo.MaSV)
+			{
+                List<LopSinhVien> lsv = lsvDA.GetAllData();
+                List<SVDetai> ldt = svdtDA.GetAllData();
+                foreach(var s in lsv)
+				{
+                    if (s.MaSV == id)
+                        s.MaSV = newInfo.MaSV;
+				}
+                lsvDA.GhiLaiDanhsach(lsv);
+                foreach(var s in ldt)
+				{
+                    if (s.MaSV == id)
+                        s.MaSV = newInfo.MaSV;
+				}
+                svdtDA.GhiLaiDanhsach(ldt);
+			}                
         }
         public List<SinhVien> TimSinhVien(SinhVien sv)
         {
