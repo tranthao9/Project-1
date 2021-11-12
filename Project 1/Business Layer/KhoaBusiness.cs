@@ -24,9 +24,12 @@ namespace Project_1.Business_Layer
 			{
                 foreach (var b in gvDA.GetAllData())
 				{
-                    if(a.Matruongkhoa==b.MaGV)
-                        a.Giangvien=new GiangVien (b);
-				}
+                    if (a.Matruongkhoa == b.MaGV)
+                        a.Giangvien = new GiangVien(b); break;
+
+                }
+                if (a.Matruongkhoa == 0)
+                    a.Giangvien = null;
 			}                
             return listkh;
         }

@@ -61,7 +61,15 @@ namespace Project_1.Business_Layer
         public void Delete(int malop)
         {
             if (Exist(malop))
+			{
                 lopDA.Delete(malop);
+                List<LopSinhVien> l = lDA.GetAllData();
+                foreach (var s in l)
+                {
+                    if (s.Malop == malop)
+                        lDA.DeleteLop(malop);
+                }
+            }                
             else
                 throw new Exception("Khong ton tai ma nay");
         }

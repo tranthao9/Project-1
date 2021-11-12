@@ -35,6 +35,11 @@ namespace Project_1.Business_Layer
                             break;
                         }
                     }
+                    if(nganh.Makhoa == kh.Makhoa && nganh.Matruongnganh == 0)
+					{
+                        nganh.Khoa = new Khoa(kh);
+                        nganh.Giangvien = null ;
+                    }                        
 				}
                    
             }
@@ -71,7 +76,15 @@ namespace Project_1.Business_Layer
         public void Delete(int mang)
         {
             if (Exist(mang))
+			{
                 ngDA.Delete(mang);
+                List<ChuyenNganh> l = cnDA.GetAllData();
+                foreach (var s in l)
+                {
+                    if (s.Manganh == mang)
+                        cnDA.Delete(s.Machnganh);
+                }
+            }                
             else
                 throw new Exception("Khong ton tai ma nay");
         }

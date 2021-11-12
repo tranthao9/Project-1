@@ -65,13 +65,12 @@ namespace Project_1.DataAccess
         {
             List<LopSinhVien> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
+            int i = 1;
             foreach (LopSinhVien lsv in list)
                 if (lsv.Malop != malop)
                 {
-                    int malh = Sttlsv() + 1;
-                    fwrite.WriteLine(malh + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                    fwrite.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
                 }
-
             fwrite.Close();
         }
         //Xóa một lop sinh vien khi biết mã sinh viên
@@ -79,13 +78,12 @@ namespace Project_1.DataAccess
         {
             List<LopSinhVien> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
+            int malh = 1;
             foreach (LopSinhVien lsv in list)
                 if (lsv.MaSV != ma)
                 {
-                    int malh = Sttlsv() + 1;
-                    fwrite.WriteLine(malh + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
                 }
-
             fwrite.Close();
         }
         //Xóa một lop sinh vien khi biết mã sinh vien và mã lớp
@@ -93,25 +91,22 @@ namespace Project_1.DataAccess
         {
             List<LopSinhVien> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
+            int malh = 1;
             foreach (LopSinhVien lsv in list)
                 if (lsv.MaSV != masv && lsv.Malop != malop)
                 {
-                    int malh = Sttlsv() + 1;
-                    fwrite.WriteLine(malh + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
                 }
-
             fwrite.Close();
         }
         //Thuật toán phương thức sửa trên danh sách, ghi lại tệp.
         public void GhiLaiDanhsach(List<LopSinhVien> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
-            int i = 0;
+            int i =1;
             foreach (LopSinhVien lsv in List)
             {
-                
                 fw.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
-
             }
             fw.Close();
         }

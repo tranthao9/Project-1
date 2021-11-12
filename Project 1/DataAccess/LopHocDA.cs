@@ -69,7 +69,7 @@ namespace Project_1.DataAccess
             foreach (LopHoc lh in list)
                 if (lh.Malop != malop)
 				{
-                    fwrite.WriteLine(malh + "#" + lh.Malop + "#" + lh.Tenlop + "#" + lh.Mach);
+                    fwrite.WriteLine(malh++ + "#" + lh.Malop + "#" + lh.Tenlop + "#" + lh.Mach);
                 }
                     
             fwrite.Close();

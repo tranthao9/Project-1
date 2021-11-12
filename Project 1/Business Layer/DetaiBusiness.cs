@@ -56,7 +56,26 @@ namespace Project_1.Business_Layer
         public void Delete(int ma)
         {
             if (Exist(ma))
+			{
                 lopDA.Delete(ma);
+                List<SVDetai> lsv = sDA.GetAllData();
+                List<TuanDetai> lt = tDA.GetAllData();
+                foreach (var a in lsv)
+                {
+                    if (a.Madetai == ma)
+                    {
+                        sDA.Delete(a.Madetai);
+                    }
+                }
+                foreach (var s in lt)
+                {
+                    if (s.Madettai == ma)
+                    {
+                        tDA.Delete(s.Madettai, s.Matuan);
+                    }
+                }
+
+            }               
             else
                 throw new Exception("Khong ton tai ma nay");
         }

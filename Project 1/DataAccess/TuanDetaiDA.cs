@@ -68,7 +68,6 @@ namespace Project_1.DataAccess
             StreamWriter fwrite = File.CreateText(txtfile);
             int i = 0;
             foreach (TuanDetai da in list)
-                
                 if (da.Madettai != mada && da.Matuan!=mat)
                 {
                     fwrite.WriteLine(i++ + "#" + da.Matuan + "#" + da.Madettai + "#" + da.Danhgia + "#" + da.Diem );
@@ -83,9 +82,7 @@ namespace Project_1.DataAccess
             int i = 0;
             foreach (TuanDetai da in List)
             {
-               
                 fw.WriteLine(i++ + "#" + da.Matuan + "#" + da.Madettai + "#" + da.Danhgia + "#" + da.Diem);
-
             }
             fw.Close();
         }

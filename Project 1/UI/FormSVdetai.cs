@@ -55,7 +55,7 @@ namespace Project_1.UI
 			Max(list,out tsv,out tendt,out tengvhd,out tengvpb);
 			Console.ForegroundColor = ConsoleColor.DarkBlue; Console.SetCursorPosition(x + 1, y); Console.Write("STT");
 			Console.SetCursorPosition(x + 7, y); Console.Write("MÃ SV");
-			Console.SetCursorPosition(x + 17, y); Console.Write("MÃ ĐỀ TÀI");
+			Console.SetCursorPosition(x + 15, y); Console.Write("MÃ ĐỀ TÀI");
 			Console.SetCursorPosition(x + 27, y); Console.Write("TÊN SINH VIÊN");
 			Console.SetCursorPosition(x + 30+tsv, y); Console.Write("ĐỒ ÁN");
 			Console.SetCursorPosition(x + 37+tsv, y); Console.Write("TÊN ĐỀ TÀI");
@@ -73,7 +73,7 @@ namespace Project_1.UI
 				y = y + 1;
 				Console.ForegroundColor = ConsoleColor.Black; Console.SetCursorPosition(x + 1, y); Console.Write(d++);
 				Console.SetCursorPosition(x + 5, y); Console.Write(list[i].LopSV.MaSV);
-				Console.SetCursorPosition(x + 19, y); Console.Write(list[i].Madetai);
+				Console.SetCursorPosition(x + 17, y); Console.Write(list[i].Madetai);
 				Console.SetCursorPosition(x + 27, y); Console.Write(list[i].LopSV.Sinhvien.TenSV);
 				Console.SetCursorPosition(x + 30 + tsv, y); Console.Write(list[i].Tuandt.Detai.Mada);
 				Console.SetCursorPosition(x + 37 + tsv, y); Console.Write(list[i].Tuandt.Detai.Tendetai);
@@ -110,7 +110,7 @@ namespace Project_1.UI
 				Console.WriteLine();
 				Console.WriteLine("Mã giáo viên phản biện:                             Điểm bảo vệ : ");
 				int x = 0, y = 11;
-				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", 5);
+				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count);
 				SVDetai s = new SVDetai();
 				while (true)
 				{
@@ -204,14 +204,10 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				Hien(BL.GetAllData(), 0, 0, "Nhập tuần cần xóa, thoát nhập 0!", 20);
-				Console.WriteLine();
-				Console.Write("Nhập mã đề tài muốn xóa : ");
+				Hien(BL.GetAllData(), 0,3, "Nhập mã đề tài cần xóa, thoát nhập 0!", BL.GetAllData().Count);
 				int ma = int.Parse("0" + Console.ReadLine());
-				Console.Write("Nhập mã sinh viên muốn xóa : ");
-				int ma1 = int.Parse("0" + Console.ReadLine());
-				if (ma == 0 || ma1 == 0) return;
-				else BL.Delete(ma, ma1);
+				if (ma == 0 ) return;
+				else BL.Delete(ma);
 			} while (true);
 		}
 		public void Tim()

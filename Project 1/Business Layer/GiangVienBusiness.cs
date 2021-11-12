@@ -45,7 +45,39 @@ namespace Project_1.Business_Layer
         public void Delete(int magv)
         {
             if (Exist(magv))
+			{
                 gvDA.Delete(magv);
+                List<ChuyenNganh> lcn = cnDA.GetAllData();
+                List<Nganh> ln = nDA.GetAllData();
+                List<Khoa> lk = kDA.GetAllData();
+                List<SVDetai> lsv = svDA.GetAllData();
+                foreach (var s in lcn)
+                {
+                    if (s.Maphutrach == magv)
+                        s.Maphutrach = 0;
+                }
+                cnDA.GhiLaiDanhsach(lcn);
+                foreach (var s in ln)
+                {
+                    if (s.Matruongnganh == magv)
+                        s.Matruongnganh = 0;
+                }
+                nDA.GhiLaiDanhsach(ln);
+                foreach (var s in lk)
+                {
+                    if (s.Matruongkhoa == magv)
+                        s.Matruongkhoa = 0;
+                }
+                kDA.GhiLaiDanhsach(lk);
+                foreach (var s in lsv)
+                {
+                    if (s.MaGVHD == magv)
+                        s.MaGVHD = 0;
+                    if (s.MaGVPB == magv)
+                        s.MaGVPB = 0;
+                }
+                svDA.GhiLaiDanhsach(lsv);
+            }                
             else
                 throw new Exception("Khong ton tai ma nay");
         }
@@ -82,7 +114,8 @@ namespace Project_1.Business_Layer
                         s.MaGVHD = newInfo.MaGV;
                     if (s.MaGVPB == id)
                         s.MaGVPB = newInfo.MaGV;
-				}                    
+				}
+                svDA.GhiLaiDanhsach(lsv);
 			}                
         }
         public List<GiangVien> TimGiangVien(GiangVien gv)

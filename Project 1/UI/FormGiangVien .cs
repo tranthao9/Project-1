@@ -118,7 +118,7 @@ namespace Project_1.UI
 			{
 				Console.Clear();
 				IGiangVienBusiness Bl = new GiangVienBusiness();
-				Hien(Bl.GetAllData(), 0, 0, "Nhập MÃ GV cần xóa, thoát nhập 0!", 20);
+				Hien(Bl.GetAllData(), 0, 3, "Nhập MÃ GV cần xóa, thoát nhập 0!", Bl.GetAllData().Count);
 				int ma = int.Parse("0" + Console.ReadLine());
 				if (ma == 0) return;
 				else Bl.Delete(ma);
@@ -165,7 +165,7 @@ namespace Project_1.UI
 			{
 				Console.Clear();
 				IGiangVienBusiness Bl = new GiangVienBusiness();
-				Hien(Bl.GetAllData(), 0, 0, "Nhập MÃ GV cần sửa, thoát nhập 0!", 20);
+				Hien(Bl.GetAllData(), 0, 3, "Nhập MÃ GV cần sửa, thoát nhập 0!", Bl.GetAllData().Count);
 				int ma = int.Parse(Console.ReadLine());
 				if (ma == 0) return;
 				else
@@ -365,7 +365,7 @@ namespace Project_1.UI
 							}
 						}
 						else
-							Console.SetCursorPosition(10, Bl.GetAllData().Count + 2); Console.WriteLine("Mã giảng viên không tồn tại ");
+							Console.SetCursorPosition(10, Bl.GetAllData().Count + 8); Console.WriteLine("Mã giảng viên không tồn tại ");
 					}
 				}
 			} while (true);
@@ -440,7 +440,7 @@ namespace Project_1.UI
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
-						Hien(BL.GetAllData(), 0, 11, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
+						Hien(BL.GetAllData(), 0, 3, "  ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:
 						Console.Clear();

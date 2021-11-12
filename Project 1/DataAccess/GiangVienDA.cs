@@ -66,11 +66,12 @@ namespace Project_1.DataAccess
 
 			List<GiangVien> list = GetAllData();
 			StreamWriter fw = File.CreateText(filetxt);
+			int stt = 1;
 			foreach (GiangVien gv in list)
 				if (gv.MaGV != magv)
 				{
-					int sttsv = Getma() + 1;
-					fw.Write(sttsv + "#" + gv.MaGV + "#" + gv.TenGV + "#" + gv.Namsinh + "#" + gv.Gioitinh + "#" + gv.Diachi + "#" + gv.SDT + "#" + gv.Email);
+					
+					fw.Write(stt++ + "#" + gv.MaGV + "#" + gv.TenGV + "#" + gv.Namsinh + "#" + gv.Gioitinh + "#" + gv.Diachi + "#" + gv.SDT + "#" + gv.Email);
 				}
 			fw.Close();
 		}
@@ -78,7 +79,7 @@ namespace Project_1.DataAccess
 		public void GhiLaiDanhsach(List<GiangVien> List)
 		{
 			StreamWriter fw = new StreamWriter(filetxt, false);
-			int i = 0;
+			int i = 1;
 			foreach (GiangVien gv in List)
 			{
 				fw.WriteLine(i++ + "#" + gv.MaGV + "#" + gv.TenGV + "#" + gv.Namsinh + "#" + gv.Gioitinh + "#" + gv.Diachi + "#" + gv.SDT + "#" + gv.Email); ;

@@ -11,7 +11,6 @@ namespace Project_1.DataAccess.Interface
 	{
 		List<Khoa> GetAllData();
 		void Insert(Khoa k);
-		void Delete(int mak);
 		void Edit(int id, Khoa newInfo);
 		void GhiLaiDanhsach(List<Khoa> List);
 	}

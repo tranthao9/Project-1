@@ -28,14 +28,20 @@ namespace Project_1.Business_Layer
                 foreach (var ng in listng)
 				{
                     foreach(var gv in gvDA.GetAllData())
-                        if (chnganh.Manganh == ng.Manganh&& chnganh.Maphutrach==gv.MaGV)
+					{
+                        if (chnganh.Manganh == ng.Manganh && chnganh.Maphutrach == gv.MaGV)
                         {
                             chnganh.Nganh = new Nganh(ng);
                             chnganh.Giangvien = new GiangVien(gv);
                             break;
-                        }
-                }
-                   
+                        }                            
+                    }
+                    if (chnganh.Manganh == ng.Manganh && chnganh.Maphutrach == 0)
+                    {
+                        chnganh.Nganh = new Nganh(ng);
+                        chnganh.Giangvien = null;
+                    }
+                } 
             }
             return listch;
         }
@@ -78,7 +84,15 @@ namespace Project_1.Business_Layer
         public void Delete(int mach)
         {
             if (ExistKTCN(mach))
+            {
                 chDA.Delete(mach);
+                List<LopHoc> l = lDA.GetAllData();
+                foreach (var s in l)
+                {
+                    if (s.Mach == mach)
+                        lDA.Delete(s.Malop);
+                }
+            }
             else
                 throw new Exception("Khong ton tai ma nay");
         }

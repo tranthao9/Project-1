@@ -78,10 +78,10 @@ namespace Project_1.DataAccess
         public void GhiLaiDanhsach(List<Detai> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
+            int malh = 1;
             foreach (Detai t in List)
             {
-                int malh = Stt() + 1;
-                fw.WriteLine(malh + "#" + t.Madetai + "#" + t.Tendetai + "#" + t.Mota + "#" + t.Mada);
+                fw.WriteLine(malh++ + "#" + t.Madetai + "#" + t.Tendetai + "#" + t.Mota + "#" + t.Mada);
 
             }
             fw.Close();

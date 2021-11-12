@@ -132,10 +132,10 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
-        public void Delete(int ma,int m2)
+        public void Delete(int ma)
         {
-            if (KiemTraMa(ma, m2))
-                svDA.Delete(ma, m2);
+            if (ExistDT(ma))
+                svDA.Delete(ma);
             else
                 throw new Exception("Khong ton tai ma nay");
         }
@@ -199,17 +199,6 @@ namespace Project_1.Business_Layer
             }
             else kq = null;
             return kq;
-        }
-        //Các phương thức hỗ trợ cho việc thực thi các yêu cầu
-        public bool KiemTraMa(int ma,int m2)
-        {
-            bool ok = false;
-            foreach (SVDetai sv in svDA.GetAllData())
-                if (sv.MaSV== ma && sv.Madetai == m2)
-                {
-                    ok = true; break;
-                }
-            return ok;
         }
         public double Diemgvpb(SVDetai x)
         {

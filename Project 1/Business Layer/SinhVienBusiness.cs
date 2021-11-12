@@ -48,7 +48,21 @@ namespace Project_1.Business_Layer
         public void Delete(int masv)
         {
             if (Exist(masv))
+			{
                 svDA.Delete(masv);
+                List<LopSinhVien> lsv = lsvDA.GetAllData();
+                List<SVDetai> ldt = svdtDA.GetAllData();
+                foreach (var s in lsv)
+                {
+                    if (s.MaSV == masv)
+                        lsvDA.DeleteSV(masv);
+                }
+                foreach (var s in ldt)
+                {
+                    if (s.MaSV == masv)
+                        svdtDA.Delete(s.Madetai);
+                }
+            }                
             else
                 throw new Exception("Khong ton tai ma nay");
         }

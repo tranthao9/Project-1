@@ -43,7 +43,15 @@ namespace Project_1.Business_Layer
         public void Delete(int ma)
         {
             if (Exist(ma))
+			{
                 DA.Delete(ma);
+                List<Detai> l = dtDA.GetAllData();
+                foreach (var s in l)
+                {
+                    if (s.Mada == ma)
+                        dtDA.Delete(s.Madetai);
+                }
+            }                
             else
                 throw new Exception("Khong ton tai ma nay");
         }

@@ -62,13 +62,13 @@ namespace Project_1.DataAccess
             fwrite.Close();
         }
         //Xóa một do an khi biết mã đề tài và mã sv
-        public void Delete(int mada,int m2)
+        public void Delete(int mada)
         {
             List<SVDetai> list = GetAllData();
             StreamWriter fwrite = File.CreateText(txtfile);
-            int i = 0;
+            int i = 1;
             foreach (SVDetai da in list)
-                if (da.Madetai != mada && da.MaSV !=m2)
+                if (da.Madetai != mada )
                 {
                     fwrite.WriteLine(i++ + "#" + da.Madetai + "#" + da.MaSV + "#" + da.MaGVHD + "#" + da.MaGVPB + "#" + da.DiemGVHD + "#" + da.DiemBV);
                 }
@@ -79,7 +79,7 @@ namespace Project_1.DataAccess
         public void GhiLaiDanhsach(List<SVDetai> List)
         {
             StreamWriter fw = new StreamWriter(txtfile, false);
-            int i = 0;
+            int i = 1;
             foreach (SVDetai da in List)
             {
                 fw.WriteLine(i++ + "#" + da.Madetai + "#" + da.MaSV + "#" + da.MaGVHD + "#" + da.MaGVPB + "#" + da.DiemGVHD + "#" + da.DiemBV);

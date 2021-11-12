@@ -69,7 +69,7 @@ namespace Project_1.DataAccess
 			
 			List<SinhVien> list = GetAllData();
 			StreamWriter fw = File.CreateText(filetxt);
-			int i = 0;
+			int i = 1;
 			foreach(SinhVien sv in list)
 				if(sv.MaSV != masv)
 				{

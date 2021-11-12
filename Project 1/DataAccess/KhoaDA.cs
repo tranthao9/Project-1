@@ -59,24 +59,11 @@ namespace Project_1.DataAccess.Interface
 			fwrite.WriteLine(sttk + "#" + k.Makhoa + "#" + k.Tenkhoa + "#" + k.Matruongkhoa + "#" + k.Mota + "#" + k.Trangthai );
 			fwrite.Close();
 		}
-		//xoa  khoa theo ma
-		public void Delete(int mak)
-		{
-			List<Khoa> list = GetAllData();
-			StreamWriter fw = File.CreateText(ftxt);
-			foreach (Khoa n in list)
-				if (n.Makhoa != mak)
-				{
-					int sttk = STTkhoa() + 1;
-					fw.Write(sttk + "#" + n.Makhoa + "#" + n.Tenkhoa + "#" + n.Matruongkhoa + "#" + n.Mota + "#" + n.Trangthai );
-				}
-			fw.Close();
-		}
 		//Thuật toán phương thức sửa trên danh sách, ghi lại tệp.
 		public void GhiLaiDanhsach(List<Khoa> List)
 		{
 			StreamWriter fw = new StreamWriter(ftxt, false);
-			int i = 0;
+			int i = 1;
 			foreach (Khoa n in List)
 			{
 				fw.Write(i++ + "#" + n.Makhoa + "#" + n.Tenkhoa + "#" + n.Matruongkhoa + "#" + n.Mota + "#" + n.Trangthai);

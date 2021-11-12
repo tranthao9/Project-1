@@ -68,7 +68,6 @@ namespace Project_1.DataAccess
 			foreach (ChuyenNganh cn in list)
 				if (cn.Machnganh != mach)
 				{
-					int sttcn = STTchuyennganh() + 1;
 					fw.WriteLine(i++ + "#" + cn.Machnganh + "#" + cn.Tenchnganh + "#" + cn.Maphutrach + "#" + cn.Mota + "#" + cn.Trangthai + "#" + cn.Manganh);
 				}
 			fw.Close();

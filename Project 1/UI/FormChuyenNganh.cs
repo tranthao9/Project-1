@@ -153,7 +153,7 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				Hien(BL.GetAllData(), 0, 0, "Nhập MÃ Chuyên ngành cần xóa, thoát nhập 0!", 20);
+				Hien(BL.GetAllData(), 0, 3, "Nhập MÃ Chuyên ngành cần xóa, thoát nhập 0!", 20);
 				int ma = int.Parse("0" + Console.ReadLine());
 				if (ma == 0) return;
 				else BL.Delete(ma);
@@ -512,7 +512,8 @@ namespace Project_1.UI
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
-						Hien(BL.GetAllData(), 0, 11, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
+						Console.Clear();
+						Hien(BL.GetAllData(), 0, 3, " ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:
 						Console.Clear();

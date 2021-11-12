@@ -11,7 +11,7 @@ namespace Project_1.Business_Layer.Interface
 	{
 		List<SVDetai> GetAllData();
 		void Insert(SVDetai lop);
-		void Delete(int malop,int m1);
+		void Delete(int ma);
 		List<SVDetai> Tim(SVDetai t);
 		bool ExistDT(int ma);
 		bool ExistGV(int ma);

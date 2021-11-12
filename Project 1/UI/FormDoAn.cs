@@ -108,7 +108,7 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				Hien(BL.GetAllData(), 0, 3, "Nhập đồ án cần xóa, thoát nhập 0!", 20);
+				Hien(BL.GetAllData(), 0, 3, "Nhập đồ án cần xóa, thoát nhập 0!", BL.GetAllData().Count);
 				int ma = int.Parse("0" + Console.ReadLine());
 				if (ma == 0) return;
 				else BL.Delete(ma);
@@ -121,7 +121,7 @@ namespace Project_1.UI
 			{
 				Console.Clear();
 				List<DoAn> list = BL.Tim(new DoAn(detai, null,0, null));
-				Hien(list, 0, 3, "Nhấn Enter để thoát! Nhập đồ án cần tìm : ", 30);
+				Hien(list, 0, 3, "Nhấn Enter để thoát! Nhập đồ án cần tìm : ", BL.GetAllData().Count);
 				detai = int.Parse(Console.ReadLine());
 				if (detai == 0) return;
 			} while (true);
@@ -153,7 +153,7 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				Hien(BL.GetAllData(), 0,3, "Nhập MÃ đồ án cần sửa, thoát nhập 0!", 20);
+				Hien(BL.GetAllData(), 0,3, "Nhập MÃ đồ án cần sửa, thoát nhập 0!", BL.GetAllData().Count);
 				int ma = int.Parse(Console.ReadLine());
 				if (ma == 0) return;
 				else
@@ -415,7 +415,7 @@ namespace Project_1.UI
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
-						Hien(BL.GetAllData(), 0, 11, "", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
+						Hien(BL.GetAllData(), 0, 3, "", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:
 						Console.Clear();

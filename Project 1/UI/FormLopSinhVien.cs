@@ -141,7 +141,7 @@ namespace Project_1.UI
 			do
 			{
 				Console.Clear();
-				Hien(BL.GetAllData(), 0, 0, "Nhập tuần cần xóa, thoát nhập 0!", 20);
+				Hien(BL.GetAllData(), 0,3, "Nhập tuần cần xóa, thoát nhập 0!", BL.GetAllData().Count);
 				Console.WriteLine();
 				Console.Write("Nhập mã lớp muốn xóa : ");
 				int ma = int.Parse("0" + Console.ReadLine());
@@ -158,7 +158,7 @@ namespace Project_1.UI
 			{
 				Console.Clear();
 				List<LopSinhVien> list = BL.Tim(new LopSinhVien(lop,0,0,0));
-				Hien(list, 0, 0, "Nhấn Enter để thoát! Nhập tuần cần tìm : ", 30);
+				Hien(list, 0, 3, "Nhấn Enter để thoát! Nhập tuần cần tìm : ", BL.GetAllData().Count);
 				lop = int.Parse(Console.ReadLine());
 				if (lop == 0) return;
 			} while (true);
@@ -192,7 +192,7 @@ namespace Project_1.UI
 			{
 				Console.ForegroundColor = ConsoleColor.Black; ;
 				Console.Clear();
-				Hien(BL.GetAllData(), 0, 0, "Nhập MÃ đề tài và mã tuần cần sửa, thoát nhập 0!", 20);
+				Hien(BL.GetAllData(), 0, 3, "Nhập MÃ đề tài và mã tuần cần sửa, thoát nhập 0!", BL.GetAllData().Count);
 				Console.WriteLine();
 				Console.Write("Nhập mã sinh viên : ");
 				int ma = int.Parse(Console.ReadLine());
@@ -400,7 +400,7 @@ namespace Project_1.UI
 						}
 					}
 					if (d == 0)
-						Console.SetCursorPosition(5, BL.GetAllData().Count + 10); Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Mã không tồn tại ");
+						Console.SetCursorPosition(5, BL.GetAllData().Count + 8); Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Mã không tồn tại ");
 				}
 			}
 		}
@@ -473,7 +473,8 @@ namespace Project_1.UI
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
-						Hien(BL.GetAllData(), 0, 11, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
+						Console.Clear();
+						Hien(BL.GetAllData(), 0, 3, " ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:
 						Console.Clear();

@@ -25,7 +25,6 @@ namespace Project_1.Entities
 			get { return giangvien; }
 			set
 			{
-				if (value != null)
 					giangvien = value;
 			}
 		}

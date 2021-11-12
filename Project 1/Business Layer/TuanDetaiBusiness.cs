@@ -15,6 +15,7 @@ namespace Project_1.Business_Layer
     {
         private ITuanDetaiDA tuandtDA = new TuanDetaiDA();
         private IDetaiBusiness chDA = new DetaiBusiness();
+        private ISVDetaiDA svDA = new SVDetaiDA();
         //Thực thi các yêu cầu
         public List<TuanDetai> GetAllData()
         {
@@ -61,13 +62,32 @@ namespace Project_1.Business_Layer
         public void Delete(int matuan,int madetai)
         {
             if (Exist(matuan,madetai))
-                tuandtDA.Delete(matuan,madetai);
+			{
+                tuandtDA.Delete(matuan, madetai);
+                List<SVDetai> l = svDA.GetAllData();
+                foreach (var s in l)
+                {
+                    if (s.Madetai == madetai)
+                        svDA.Delete(madetai);
+                }
+            }
             else
                 throw new Exception("Khong ton tai ma nay");
         }
         public void Edit(int id, int ma, TuanDetai newInfo)
         {
             tuandtDA.Edit(id, ma, newInfo);
+            if(id != newInfo.Madettai)
+			{
+                List<SVDetai> l = svDA.GetAllData();
+                foreach(var s in l)
+				{
+                    if (s.Madetai == id)
+                        s.Madetai = newInfo.Madettai;
+				}
+                svDA.GhiLaiDanhsach(l);
+
+			}
         }
         public List<TuanDetai> Tim(TuanDetai t)
         {
