@@ -22,7 +22,6 @@ namespace Project_1.Entities
 			get { return mada; }
 			set
 			{
-				if (value > 0)
 					mada = value;
 			}
 
@@ -32,7 +31,6 @@ namespace Project_1.Entities
 			get { return tenda; }
 			set
 			{
-				if (value != "")
 					tenda = value;
 			}
 		}
@@ -41,7 +39,6 @@ namespace Project_1.Entities
 			get { return sotc; }
 			set
 			{
-				if (value >= 1)
 					sotc = value;
 			}
 		}
@@ -50,7 +47,6 @@ namespace Project_1.Entities
 			get { return mota; }
 			set
 			{
-				if (value != "")
 					mota = value;
 			}
 		}
@@ -61,7 +57,7 @@ namespace Project_1.Entities
 		public DoAn(DoAn da)
 		{
 			this.mada = da.mada;
-			this.tenda = string.Copy(da.tenda);
+			this.tenda = da.tenda;
 			this.sotc = da.sotc;
 			this.mota = da.mota;
 		}

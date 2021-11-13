@@ -125,6 +125,82 @@ namespace Project_1.UI
 			} while (true);
 		}
 
+		public void Tim()
+		{
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐  CHỌN THÔNG TIN MUỐN TÌM KIẾM  ▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("\t\t\t\t\t\t\t\t╔══════════════════════════════╗");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   1. Theo mã giảng viên      ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   2. Theo tên giảng viên     ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   0. Exit                    ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t╚══════════════════════════════╝");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.SetCursorPosition(65, 22); Console.Write("Nhập lựa chọn : "); int n = int.Parse(Console.ReadLine());
+			switch (n)
+			{
+				case 1:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập mã giảng viên       ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if (A.Exist(i))
+						{
+							List<GiangVien> list = A.TimGiangVien(new GiangVien(i, null,new DateTime(),null,null,0,null));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại mã này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 2:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 2. Nhập tên giảng viên      ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); string a = Console.ReadLine();
+						if (A.ExistTEN(a))
+						{
+							List<GiangVien> list = A.TimGiangVien(new GiangVien(0, a, new DateTime(), null,null, 0, null) );
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại tên này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (a == null)
+							break;
+					} while (true);
+					break;
+				case 0:
+					break;
+				default:
+					Console.WriteLine("Nhập sai cú pháp !");
+					break;
+			}
+		}
 		static void Bang(GiangVien a)
 		{
 			Console.Clear();

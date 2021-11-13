@@ -17,5 +17,7 @@ namespace Project_1.Business_Layer.Interface
 		bool ExistKTN(int ma);
 		bool ExistKTGV(int ma);
 		void Edit(int id, ChuyenNganh newInfo);
+		bool ExistKTTen(string ma);
+		bool ExistXN(int ma);
 	}
 }

@@ -32,6 +32,14 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiểm tra một tên sinh viên xem đã tồn tại hay chưa
+        public bool ExistTEN(string ma)
+        {
+            List<SinhVien> list = GetAllData();
+            if (list.Find(m => m.TenSV == ma) != null)
+                return true;
+            return false;
+        }
         public void Insert(SinhVien sv)
 		{
             Console.InputEncoding = Encoding.UTF8;

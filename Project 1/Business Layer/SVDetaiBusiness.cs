@@ -37,17 +37,16 @@ namespace Project_1.Business_Layer
                             {
                                 if (lop.MaGVHD == gv.MaGV)
                                 {
-
-                                    lop.GiangvienHD = new GiangVien(gv);
                                     d++;
                                 }
                                 if ( lop.MaGVPB == gv.MaGV)
                                 {
-                                    lop.GiangvienPB = new GiangVien(gv);
                                     d++;
                                 }
                                 if (d == 2)
                                 {
+                                    lop.GiangvienHD = new GiangVien(gv);
+                                    lop.GiangvienPB = new GiangVien(gv);
                                     lop.LopSV = new LopSinhVien(ls);
                                     lop.Tuandt = new TuanDetai(ch);
                                     break;
@@ -132,6 +131,47 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiểm tra mã lớp có tồn tại trong bảng không
+        public bool ExistKTL(int ma)
+        {
+            List<SVDetai> list = GetAllData();
+            if (list.Find(m => m.Lop() == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra mã sinh viên có tồn tại trong bảng không
+        public bool ExistKTSV(int ma)
+        {
+            List<SVDetai> list = GetAllData();
+            if (list.Find(m => m.MaSV == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra mã GVHD có tồn tại trong bảng không
+        public bool ExistKTGVHD(int ma)
+        {
+            List<SVDetai> list = GetAllData();
+            if (list.Find(m => m.MaGVHD == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra mã GVPB có tồn tại trong bảng không
+        public bool ExistKTGVPB(int ma)
+        {
+            List<SVDetai> list = GetAllData();
+            if (list.Find(m => m.MaGVPB == ma) != null)
+                return true;
+            return false;
+        }
+        // kiểm tra mã đồ án
+        public bool ExistKTDA(int ma)
+        {
+            List<SVDetai> list = GetAllData();
+            if (list.Find(m => m.Tuandt.Detai.Mada == ma) != null)
+                return true;
+            return false;
+        }
+
         public void Delete(int ma)
         {
             if (ExistDT(ma))
@@ -145,59 +185,49 @@ namespace Project_1.Business_Layer
         }
         public List<SVDetai> Tim(SVDetai sv)
         {
-            List<SVDetai> list = svDA.GetAllData();
+            List<SVDetai> list =GetAllData();
             List<SVDetai> kq = new List<SVDetai>();
             //Voi gai tri ngam dinh ban dau
-            if (sv.MaSV == 0 && sv.Madetai==0 &&sv.MaGVHD==0&&sv.MaGVPB==0 )
+            if (sv.MaSV == 0 && sv.Tuandt.Detai.Mada==0 &&sv.MaGVHD==0&&sv.MaGVPB==0 )
             {
-                kq = list;
+                return list;
             }
             //Tim theo ma sv
-            else if (sv.MaSV != 0 && sv.Madetai == 0 && sv.MaGVHD == 0 && sv.MaGVPB == 0)
+            if (sv.MaSV != 0)
             {
                 foreach (SVDetai s in list)
                     if (s.MaSV== sv.MaSV)
                     {
-                        kq.Add(new SVDetai(s));
+                        kq.Add(s);
                     }
             }
-            //Tim theo ma de tai
-            else if (sv.MaSV == 0 && sv.Madetai != 0 && sv.MaGVHD == 0 && sv.MaGVPB == 0)
+            //Tim theo ma đồ án
+            else if (sv.Tuandt.Detai.Mada != 0)
             {
                 foreach (SVDetai s in list)
                     if (s.Madetai == sv.Madetai)
                     {
-                        kq.Add(new SVDetai(s));
+                        kq.Add(s);
                     }
             }
             //Tim theo ma GVHD
-            else if (sv.MaSV == 0 && sv.Madetai == 0 && sv.MaGVHD != 0 && sv.MaGVPB == 0)
+            else if (sv.MaGVHD != 0 )
             {
                 foreach (SVDetai s in list)
                     if (s.MaGVHD == sv.MaGVHD)
                     {
-                        kq.Add(new SVDetai(s));
+                        kq.Add(s);
                     }
             }
             //Tim theo ma gvpb
-            else if (sv.MaSV == 0 && sv.Madetai == 0 && sv.MaGVHD == 0 && sv.MaGVPB != 0)
+            else if (sv.MaGVPB != 0)
             {
                 foreach (SVDetai s in list)
                     if (s.MaGVPB == sv.MaGVPB)
                     {
-                        kq.Add(new SVDetai(s));
+                        kq.Add(s);
                     }
             }
-            //Tim ket hop tat ca
-            else if (sv.MaSV != 0 && sv.Madetai != 0 && sv.MaGVHD != 0 && sv.MaGVPB != 0)
-            {
-                foreach (SVDetai s in list)
-                    if (s.MaGVPB == sv.MaGVPB && s.MaGVHD == sv.MaGVHD && s.Madetai == sv.Madetai && s.MaSV == sv.MaSV)
-                    {
-                        kq.Add(new SVDetai(s));
-                    }
-            }
-            else kq = null;
             return kq;
         }
         public double Diemgvpb(SVDetai x)

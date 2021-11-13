@@ -116,15 +116,105 @@ namespace Project_1.UI
 		}
 		public void Tim()
 		{
-			int detai = 0;
-			do
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐  CHỌN THÔNG TIN MUỐN TÌM KIẾM  ▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("\t\t\t\t\t\t\t\t╔══════════════════════════════╗");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   1. Theo mã đồ án           ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   2. Theo tên đồ án          ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║  3. Theo số tín chỉ          ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   0. Exit                    ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t╚══════════════════════════════╝");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.SetCursorPosition(65, 22); Console.Write("Nhập lựa chọn : "); int n = int.Parse(Console.ReadLine());
+			switch (n)
 			{
-				Console.Clear();
-				List<DoAn> list = BL.Tim(new DoAn(detai, null,0, null));
-				Hien(list, 0, 3, "Nhấn Enter để thoát! Nhập đồ án cần tìm : ", BL.GetAllData().Count);
-				detai = int.Parse(Console.ReadLine());
-				if (detai == 0) return;
-			} while (true);
+				case 1:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập mã đồ án            ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if (BL.Exist(i))
+						{
+							List<DoAn> list = BL.Tim(new DoAn(i, null, 0, null));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại mã này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+							
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 2:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 2. Nhập tên đồ án           ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); string a = Console.ReadLine();
+						if (BL.ExistTEN(a))
+						{
+							List<DoAn> list = BL.Tim(new DoAn(0, a, 0,null));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại tên này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (a == null)
+							break;
+					} while (true);
+					break;
+				case 3:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập số tín chỉ          ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if (BL.ExistTC(i))
+						{
+							List<DoAn> list = BL.Tim(new DoAn(0, null, i, null));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại số tín chỉ này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 0:
+					break;
+				default:
+					Console.WriteLine("Nhập sai cú pháp !");
+					break;
+			}
 		}
 		static void Bang(DoAn a)
 		{
@@ -362,17 +452,17 @@ namespace Project_1.UI
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.Write("\t\t║                        ");
 				Console.ForegroundColor = ConsoleColor.Black;
-				Console.Write("                                 ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                      ");
+				Console.Write("                                 ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                   ");
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.WriteLine("║");
 				Console.Write("\t\t║                        ");
 				Console.ForegroundColor = ConsoleColor.Black;
-				Console.Write("                                 ▐     QUẢN LÝ ĐỒ ÁN      ▌                                                      ");
+				Console.Write("                                 ▐     QUẢN LÝ ĐỒ ÁN      ▌                                                   ");
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.WriteLine("║");
 				Console.Write("\t\t║                        ");
 				Console.ForegroundColor = ConsoleColor.Black;
-				Console.Write("                                 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                      ");
+				Console.Write("                                 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                   ");
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.WriteLine("║");
 				Console.WriteLine("\t\t║                                                                                                                                      ║");

@@ -137,18 +137,79 @@ namespace Project_1.UI
 		}
 		public void Tim()
 		{
-			Console.OutputEncoding = Encoding.UTF8;
-			Console.InputEncoding = Encoding.Unicode;
-			string hoten = "";
-			do
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐  CHỌN THÔNG TIN MUỐN TÌM KIẾM  ▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("\t\t\t\t\t\t\t\t╔══════════════════════════════╗");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   1. Theo mã sinh viên       ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   2. Theo tên sinh viên      ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   0. Exit                    ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t╚══════════════════════════════╝");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.SetCursorPosition(65, 22); Console.Write("Nhập lựa chọn : "); int n = int.Parse(Console.ReadLine());
+			switch (n)
 			{
-				Console.Clear();
-				ISinhVienBusiness BL = new SinhVienBusiness();
-				List<SinhVien> list = BL.TimSinhVien(new SinhVien(0, hoten, new DateTime(), "", "", 0, ""));
-				Hien(list, 0, 3, "Nhấn ENTER để thoát! Nhập họ và tên cần tìm : ",BL.GetAllData().Count );
-				hoten = Console.ReadLine();
-				if (hoten == "") return;
-			} while (true);
+				case 1:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập mã sinh viên        ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if (BL.Exist(i))
+						{
+							List<SinhVien> list = BL.TimSinhVien(new SinhVien(i, null, new DateTime(), null, null, 0, null));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại mã này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 2:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 2. Nhập tên sinh viên       ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); string a = Console.ReadLine();
+						if (BL.ExistTEN(a))
+						{
+							List<SinhVien> list = BL.TimSinhVien(new SinhVien(0, a, new DateTime(), null, null, 0, null));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại tên này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (a == null)
+							break;
+					} while (true);
+					break;
+				case 0:
+					break;
+				default:
+					Console.WriteLine("Nhập sai cú pháp !");
+					break;
+			}
 		}
 		static void Bang(SinhVien a)
 		{

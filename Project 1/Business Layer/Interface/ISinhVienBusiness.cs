@@ -16,5 +16,6 @@ namespace Project_1.Business_Layer.Interface
 		void Delete(int masv);
 		List<SinhVien> TimSinhVien(SinhVien sv);
 		void Edit(int id, SinhVien newInfo);
+		bool ExistTEN(string ma);
 	}
 }

@@ -212,19 +212,300 @@ namespace Project_1.UI
 		}
 		public void Tim()
 		{
-			int detai = 0;
-			int sv = 0;
-			do
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐  CHỌN THÔNG TIN MUỐN TÌM KIẾM  ▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("\t\t\t\t\t\t\t\t╔══════════════════════════════╗");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   1. Theo mã lớp             ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   2. Theo mã sinh viên       ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   3. Theo mã GVHD            ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   4. Theo mã GVPB            ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   5. Theo mã đồ án           ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   6. Theo đánh giá           ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   7. Theo xếp loại           ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   0. Exit                    ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t╚══════════════════════════════╝");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.SetCursorPosition(65, 42); Console.Write("Nhập lựa chọn : "); int n = int.Parse(Console.ReadLine());
+			switch (n)
 			{
-				Console.Clear();
-				List<SVDetai> list = BL.Tim(new SVDetai(detai,sv,0,0,0,0));
-				Hien(list, 0, 0, "Nhấn Enter để thoát! Nhập tuần cần tìm : ", 30);
-				detai = int.Parse(Console.ReadLine());
-				detai = int.Parse(Console.ReadLine());
-				if (detai == 0 && sv==0) return;
-			} while (true);
-		}
+				case 1:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║    Nhập mã lớp              ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if (BL.ExistKTL(i))
+						{
+							List<SVDetai> list = new List<SVDetai>();
+							foreach(var a in BL.GetAllData())
+							{
+								if (a.Lop() == i)
+									list.Add(a);
 
+							}	
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại mã này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 2:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║    Nhập mã sinh viên        ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int a = int.Parse(Console.ReadLine());
+						if (BL.ExistKTSV(a))
+						{
+							List<SVDetai> list = BL.Tim(new SVDetai(0,a,0,0,0,0));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại mã sinh viên này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (a == 0)
+							break;
+					} while (true);
+					break;
+				case 3:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║    Nhập mã GVHD             ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if (BL.ExistKTGVHD(i))
+						{
+							List<SVDetai> list = BL.Tim(new SVDetai(0, 0, i,0,0, 0));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại năm học này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 4:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║    Nhập mã GVPB             ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int s = int.Parse(Console.ReadLine());
+						if (BL.ExistKTGVPB(s))
+						{
+							List<SVDetai> list = BL.Tim(new SVDetai(0, 0, 0, s,0,0));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại học kỳ này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (s == 0)
+							break;
+					} while (true);
+					break;
+				case 5:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║  Nhập mã đồ án              ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int l = int.Parse(Console.ReadLine());
+						if (BL.ExistKTDA(l))
+						{
+							List<SVDetai> list = new List<SVDetai>();
+							foreach (var a in BL.GetAllData())
+							{
+								if (a.Tuandt.Detai.Mada == l)
+									list.Add(a);
+
+							}
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại học kỳ này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (l == 0)
+							break;
+					} while (true);
+					break;
+				case 6:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Đạt                      ║  2. KHông đạt                      ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(50, 5);Console.Write("Nhập lựa chọn : "); int c = int.Parse(Console.ReadLine());
+						List<SVDetai> list = new List<SVDetai>();
+						if (c==1)
+						{
+							
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.Danhgia(a) == "Đạt")
+									list.Add(a);
+
+							}
+							Hien(list, 0, 10, "Nhấn 0 để thoát! ", list.Count);
+						}	
+						else if(c==2)
+						{
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.Danhgia(a) == "KHông đạt")
+									list.Add(a);
+
+							}
+							Hien(list, 0, 10, "Nhấn 0 để thoát! ", list.Count);
+						}	
+							
+						else
+						{
+							Console.SetCursorPosition(60, 6); Console.WriteLine("KHông tồn tại học kỳ này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (c == 0)
+							break;
+					} while (true);
+					break;
+				case 7:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                     ║                  ║                   ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Xuất sắc         ║  2. Giỏi         ║ 3. Khá            ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t║════════════════════════════════════════════════════════════║");
+						Console.SetCursorPosition(0, 4); Console.WriteLine("\t\t\t\t\t\t║                     ║                  ║                   ║");
+						Console.SetCursorPosition(0, 5); Console.WriteLine("\t\t\t\t\t\t║ 4.Trung bình khá    ║  5. Trung bình   ║   6. Yếu          ║");
+						Console.SetCursorPosition(0, 6); Console.WriteLine("\t\t\t\t\t\t╚════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(50, 7); Console.Write("Nhập lựa chọn : "); int c = int.Parse(Console.ReadLine());
+						List<SVDetai> list = new List<SVDetai>();
+						if (c == 1)
+						{
+							
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.xeploai(a) == "Xuất Sắc")
+									list.Add(a);
+							}
+							Hien(list, 0, 10, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else if (c == 2)
+						{
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.xeploai(a) == "Giỏi")
+									list.Add(a);
+
+							}
+							Hien(list, 0, 10, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else if (c == 3)
+						{
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.xeploai(a) == "Khá")
+									list.Add(a);
+
+							}
+							Hien(list, 0,10, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else if (c == 4)
+						{
+							
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.xeploai(a) == "Trung bình khá")
+									list.Add(a);
+
+							}
+							Hien(list, 0, 10, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else if (c == 5)
+						{
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.xeploai(a) == "Trung bình")
+									list.Add(a);
+
+							}
+							Hien(list, 0, 10, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else if (c == 6)
+						{
+							foreach (var a in BL.GetAllData())
+							{
+								if (BL.xeploai(a) == "Yếu")
+									list.Add(a);
+
+							}
+							Hien(list, 0, 10, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 9); Console.WriteLine("Lựa chọn không đúng ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (c == 0)
+							break;
+					} while (true);
+					break;
+				case 0:
+					break;
+				default:
+					Console.WriteLine("Nhập sai cú pháp !");
+					break;
+			}
+		}
 		static void Bang(SVDetai a)
 		{
 			Console.Clear();

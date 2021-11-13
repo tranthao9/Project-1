@@ -61,6 +61,22 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiểm tra một tên ngành xem đã tồn tại hay chưa
+        public bool ExistTEN(string ma)
+        {
+            List<Nganh> list = GetAllData();
+            if (list.Find(m => m.Tennganh == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra một mã trưởng ngành xem đã tồn tại hay chưa
+        public bool ExistTN(int ma)
+        {
+            List<Nganh> list = GetAllData();
+            if (list.Find(m => m.Matruongnganh == ma) != null)
+                return true;
+            return false;
+        }
         public void Insert(Nganh ng)
         {
             if (ng.Tennganh != "" && ng.Mota != null && ng.Trangthai != null)
@@ -107,12 +123,12 @@ namespace Project_1.Business_Layer
             List<Nganh> list = ngDA.GetAllData();
             List<Nganh> kq = new List<Nganh>();
             //Voi gai tri ngam dinh ban dau
-            if (ng.Manganh == 0 && ng.Tennganh == null && ng.Mota == null && ng.Trangthai == null)
+            if (ng.Manganh == 0 && ng.Tennganh == null && ng.Matruongnganh==0)
             {
-                kq = list;
+                 return list;
             }
             //Tim theo ma nganh
-            if (ng.Manganh != 0 && ng.Tennganh == null && ng.Mota == null && ng.Trangthai == null)
+            if (ng.Manganh != 0)
             {
                 foreach (Nganh nganh in list)
                     if (nganh.Manganh == ng.Manganh)
@@ -121,7 +137,7 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim theo ten nganh
-            else if (ng.Manganh == 0 && ng.Tennganh != null && ng.Mota == null && ng.Trangthai == null)
+            else if ( ng.Tennganh != null )
             {
                 foreach (Nganh nganh in list)
                     if (nganh.Tennganh.IndexOf(ng.Tennganh) >= 0)
@@ -129,25 +145,15 @@ namespace Project_1.Business_Layer
                         kq.Add(new Nganh(nganh));
                     }
             }
-            // Tim kiem theo mo ta
-            else if (ng.Manganh == 0 && ng.Tennganh == null &&ng.Mota != null && ng.Trangthai == null)
+            // Tim kiem theo mã trưởng ngành
+            else if (ng.Matruongnganh != 0)
             {
                 foreach (Nganh nganh in list)
-                    if (nganh.Mota.IndexOf(ng.Mota) >= 0)
+                    if (ng.Matruongnganh == nganh.Matruongnganh)
                     {
                         kq.Add(new Nganh(nganh));
                     }
             }
-            // Tim kiem theo trang thai
-            else if (ng.Manganh == 0 && ng.Tennganh == null && ng.Mota == null && ng.Trangthai != null)
-            {
-                foreach (Nganh nganh in list)
-                    if (nganh.Trangthai.IndexOf(ng.Trangthai) >= 0)
-                    {
-                        kq.Add(new Nganh(nganh));
-                    }
-            }
-            else kq = null;
             return kq;
         }
     }

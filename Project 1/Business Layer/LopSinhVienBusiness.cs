@@ -55,6 +55,38 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiểm tra lớp đã tồn tại trong bảng lớp siinh viên hay chưa
+        public bool ExistKTL(int ma)
+        {
+            List<LopSinhVien> list = GetAllData();
+            if (list.Find(m => m.Malop == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra sv đã tồn tại trong bảng lớp sinh viên hay chưa
+        public bool ExistKTSV(int ma)
+        {
+            List<LopSinhVien> list = GetAllData();
+            if (list.Find(m => m.MaSV == ma) != null)
+                return true;
+            return false;
+        }
+        // kiểm tra năm học có tồn tại hay không
+        public bool ExistKTNH(int ma)
+        {
+            List<LopSinhVien> list = GetAllData();
+            if (list.Find(m => m.Namhoc == ma) != null)
+                return true;
+            return false;
+        }
+        // kiểm tra học kỳ có tồn tại hay không
+        public bool ExistKTHK(int ma)
+        {
+            List<LopSinhVien> list = GetAllData();
+            if (list.Find(m => m.Hocky == ma) != null)
+                return true;
+            return false;
+        }
         public void Insert(LopSinhVien ng)
         {
             DA.Insert(ng);
@@ -72,7 +104,7 @@ namespace Project_1.Business_Layer
         }
         public List<LopSinhVien> Tim(LopSinhVien ng)
         {
-            List<LopSinhVien> list = DA.GetAllData();
+            List<LopSinhVien> list = GetAllData();
             List<LopSinhVien> kq = new List<LopSinhVien>();
             //Voi gai tri ngam dinh ban dau
             if (ng.MaSV == 0 && ng.Malop == 0 && ng.Namhoc==0 && ng.Hocky==0)
@@ -80,7 +112,7 @@ namespace Project_1.Business_Layer
                 kq = list;
             }
             //Tim theo ma sv
-            else if (ng.MaSV != 0 && ng.Malop == 0 && ng.Namhoc == 0 && ng.Hocky == 0)
+            else if (ng.MaSV != 0)
             {
                 foreach (LopSinhVien lsv in list)
                     if (lsv.MaSV == ng.MaSV)
@@ -89,7 +121,7 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim theo ma lop
-            else if (ng.MaSV == 0 && ng.Malop != 0 && ng.Namhoc == 0 && ng.Hocky == 0)
+            else if (ng.Malop != 0 )
             {
                 foreach (LopSinhVien lsv in list)
                     if (lsv.Malop == ng.Malop)
@@ -98,7 +130,7 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim kiem theo nam hoc
-            else if (ng.MaSV == 0 && ng.Malop == 0 && ng.Namhoc != 0 && ng.Hocky == 0)
+            else if ( ng.Namhoc != 0 )
             {
                 foreach (LopSinhVien lsv in list)
                     if (lsv.Namhoc == ng.Namhoc)
@@ -107,7 +139,7 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim kiem theo hoc ky
-            else if (ng.MaSV == 0 && ng.Malop == 0 && ng.Namhoc == 0 && ng.Hocky != 0)
+            else if ( ng.Hocky != 0)
             {
                 foreach (LopSinhVien lsv in list)
                     if (lsv.Hocky == ng.Hocky)
@@ -115,34 +147,6 @@ namespace Project_1.Business_Layer
                         kq.Add(new LopSinhVien(lsv));
                     }
             }
-            // tim kiem theo nam hoc va hoc ky
-            else if (ng.MaSV == 0 && ng.Malop == 0 && ng.Namhoc != 0 && ng.Hocky != 0)
-            {
-                foreach (LopSinhVien lsv in list)
-                    if (lsv.Hocky == ng.Hocky && lsv.Namhoc == ng.Namhoc)
-                    {
-                        kq.Add(new LopSinhVien(lsv));
-                    }
-            }
-            //tim kiem theo lop va hoc ky
-            else if (ng.MaSV == 0 && ng.Malop != 0 && ng.Namhoc == 0 && ng.Hocky != 0)
-            {
-                foreach (LopSinhVien lsv in list)
-                    if (lsv.Hocky == ng.Hocky && lsv.Malop == ng.Malop)
-                    {
-                        kq.Add(new LopSinhVien(lsv));
-                    }
-            }
-            //tim kiem theo lop va nam hoc
-            else if (ng.MaSV == 0 && ng.Malop != 0 && ng.Namhoc != 0 && ng.Hocky == 0)
-            {
-                foreach (LopSinhVien lsv in list)
-                    if (lsv.Namhoc == ng.Namhoc && lsv.Malop == ng.Malop)
-                    {
-                        kq.Add(new LopSinhVien(lsv));
-                    }
-            }
-            else kq = null;
             return kq;
         }
         //Các phương thức hỗ trợ cho việc thực thi các yêu cầu

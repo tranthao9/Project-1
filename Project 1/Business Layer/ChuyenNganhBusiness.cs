@@ -26,26 +26,22 @@ namespace Project_1.Business_Layer
             foreach (var chnganh in listch)
             {
                 foreach (var ng in listng)
-				{
+				{  
                     foreach(var gv in gvDA.GetAllData())
 					{
                         if (chnganh.Manganh == ng.Manganh && chnganh.Maphutrach == gv.MaGV)
                         {
-                            chnganh.Nganh = new Nganh(ng);
-                            chnganh.Giangvien = new GiangVien(gv);
+                            chnganh.Nganh = ng;
+                            chnganh.Giangvien = gv;
                             break;
-                        }                            
+                        }
                     }
-                    if (chnganh.Manganh == ng.Manganh && chnganh.Maphutrach == 0)
-                    {
-                        chnganh.Nganh = new Nganh(ng);
-                        chnganh.Giangvien = null;
-                    }
+                   
                 } 
             }
             return listch;
         }
-        //kiểm tra một mã ngành xem đã tồn tại hay chưa
+        //kiểm tra một mã giáo viên xem đã tồn tại hay chưa
         public bool ExistKTGV(int ma)
         {
             List<GiangVien> list = gvDA.GetAllData();
@@ -53,11 +49,27 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        // kiểm tra tên chuyen ngành có tồn tại hay  không
+        public bool ExistKTTen(string ma)
+        {
+            List<ChuyenNganh> list = GetAllData();
+            if (list.Find(m => m.Tenchnganh == ma) != null)
+                return true;
+            return false;
+        }
+        // kierm tra xem mã ngành có nằm trong chuyên ngành này không
+        public bool ExistXN(int ma)
+        {
+            List<ChuyenNganh> list = GetAllData();
+            if (list.Find(m => m.Manganh == ma) != null)
+                return true;
+            return false;
+        }
         //kiểm tra một mã chuyên  ngành xem đã tồn tại hay chưa
         public bool ExistKTCN(int ma)
         {
             List<ChuyenNganh> list = GetAllData();
-            if (list.Find(m => m.Manganh== ma) != null)
+            if (list.Find(m => m.Machnganh== ma) != null)
                 return true;
             return false;
         }
@@ -112,15 +124,15 @@ namespace Project_1.Business_Layer
         }
         public List<ChuyenNganh> TimChuyenNganh(ChuyenNganh ch)
         {
-            List<ChuyenNganh> list = chDA.GetAllData();
+            List<ChuyenNganh> list = GetAllData();
             List<ChuyenNganh> kq = new List<ChuyenNganh>();
             //Voi gai tri ngam dinh ban dau
-            if (ch.Machnganh == 0 && ch.Tenchnganh == null && ch.Mota==null && ch.Trangthai==null)
+            if (ch.Machnganh == 0 && ch.Tenchnganh == null && ch.Manganh==0 )
             {
-                kq = list;
+                return list;
             }
             //Tim theo ma chuyen nganh
-            if (ch.Machnganh != 0 && ch.Tenchnganh == null && ch.Mota == null && ch.Trangthai == null)
+            if (ch.Machnganh != 0)
             {
                 foreach (ChuyenNganh chuyenNganh in list)
                     if (chuyenNganh.Machnganh == ch.Machnganh)
@@ -129,7 +141,7 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim theo ten chuyen nganh
-            else if (ch.Machnganh == 0 && ch.Tenchnganh != null && ch.Mota == null && ch.Trangthai == null)
+            else if (ch.Tenchnganh != null)
             {
                 foreach (ChuyenNganh chuyenNganh in list)
                     if (chuyenNganh.Tenchnganh.IndexOf(ch.Tenchnganh)>=0)
@@ -137,8 +149,8 @@ namespace Project_1.Business_Layer
                         kq.Add(new ChuyenNganh(chuyenNganh));
                     }
             }
-            // Tim kiem theo mo ta
-            else if (ch.Machnganh == 0 && ch.Tenchnganh == null && ch.Mota != null && ch.Trangthai == null)
+            // Tim kiem theo ngành
+            else if (ch.Manganh != 0)
             {
                 foreach (ChuyenNganh chuyenNganh in list)
                     if (chuyenNganh.Mota.IndexOf(ch.Mota) >= 0)
@@ -146,16 +158,6 @@ namespace Project_1.Business_Layer
                         kq.Add(new ChuyenNganh(chuyenNganh));
                     }
             }
-            // Tim kiem theo trang thai
-            else if (ch.Machnganh == 0 && ch.Tenchnganh == null && ch.Mota == null && ch.Trangthai != null)
-            {
-                foreach (ChuyenNganh chuyenNganh in list)
-                    if (chuyenNganh.Trangthai.IndexOf(ch.Trangthai) >= 0)
-                    {
-                        kq.Add(new ChuyenNganh(chuyenNganh));
-                    }
-            }
-            else kq = null;
             return kq;
         }
     }

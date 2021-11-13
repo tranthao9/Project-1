@@ -40,6 +40,22 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiem tra xem mã đồ án có nằm trong đề tài này hay không
+        public bool ExistDA(int a)
+        {
+            List<Detai> list = GetAllData();
+            if (list.Find(m => m.Mada == a) != null)
+                return true;
+            return false;
+        }
+        // kiểm tra tên đề tài xem có tồn tại hay không
+        public bool ExistTen(string a)
+		{
+            List<Detai> list = GetAllData();
+            if (list.Find(m => m.Tendetai == a) != null)
+                return true;
+            return false;
+        }
         //kiểm tra một mã đề tài xem đã tồn tại hay chưa
         public bool Exist(int ma)
         {
@@ -106,24 +122,24 @@ namespace Project_1.Business_Layer
         }
         public List<Detai> Tim(Detai dt)
         {
-            List<Detai> list = lopDA.GetAllData();
+            List<Detai> list = GetAllData();
             List<Detai> kq = new List<Detai>();
             //Voi gai tri ngam dinh ban dau
-            if (dt.Mada==0&& dt.Tendetai==null)
+            if (dt.Mada==0&& dt.Tendetai==null&& dt.Madetai==0)
             {
                 kq = list;
             }
             //Tim theo ma 
-            else if (dt.Mada != 0 && dt.Tendetai == null)
+            else if (dt.Madetai != 0 )
             {
                 foreach (Detai d in list)
-                    if (d.Mada== dt.Mada)
+                    if (d.Madetai== dt.Madetai)
                     {
                         kq.Add(new Detai(d));
                     }
             }
-            // Tim theo ten lop
-            else if (dt.Mada == 0 && dt.Tendetai != null)
+            // Tim theo ten chuyên ngành
+            else if (dt.Tendetai != null)
             {
                 foreach (Detai d in list)
                     if (d.Tendetai == dt.Tendetai)
@@ -131,16 +147,14 @@ namespace Project_1.Business_Layer
                         kq.Add(new Detai(d));
                     }
             }
-            //Tim ket hop giua ma va ten lop
-            else if (dt.Mada != 0 && dt.Tendetai != null)
+            else if (dt.Mada != 0)
             {
                 foreach (Detai d in list)
-                    if (d.Tendetai == dt.Tendetai&& d.Mada == dt.Mada)
+                    if (d.Mada == dt.Mada)
                     {
                         kq.Add(new Detai(d));
                     }
             }
-            else kq = null;
             return kq;
         }
     }

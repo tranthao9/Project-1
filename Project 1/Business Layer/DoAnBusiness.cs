@@ -22,6 +22,22 @@ namespace Project_1.Business_Layer
             
             return list;
         }
+        // kiểm tra tên đồ án có tồn tại hay không
+        public bool ExistTEN(string ma)
+        {
+            List<DoAn> list = GetAllData();
+            if (list.Find(m => m.Tenda == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra số tín chỉ của đồ án
+        public bool ExistTC(int ma)
+        {
+            List<DoAn> list = GetAllData();
+            if (list.Find(m => m.Sotc == ma) != null)
+                return true;
+            return false;
+        }
         //kiểm tra một mã đồ án xem đã tồn tại hay chưa
         public bool Exist(int ma)
         {
@@ -71,15 +87,15 @@ namespace Project_1.Business_Layer
         }
         public List<DoAn> Tim(DoAn da)
         {
-            List<DoAn> list = DA.GetAllData();
+            List<DoAn> list = GetAllData();
             List<DoAn> kq = new List<DoAn>();
             //Voi gai tri ngam dinh ban dau
             if (da.Mada==0 && da.Tenda==null &&da.Sotc==0)
             {
-                kq = list;
+                return list;
             }
             //Tim theo ma
-            else if (da.Mada != 0 && da.Tenda == null && da.Sotc == 0)
+            if (da.Mada != 0)
             {
                 foreach (DoAn d in list)
                     if (d.Mada==da.Mada)
@@ -88,7 +104,7 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim theo ten
-            else if (da.Mada == 0 && da.Tenda != null && da.Sotc == 0)
+            else if (da.Tenda != null)
             {
                 foreach (DoAn d in list)
                     if (d.Tenda.Contains(da.Tenda))
@@ -97,7 +113,7 @@ namespace Project_1.Business_Layer
                     }
             }
             //Tim theo sotc
-            else if (da.Mada == 0 && da.Tenda == null && da.Sotc != 0)
+            else if (da.Sotc != 0)
             {
                 foreach (DoAn d in list)
                     if (d.Sotc == da.Sotc)
@@ -105,7 +121,6 @@ namespace Project_1.Business_Layer
                         kq.Add(new DoAn(da));
                     }
             }
-            else kq = null;
             return kq;
         }
     }

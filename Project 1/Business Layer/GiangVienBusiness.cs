@@ -35,6 +35,14 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        // liểm tra tên giảng viên có tồn tại không
+        public bool ExistTEN(string ma)
+        {
+            List<GiangVien> list = GetAllData();
+            if (list.Find(m => m.TenGV == ma) != null)
+                return true;
+            return false;
+        }
         public void Insert(GiangVien gv)
         {
             gv.TenGV = Project_1.Utility.Congcu.Chuanhoaxau(gv.TenGV);
@@ -123,12 +131,12 @@ namespace Project_1.Business_Layer
             List<GiangVien> list = gvDA.GetAllData();
             List<GiangVien> kq = new List<GiangVien>();
             //Voi gai tri ngam dinh ban dau
-            if (gv.TenGV == null && gv.Diachi == null && gv.MaGV == 0 && gv.Gioitinh == null && gv.Namsinh == null && gv.SDT == 0)
+            if (gv.TenGV == null && gv.MaGV==0)
             {
-                kq = list;
+                return list;
             }
             //Tim theo ho ten
-            if (gv.TenGV != null && gv.Diachi == null && gv.MaGV == 0 && gv.Gioitinh == null && gv.Namsinh == null && gv.SDT == 0)
+            if (gv.TenGV != null)
             {
                 foreach (GiangVien giangvien in list)
                     if (giangvien.TenGV.IndexOf(gv.TenGV) >= 0)
@@ -136,17 +144,8 @@ namespace Project_1.Business_Layer
                         kq.Add(new GiangVien(giangvien));
                     }
             }
-            // Tim theo que quan
-            else if (gv.TenGV == null && gv.Diachi != null && gv.MaGV == 0 && gv.Gioitinh == null && gv.Namsinh == null && gv.SDT == 0)
-            {
-                foreach (GiangVien giangvien in list)
-                    if (giangvien.Diachi.IndexOf(gv.Diachi) >= 0)
-                    {
-                        kq.Add(new GiangVien(giangvien));
-                    }
-            }
             //Tim theo ma
-            else if (gv.TenGV == null && gv.Diachi == null && gv.MaGV != 0 && gv.Gioitinh == null && gv.Namsinh == null && gv.SDT == 0)
+            else if ( gv.MaGV != 0)
             {
                 foreach (GiangVien giangvien in list)
                     if (giangvien.MaGV == gv.MaGV)
@@ -154,52 +153,6 @@ namespace Project_1.Business_Layer
                         kq.Add(new GiangVien(giangvien));
                     }
             }
-            // Tim kiem theo sdt
-            else if (gv.TenGV == null && gv.Diachi == null && gv.MaGV == 0 && gv.Gioitinh == null && gv.Namsinh == null && gv.SDT != 0)
-            {
-                foreach (GiangVien giangvien in list)
-                    if (giangvien.SDT == gv.SDT)
-                    {
-                        kq.Add(new GiangVien(giangvien));
-                    }
-            }
-            // Tim kiem theo gioi tinh 
-            else if (gv.TenGV == null && gv.Diachi == null && gv.MaGV == 0 && gv.Gioitinh != null && gv.Namsinh == null && gv.SDT == 0)
-            {
-                foreach (GiangVien giangvien in list)
-                    if (giangvien.Gioitinh.ToLower() == gv.Gioitinh.ToLower())
-                    {
-                        kq.Add(new GiangVien(giangvien));
-                    }
-            }
-            //Tim theo namsinh
-            else if (gv.TenGV == null && gv.Diachi == null && gv.MaGV == 0 && gv.Gioitinh == null && gv.Namsinh != null && gv.SDT == 0)
-            {
-                foreach (GiangVien giangvien in list)
-                    if (giangvien.Namsinh.Year == gv.Namsinh.Year)
-                    {
-                        kq.Add(new GiangVien(giangvien));
-                    }
-            }
-            //Tim ket hop giua ho ten va que quan
-            else if (gv.TenGV != null && gv.Diachi != null && gv.MaGV == 0 && gv.Gioitinh == null && gv.Namsinh == null && gv.SDT == 0)
-            {
-                foreach (GiangVien giangvien in list)
-                    if (giangvien.TenGV.IndexOf(gv.TenGV) >= 0 && giangvien.Diachi.IndexOf(gv.Diachi) >= 0)
-                    {
-                        kq.Add(new GiangVien(giangvien));
-                    }
-            }
-            // Tim kiem ket hop theo tat ca
-            else if (gv.TenGV != null && gv.Diachi != null && gv.MaGV != 0 && gv.Gioitinh != null && gv.Namsinh != null && gv.SDT != 0)
-            {
-                foreach (GiangVien giangvien in list)
-                    if (giangvien.TenGV.IndexOf(gv.TenGV) >= 0 && giangvien.Diachi.IndexOf(gv.Diachi) >= 0 && giangvien.Namsinh.Year == gv.Namsinh.Year && giangvien.Gioitinh.ToLower() == gv.Gioitinh.ToLower() && giangvien.MaGV == gv.MaGV && giangvien.SDT == gv.SDT)
-                    {
-                        kq.Add(new GiangVien(giangvien));
-                    }
-            }
-            else kq = null;
             return kq;
         }
     }

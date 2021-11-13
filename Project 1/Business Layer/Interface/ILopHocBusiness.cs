@@ -16,5 +16,7 @@ namespace Project_1.Business_Layer.Interface
 		bool Exist(int ma);
 		void Edit(int id, LopHoc newInfo);
 		bool ExistCN(int ma);
+		bool ExistTEN(string ma);
+		bool ExistXCN(int ma);
 	}
 }

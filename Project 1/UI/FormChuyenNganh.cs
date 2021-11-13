@@ -25,15 +25,24 @@ namespace Project_1.UI
 			{
 				maxmt = list[0].Mota.Length;
 				maxtrangthai = list[0].Tenchnganh.Length;
-				maxten = list[0].Giangvien.TenGV.Length;
+				if (list[0].Maphutrach==0)
+					maxten = 10;
+				else
+					maxten = list[0].Giangvien.TenGV.Length;
+
 				for (int i = 1; i < list.Count; i++)
 				{
 					if (maxmt < list[i].Mota.Length)
 						maxmt = list[i].Mota.Length;
 					if (maxtrangthai < list[i].Tenchnganh.Length)
 						maxtrangthai = list[i].Tenchnganh.Length;
-					if (maxten < list[0].Giangvien.TenGV.Length)
-						maxten = list[0].Giangvien.TenGV.Length;
+					if (list[i].Maphutrach == 0)
+						maxten = maxten + 1;
+					if (list[i].Maphutrach != 0)
+					{
+						if (maxten < list[i].Giangvien.TenGV.Length)
+							maxten = list[i].Giangvien.TenGV.Length;
+					}
 				}
 			}
 		}
@@ -63,7 +72,11 @@ namespace Project_1.UI
 				Console.SetCursorPosition(x+1, y);Console.Write(d++);
 				Console.SetCursorPosition(x+10, y);Console.Write(list[i].Machnganh);
 				Console.SetCursorPosition(x + 24, y);Console.Write(list[i].Tenchnganh);
-				Console.SetCursorPosition(x + 29 + t, y);Console.Write(list[i].Giangvien.TenGV);
+				if (list[i].Maphutrach != 0)
+				{ Console.SetCursorPosition(x + 29 + t, y); Console.Write(list[i].Giangvien.TenGV); }
+				if (list[i].Maphutrach == 0)
+				{ Console.SetCursorPosition(x + 29 + t, y); Console.Write("null"); }
+				
 				Console.SetCursorPosition(x + 34+ten+t, y); Console.Write(list[i].Manganh);
 				Console.SetCursorPosition(x + 50+ten+t, y); Console.Write(list[i].Mota);
 				Console.SetCursorPosition(x + 55 + t+ten + mota, y); Console.Write(list[i].Trangthai);
@@ -161,17 +174,106 @@ namespace Project_1.UI
 		}
 		public void Tim()
 		{
-			string ten = "";
-			do
-			{
-				Console.Clear();
-				List<ChuyenNganh> list = BL.TimChuyenNganh(new ChuyenNganh(0,ten,0,null,null,0));
-				Hien(list, 0, 0, "Nhấn Enter để thoát! Nhập tên chuyên ngành cần tìm : ", 30);
-				ten=Console.ReadLine();
-				if (ten == "") return;
-			} while (true);
-		}
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐  CHỌN THÔNG TIN MUỐN TÌM KIẾM  ▌");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
+			Console.WriteLine();
+			Console.WriteLine();
 
+			Console.WriteLine("\t\t\t\t\t\t\t\t╔══════════════════════════════╗");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   1. Theo mã chuyên ngành    ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   2. Theo tên chuyên ngành   ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   3. Theo mã ngành           ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   0. Exit                    ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t╚══════════════════════════════╝");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.SetCursorPosition(65, 22); Console.Write("Nhập lựa chọn : "); int n = int.Parse(Console.ReadLine());
+			switch(n)
+			{
+				case 1:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0,0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0,1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0,2); Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập mã chuyên ngành     ║                                    ║");
+						Console.SetCursorPosition(0,3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90,2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if(BL.ExistKTCN(i))
+						{
+							List<ChuyenNganh> list = BL.TimChuyenNganh(new ChuyenNganh(i, null, 0, null, null, 0));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}	
+						else
+						{
+							Console.SetCursorPosition(70, 5);Console.WriteLine("Mã này không tồn tại ! Tiếp tục hoặc nhấn 0 để thoát ");
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 2:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập tên chuyên ngành    ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); string a= Console.ReadLine();
+						if (BL.ExistKTTen(a))
+						{
+							List<ChuyenNganh> list = BL.TimChuyenNganh(new ChuyenNganh(0, a, 0, null, null, 0));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(70, 5); Console.WriteLine("Tên này không tồn tại ! Tiếp tục hoặc nhấn 0 để thoát ");
+						}
+						Console.ReadKey();
+						if (a==null)
+							break;
+					} while (true);
+					break;
+				case 3:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập mã ngành            ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int i = int.Parse(Console.ReadLine());
+						if (BL.ExistXN(i))
+						{
+							List<ChuyenNganh> list = BL.TimChuyenNganh(new ChuyenNganh(0, null, 0, null, null, i));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(70, 5); Console.WriteLine("Tên này không tồn tại ! Tiếp tục hoặc nhấn 0 để thoát ");
+						}
+						Console.ReadKey();
+						if (i == 0)
+							break;
+					} while (true);
+					break;
+				case 0:
+					break;
+				default:
+					Console.WriteLine("Nhập sai cú pháp !");
+					break;
+			}
+		}
 		static void Bang(ChuyenNganh a)
 		{
 			Console.Clear();
@@ -459,17 +561,17 @@ namespace Project_1.UI
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.Write("\t\t║                        ");
 				Console.ForegroundColor = ConsoleColor.Black;
-				Console.Write("                                 ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                      ");
+				Console.Write("                                 ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                   ");
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.WriteLine("║");
 				Console.Write("\t\t║                        ");
 				Console.ForegroundColor = ConsoleColor.Black;
-				Console.Write("                                 ▐  QUẢN LÝ CHUYÊN NGÀNH  ▌                                                      ");
+				Console.Write("                                 ▐  QUẢN LÝ CHUYÊN NGÀNH  ▌                                                   ");
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.WriteLine("║");
 				Console.Write("\t\t║                        ");
 				Console.ForegroundColor = ConsoleColor.Black;
-				Console.Write("                                 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                      ");
+				Console.Write("                                 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                   ");
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.WriteLine("║");
 				Console.WriteLine("\t\t║                                                                                                                                      ║");

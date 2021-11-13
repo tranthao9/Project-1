@@ -40,6 +40,22 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiểm tra tên lớp đã tồn tại hay chưa
+        public bool ExistTEN(string ma)
+        {
+            List<LopHoc> list = GetAllData();
+            if (list.Find(m => m.Tenlop == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra chuyên ngành có tồn tại không
+        public bool ExistXCN(int ma)
+        {
+            List<LopHoc> list = GetAllData();
+            if (list.Find(m => m.Mach == ma) != null)
+                return true;
+            return false;
+        }
         //kiểm tra một mã lớp học xem đã tồn tại hay chưa
         public bool Exist(int ma)
         {
@@ -89,15 +105,15 @@ namespace Project_1.Business_Layer
         }
         public List<LopHoc> TimLopHoc(LopHoc lop)
         {
-            List<LopHoc> list = lopDA.GetAllData();
+            List<LopHoc> list = GetAllData();
             List<LopHoc> kq = new List<LopHoc>();
             //Voi gai tri ngam dinh ban dau
-            if (lop.Malop == 0 && lop.Tenlop == null )
+            if (lop.Malop == 0 && lop.Tenlop == null && lop.Mach==0)
             {
-                kq = list;
+                return list;
             }
             //Tim theo ma lop
-            if (lop.Malop != 0 && lop.Tenlop == null)
+            if (lop.Malop != 0)
             {
                 foreach (LopHoc lopHoc in list)
                     if (lopHoc.Malop== lop.Malop)
@@ -106,7 +122,7 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim theo ten lop
-            else if (lop.Malop == 0 && lop.Tenlop != null)
+            else if (lop.Tenlop != null)
             {
                 foreach (LopHoc lopHoc in list)
                     if (lopHoc.Malop.ToString().ToLower() == lop.Malop.ToString().ToLower())
@@ -115,15 +131,14 @@ namespace Project_1.Business_Layer
                     }
             }
             //Tim ket hop giua ma va ten lop
-            else if (lop.Malop != 0 && lop.Tenlop != null)
+            else if (lop.Mach != 0)
             {
                 foreach (LopHoc lopHoc in list)
-                    if (lopHoc.Malop.ToString().ToLower() == lop.Malop.ToString().ToLower() && lopHoc.Malop == lop.Malop)
+                    if (lopHoc.Mach == lop.Mach)
                     {
                         kq.Add(new LopHoc(lopHoc));
                     }
             }
-            else kq = null;
             return kq;
         }
     }

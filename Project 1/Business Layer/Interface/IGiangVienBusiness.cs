@@ -15,5 +15,6 @@ namespace Project_1.Business_Layer.Interface
 		List<GiangVien> TimGiangVien(GiangVien gv);
 		bool Exist(int ma);
 		void Edit(int id, GiangVien newInfo);
+		bool ExistTEN(string ma);
 	}
 }

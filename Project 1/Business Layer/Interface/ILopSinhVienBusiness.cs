@@ -16,5 +16,9 @@ namespace Project_1.Business_Layer.Interface
 		bool ExistL(int ma);
 		bool ExistSV(int ma);
 		void Edit(int id, LopSinhVien newInfo);
+		bool ExistKTL(int ma);
+		bool ExistKTSV(int ma);
+		bool ExistKTNH(int ma);
+		bool ExistKTHK(int ma);
 	}
 }

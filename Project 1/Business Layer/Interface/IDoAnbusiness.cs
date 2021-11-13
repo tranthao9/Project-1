@@ -15,5 +15,7 @@ namespace Project_1.Business_Layer.Interface
 		List<DoAn> Tim(DoAn da);
 		bool Exist(int ma);
 		void Edit(int id, DoAn newInfo);
+		bool ExistTEN(string ma);
+		bool ExistTC(int ma);
 	}
 }

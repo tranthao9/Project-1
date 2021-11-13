@@ -23,5 +23,11 @@ namespace Project_1.Business_Layer.Interface
 		double TongDiem(SVDetai x);
 		string xeploai(SVDetai x);
 		string Danhgia(SVDetai x);
+		bool ExistKTL(int ma);
+		bool ExistKTSV(int ma);
+		bool ExistKTGVHD(int ma);
+		bool ExistKTGVPB(int ma);
+		bool ExistKTDA(int ma);
+
 	}
 }
