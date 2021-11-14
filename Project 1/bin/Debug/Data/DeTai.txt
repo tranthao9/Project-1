@@ -1,6 +1,6 @@
 1#124#quản lý khoa CNTT#Dùng console#1
 2#123#khoa CNTT#Dùng console#1
 3#125#Quản lý các hộ gia đình#Dùng console#2
-4#126#quản lý thư viện trường ĐHSP KT Hưng Yên#Dùng console#1
-5#127#quản lý tiền điện các hộ gia đình trong 1 xã#Dùng console#1
+4#126#quản lý thư viện trường ĐH#Dùng console#1
+5#127#quản lý tiền điện các hộ gia đình#Dùng console#1
 

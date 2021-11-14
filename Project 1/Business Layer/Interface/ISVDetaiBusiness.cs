@@ -28,6 +28,7 @@ namespace Project_1.Business_Layer.Interface
 		bool ExistKTGVHD(int ma);
 		bool ExistKTGVPB(int ma);
 		bool ExistKTDA(int ma);
+		bool ExistTDT(int ma);
 
 	}
 }

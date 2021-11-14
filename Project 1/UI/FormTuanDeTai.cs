@@ -15,28 +15,57 @@ namespace Project_1.UI
 		private ITuanDetaiBusiness BL = new TuanDetaiBusiness();
 		public int Hien(List<TuanDetai> list, int x, int y, string tieudecuoi, int n)
 		{
+			for(int i=0;i<list.Count-1;i++)
+			{
+				for(int j=i+1; j<list.Count;j++)
+				{
+					if(list[i].Madettai<list[j].Madettai)
+					{
+						TuanDetai tg = new TuanDetai();
+						tg= list[i];
+						list[i] = list[j];
+						list[j] = tg;
+					}
+					else if(list[i].Madettai == list[j].Madettai)
+					{
+						if(list[i].Matuan<list[j].Matuan)
+						{
+							TuanDetai tg = new TuanDetai();
+							tg = list[i];
+							list[i] = list[j];
+							list[j] = tg;
+						}	
+					}
+				}	
+			}
 			Console.WriteLine();
 			Console.WriteLine();
 			Console.ForegroundColor = ConsoleColor.DarkRed;
 			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                    ");
-			Console.WriteLine("\t\t\t\t\t\t\t\t▐  DANH SÁCH LỚP SINH VIÊN  ▌                                                    ");
+			Console.WriteLine("\t\t\t\t\t\t\t\t▐  DANH SÁCH TUẦN ĐỀ TÀI    ▌                                                    ");
 			Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                    ");
 			Console.ForegroundColor = ConsoleColor.Black;
 			y = y + 4;
-			Console.SetCursorPosition(x + 1, y); Console.Write("STT");
-			Console.SetCursorPosition(x + 6, y); Console.Write("MÃ ĐỀ TÀI");
-			Console.SetCursorPosition(x + 20, y); Console.Write("TUẦN");
-			Console.SetCursorPosition(x + 30, y); Console.Write("ĐÁNH GIÁ");
-			Console.SetCursorPosition(x + 50 , y); Console.Write("ĐIỂM ");
+			Console.SetCursorPosition(x + 5, y); Console.Write("STT");
+			Console.SetCursorPosition(x + 16, y); Console.Write("MÃ ĐỀ TÀI");
+			Console.SetCursorPosition(x + 35, y); Console.Write("TUẦN");
+			Console.SetCursorPosition(x + 60, y); Console.Write("ĐÁNH GIÁ");
+			Console.SetCursorPosition(x + 90 , y); Console.Write("ĐIỂM ");
 			int d = 1;
 			for (int i = list.Count - 1; i >= 0; i--)
 			{
 				y = y + 1;
-				Console.SetCursorPosition(x + 1, y); Console.Write(d++);
-				Console.SetCursorPosition(x + 6, y); Console.Write(list[i].Madettai);
-				Console.SetCursorPosition(x + 20, y); Console.Write(list[i].Matuan);
-				Console.SetCursorPosition(x + 30, y); Console.Write(list[i].Danhgia);
-				Console.SetCursorPosition(x + 50, y); Console.Write(list[i].Diem);
+				Console.SetCursorPosition(x + 5, y); Console.Write(d++  );
+				Console.SetCursorPosition(x + 16, y); Console.Write( list[i].Madettai);
+				Console.SetCursorPosition(x + 35, y); Console.Write( list[i].Matuan);
+				Console.SetCursorPosition(x + 60, y); Console.Write(list[i].Danhgia);
+				if (list[i].Diem == 0)
+				{ Console.SetCursorPosition(x + 90, y); Console.Write(" "); }
+				else
+				{
+					Console.SetCursorPosition(x + 90, y); Console.Write( list[i].Diem);
+				}	
+					
 				if ((d) == n+1) break;
 			}
 			Console.WriteLine();
@@ -59,35 +88,25 @@ namespace Project_1.UI
 				Console.WriteLine("Mã đề tài:                       Tuần:                             ");
 				Console.WriteLine();
 				Console.WriteLine("Đánh giá:                       Điểm :  ");
-				int x = 0, y = 11;
-				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count);
+				int x = 35, y = 11;
 				TuanDetai s = new TuanDetai();
+				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count);
 				while (true)
 				{
 					Console.SetCursorPosition(12, 5); s.Madettai = int.Parse(Console.ReadLine());
-					if (!(BL.ExistKT(s.Madettai)) && s.Madettai > 0)
+					if (!(BL.ExistKT(s.Madettai))&& BL.ExistDT(s.Madettai))
+					{
 						break;
+					}	
 					else
 					{
-						Console.SetCursorPosition(0, 9); Console.WriteLine("Sai định dạng, mã đề tài phải lớn hơn 0! hoặc mã đề tài đã có điền đầy đủ các tuần !");
+						Console.SetCursorPosition(0, 9); Console.WriteLine("Mã đề tài chưa tồn tại hoặc mã đề tài đã có điền đầy đủ các tuần !");
 
 					}
 					Console.SetCursorPosition(12, 5); Console.WriteLine("                   ");
 
 				}
-				while (true)
-				{
-					Console.SetCursorPosition(40, 5); s.Matuan = int.Parse(Console.ReadLine());
-					if (!(BL.Exist(s.Matuan, s.Madettai))&&s.Matuan >= 1 && s.Matuan <=15 )
-						break;
-					else
-					{
-						Console.SetCursorPosition(0, 9); Console.WriteLine("Định dạng tuần sai, tuần nằm trong khoảng từ 1 đến 15 hoặc tuần đã tồn tại !");
-
-					}
-					Console.SetCursorPosition(40,5); Console.WriteLine("                   ");
-
-				}
+				Console.SetCursorPosition(40, 5); s.Matuan = BL.Tuan(s);Console.WriteLine(s.Matuan);
 				while (true)
 				{
 					Console.OutputEncoding = Encoding.UTF8;
@@ -105,15 +124,25 @@ namespace Project_1.UI
 				}
 				while (true)
 				{
-					Console.SetCursorPosition(42, 7); s.Diem = double.Parse(Console.ReadLine());
-					if (s.Diem >= .0 &&s.Diem <= 10.0)
-						break;
+					if(s.Matuan ==8 || s.Matuan==12)
+					{
+						Console.SetCursorPosition(42, 7); s.Diem = double.Parse(Console.ReadLine());
+						if (s.Diem >= .0 && s.Diem <= 10.0)
+							break;
+						else
+						{
+							Console.SetCursorPosition(0, 9); Console.WriteLine("Điểm 1 sai! điểm chỉ nằm trong khoảng từ 0-10");
+
+						}
+						Console.SetCursorPosition(42, 7); Console.WriteLine("                   ");
+					}	
 					else
 					{
-						Console.SetCursorPosition(0, 9); Console.WriteLine("Điểm 1 sai! điểm chỉ nằm trong khoảng từ 0-10");
-
-					}
-					Console.SetCursorPosition(42, 7); Console.WriteLine("                   ");
+						s.Diem = .0;
+						Console.SetCursorPosition(42, 7);Console.WriteLine(s.Diem);
+						break;
+					}	
+					
 
 				}
 				Console.SetCursorPosition(80, v);
@@ -146,14 +175,35 @@ namespace Project_1.UI
 		}
 		public void Tim()
 		{
-			int detai=0;
 			do
 			{
 				Console.Clear();
-				List<TuanDetai> list = BL.Tim(new TuanDetai(0,detai,null,0));
-				Hien(list, 0, 3, "Nhấn Enter để thoát! Nhập tuần cần tìm : ", BL.GetAllData().Count);
-				detai = int.Parse(Console.ReadLine());
-				if (detai == 0) return;
+				Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
+				Console.WriteLine("\t\t\t\t\t\t\t\t▐  CHỌN THÔNG TIN MUỐN TÌM KIẾM  ▌");
+				Console.WriteLine("\t\t\t\t\t\t\t\t▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
+				Console.WriteLine();
+				Console.WriteLine();
+				Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+				Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+				Console.WriteLine("\t\t\t\t\t\t║ 1. Nhập mã đề tài           ║                                    ║");
+				Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+				Console.SetCursorPosition(80, 7); int i = int.Parse(Console.ReadLine());
+				if (BL.ExistDT(i))
+				{
+					List<TuanDetai> list = BL.Tim(new TuanDetai(0, i, null, 0));
+					Hien(list, 0, 9, "Nhấn 0 để thoát! ", list.Count);
+				}
+				
+				else
+				{
+					if (i == 0)
+						break;
+					else
+						Console.SetCursorPosition(60, 9); Console.WriteLine("KHông tồn tại mã này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+
+				}
+				Console.ReadKey();
+				
 			} while (true);
 		}
 		static void Bang(TuanDetai a)
@@ -188,241 +238,226 @@ namespace Project_1.UI
 				Console.WriteLine();
 				Console.Write("Nhập mã đề tài : ");
 				int ma = int.Parse(Console.ReadLine());
-				Console.Write("Nhập mã tuần  : ");int ma2 = int.Parse(Console.ReadLine());
-				if (ma == 0 || ma2==0) return;
-				else
+				if (BL.ExistDT(ma))
 				{
-					int d = 0;
-					for (int i = 0; i < BL.GetAllData().Count; i++)
+					Console.Clear();
+					List<TuanDetai> list = BL.Tim(new TuanDetai(0, ma, null, 0));
+					Hien(list, 0,3, " ", list.Count);
+					while(true)
 					{
-						if (BL.GetAllData()[i].Madettai == ma && BL.GetAllData()[i].Matuan == ma2)
+						int d = 0;
+						int ma2;
+						while (true)
 						{
-							d++;
-							Console.Clear();
-							Console.BackgroundColor = ConsoleColor.White;
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.WriteLine();
-							Console.WriteLine();
-							Console.WriteLine("\t\t╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.Write("\t\t║                        ");
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.Write("                             ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                    ");
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.WriteLine("║");
-							Console.Write("\t\t║                        ");
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.Write("                             ▐  CHỌN THÔNG TIN MUỐN SỬA  ▌                                                    ");
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.WriteLine("║");
-							Console.Write("\t\t║                        ");
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.Write("                             ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                    ");
-							Console.ForegroundColor = ConsoleColor.Black;
-							Console.WriteLine("║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
-							Console.WriteLine("\t\t║                                                  ║     1.Sửa mã đề tài                 ║                                             ║");
-							Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
-							Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
-							Console.WriteLine("\t\t║                                                  ║     2.Sửa mã tuần                   ║                                             ║");
-							Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
-							Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
-							Console.WriteLine("\t\t║                                                  ║     3.Sửa đánh giá                  ║                                             ║");
-							Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
-							Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
-							Console.WriteLine("\t\t║                                                  ║     4.Sửa điểm                      ║                                             ║");
-							Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
-							Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
-							Console.WriteLine("\t\t║                                                  ║     7.Sửa tất cả thông tin khoa     ║                                             ║");
-							Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
-							Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
-							Console.WriteLine("\t\t║                                                  ║     0.Exit                          ║                                             ║");
-							Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t║                                                                                                                                      ║");
-							Console.WriteLine("\t\t╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
-
-							Console.Write("Mời bạn chọn chức năng: ");
-							int mode = int.Parse(Console.ReadLine());
-							switch (mode)
+							Console.Write("Nhập mã tuần  : "); ma2 = int.Parse(Console.ReadLine());
+							if (!BL.Exist(ma2, ma) && ma2 !=0)
 							{
-								case 1:
-									Bang(BL.GetAllData()[i]);
-									Console.SetCursorPosition(80, 7); Console.Write("                        ");
-									while (true)
-									{
-										Console.SetCursorPosition(80, 7); int madetai = int.Parse(Console.ReadLine());
-										if (!(BL.ExistKT(madetai)) && madetai > 0)
-										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                                       ");
-											TuanDetai m = new TuanDetai( BL.GetAllData()[i].Matuan, madetai, BL.GetAllData()[i].Danhgia, BL.GetAllData()[i].Diem);
-											BL.Edit(ma, ma2, m);
-											Console.ReadKey();
-											break;
-										}
-										else
-										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Sai định dạng, mã đề tài phải lớn hơn 0! hoặc mã đề tài đã có điền đầy đủ các tuần !");
-											Console.SetCursorPosition(80, 7); Console.WriteLine("                     ");
-										}
+								Console.WriteLine("Không tồn tại mã này ! Tiếp tục hoặc nhấn 0 để thoát");
+							}
+							else
+								break;
+						}
+						if (ma2 == 0)
+							break;
+						for (int i = 0; i < BL.GetAllData().Count; i++)
+						{
+							if (BL.GetAllData()[i].Matuan == ma2)
+							{
+								d++;
+								Console.Clear();
+								Console.BackgroundColor = ConsoleColor.White;
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.WriteLine();
+								Console.WriteLine();
+								Console.WriteLine("\t\t╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.Write("\t\t║                        ");
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.Write("                             ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌                                                    ");
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.WriteLine("║");
+								Console.Write("\t\t║                        ");
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.Write("                             ▐  CHỌN THÔNG TIN MUỐN SỬA  ▌                                                    ");
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.WriteLine("║");
+								Console.Write("\t\t║                        ");
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.Write("                             ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌                                                    ");
+								Console.ForegroundColor = ConsoleColor.Black;
+								Console.WriteLine("║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
+								Console.WriteLine("\t\t║                                                  ║     1.Sửa mã đề tài                 ║                                             ║");
+								Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
+								Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
+								Console.WriteLine("\t\t║                                                  ║     2.Sửa đánh giá                  ║                                             ║");
+								Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
+								Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
+								Console.WriteLine("\t\t║                                                  ║     3.Sửa điểm                      ║                                             ║");
+								Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
+								Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
+								Console.WriteLine("\t\t║                                                  ║     4.Sửa tất cả thông tin          ║                                             ║");
+								Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
+								Console.WriteLine("\t\t║                                                  ╔═════════════════════════════════════╗                                             ║");
+								Console.WriteLine("\t\t║                                                  ║     0.Exit                          ║                                             ║");
+								Console.WriteLine("\t\t║                                                  ╚═════════════════════════════════════╝                                             ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t║                                                                                                                                      ║");
+								Console.WriteLine("\t\t╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
 
-									}
-									break;
-								case 2:
-									Bang(BL.GetAllData()[i]);
-									Console.SetCursorPosition(80, 10); Console.Write("                        ");
-									while (true)
-									{
-										Console.SetCursorPosition(80, 10); int matuan = int.Parse(Console.ReadLine());
-										if (!(BL.Exist(matuan, BL.GetAllData()[i].Madettai)) && matuan >= 1 && matuan <= 15)
+								Console.Write("Mời bạn chọn chức năng: ");
+								int mode = int.Parse(Console.ReadLine());
+								switch (mode)
+								{
+									case 1:
+										Bang(BL.GetAllData()[i]);
+										Console.SetCursorPosition(80, 7); Console.Write("                        ");
+										while (true)
 										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                                          ");
-											TuanDetai m = new TuanDetai(matuan, BL.GetAllData()[i].Madettai, BL.GetAllData()[i].Danhgia, BL.GetAllData()[i].Diem);
-											BL.Edit(ma, ma2, m);
-											Console.ReadKey();
-											break;
+											Console.SetCursorPosition(80, 7); int madetai = int.Parse(Console.ReadLine());
+											if (!(BL.ExistKT(madetai)) && madetai > 0)
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                                       ");
+												TuanDetai m = new TuanDetai(BL.GetAllData()[i].Matuan, madetai, BL.GetAllData()[i].Danhgia, BL.GetAllData()[i].Diem);
+												BL.Edit(ma, ma2, m);
+												Console.ReadKey();
+												break;
+											}
+											else
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Sai định dạng, mã đề tài phải lớn hơn 0! hoặc mã đề tài đã có điền đầy đủ các tuần !");
+												Console.SetCursorPosition(80, 7); Console.WriteLine("                     ");
+											}
+
 										}
-										else
+										break;
+									case 2:
+										Bang(BL.GetAllData()[i]);
+										Console.SetCursorPosition(80, 13); Console.Write("                        ");
+										while (true)
 										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Định dạng tuần sai, tuần nằm trong khoảng từ 1 đến 15 hoặc tuần đã tồn tại !");
-											Console.SetCursorPosition(80, 10); Console.WriteLine("                   ");
+											Console.OutputEncoding = Encoding.UTF8;
+											Console.InputEncoding = Encoding.Unicode;
+											Console.SetCursorPosition(80, 13); string Danhgia = (Console.ReadLine().ToLower());
+											if (Danhgia == "đạt" || Danhgia == "không đạt")
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                           ");
+												TuanDetai m = new TuanDetai(BL.GetAllData()[i].Matuan, BL.GetAllData()[i].Madettai, Danhgia, BL.GetAllData()[i].Diem);
+												BL.Edit(ma, ma2, m);
+												Console.ReadKey();
+												break;
+											}
+											else
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Đánh giá chỉ đạt hoặc không đạt !");
+												Console.SetCursorPosition(80, 13); Console.WriteLine("                   ");
+											}
 										}
-									}
-									break;
-								case 3:
-									Bang(BL.GetAllData()[i]);
-									Console.SetCursorPosition(80, 13); Console.Write("                        ");
-									while (true)
-									{
-										Console.OutputEncoding = Encoding.UTF8;
-										Console.InputEncoding = Encoding.Unicode;
-										Console.SetCursorPosition(80, 13); string Danhgia = (Console.ReadLine().ToLower());
-										if (Danhgia == "đạt" || Danhgia == "không đạt")
+										break;
+									case 3:
+										Bang(BL.GetAllData()[i]);
+										Console.SetCursorPosition(80, 16); Console.Write("                        ");
+										while (true)
 										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                           ");
-											TuanDetai m = new TuanDetai(BL.GetAllData()[i].Matuan, BL.GetAllData()[i].Madettai,  Danhgia, BL.GetAllData()[i].Diem);
-											BL.Edit(ma, ma2, m);
-											Console.ReadKey();
-											break;
+											Console.SetCursorPosition(80, 16); double Diem = double.Parse(Console.ReadLine());
+											if (Diem >= .0 && Diem <= 10.0)
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                           ");
+												TuanDetai m = new TuanDetai(BL.GetAllData()[i].Matuan, BL.GetAllData()[i].Madettai, BL.GetAllData()[i].Danhgia, Diem);
+												BL.Edit(ma, ma2, m);
+												Console.ReadKey();
+												break;
+											}
+											else
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Điểm 1 sai! điểm chỉ nằm trong khoảng từ 0-10");
+												Console.SetCursorPosition(80, 16); Console.WriteLine("                   ");
+											}
 										}
-										else
+										break;
+									case 4:
+										Bang(BL.GetAllData()[i]);
+										Console.SetCursorPosition(80, 7); Console.Write("                        ");
+										Console.SetCursorPosition(80, 13); Console.Write("                        ");
+										Console.SetCursorPosition(80, 16); Console.Write("                        ");
+										int madetai1;
+										string danhgia;
+										double diem;
+										while (true)
 										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Đánh giá chỉ đạt hoặc không đạt !");
-											Console.SetCursorPosition(80, 13); Console.WriteLine("                   ");
+											Console.SetCursorPosition(80, 7); madetai1 = int.Parse(Console.ReadLine());
+											if (!(BL.ExistKT(madetai1)) && madetai1 > 0)
+											{
+												break;
+											}
+											else
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Sai định dạng, mã đề tài phải lớn hơn 0! hoặc mã đề tài đã có điền đầy đủ các tuần !           ");
+												Console.SetCursorPosition(80, 7); Console.WriteLine("                     ");
+											}
 										}
-									}
-									break;
-								case 4:
-									Bang(BL.GetAllData()[i]);
-									Console.SetCursorPosition(80, 16); Console.Write("                        ");
-									while (true)
-									{
-										Console.SetCursorPosition(80, 16); double Diem = double.Parse(Console.ReadLine());
-										if (Diem >= .0 && Diem <= 10.0)
+										while (true)
 										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                           ");
-											TuanDetai m = new TuanDetai(BL.GetAllData()[i].Matuan, BL.GetAllData()[i].Madettai,  BL.GetAllData()[i].Danhgia, Diem);
-											BL.Edit(ma, ma2, m);
-											Console.ReadKey();
-											break;
+											Console.OutputEncoding = Encoding.UTF8;
+											Console.InputEncoding = Encoding.Unicode;
+											Console.SetCursorPosition(80, 13); danhgia = (Console.ReadLine().ToLower());
+											if (danhgia == "đạt" || danhgia == "không đạt")
+											{
+												break;
+											}
+											else
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Đánh giá chỉ đạt hoặc không đạt !                                                   ");
+												Console.SetCursorPosition(80, 13); Console.WriteLine("                   ");
+											}
 										}
-										else
+										while (true)
 										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Điểm 1 sai! điểm chỉ nằm trong khoảng từ 0-10");
-											Console.SetCursorPosition(80, 16); Console.WriteLine("                   ");
+											Console.SetCursorPosition(80, 16); diem = double.Parse(Console.ReadLine());
+											if (diem >= .0 && diem <= 10.0)
+											{
+												break;
+											}
+											else
+											{
+												Console.SetCursorPosition(50, 20); Console.WriteLine("Điểm 1 sai! điểm chỉ nằm trong khoảng từ 0-10                                       ");
+												Console.SetCursorPosition(80, 16); Console.WriteLine("                   ");
+											}
 										}
-									}
-									break;
-								case 5:
-									Bang(BL.GetAllData()[i]);
-									Console.SetCursorPosition(80, 7); Console.Write("                        ");
-									Console.SetCursorPosition(80, 10); Console.Write("                        ");
-									Console.SetCursorPosition(80, 13); Console.Write("                        ");
-									Console.SetCursorPosition(80, 16); Console.Write("                        ");
-									int madetai1, matuan1;
-									string danhgia;
-									double diem;
-									while (true)
-									{
-										Console.SetCursorPosition(80, 7); madetai1 = int.Parse(Console.ReadLine());
-										if (!(BL.ExistKT(madetai1)) && madetai1 > 0)
-										{
-											break;
-										}
-										else
-										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Sai định dạng, mã đề tài phải lớn hơn 0! hoặc mã đề tài đã có điền đầy đủ các tuần !           ");
-											Console.SetCursorPosition(80, 7); Console.WriteLine("                     ");
-										}
-									}
-									while (true)
-									{
-										Console.SetCursorPosition(80, 10); matuan1 = int.Parse(Console.ReadLine());
-										if (!(BL.Exist(matuan1, madetai1)) && matuan1 >= 1 && matuan1 <= 15)
-										{
-											break;
-										}
-										else
-										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Định dạng tuần sai, tuần nằm trong khoảng từ 1 đến 15 hoặc tuần đã tồn tại !          ");
-											Console.SetCursorPosition(80, 10); Console.WriteLine("                   ");
-										}
-									}
-									while (true)
-									{
-										Console.OutputEncoding = Encoding.UTF8;
-										Console.InputEncoding = Encoding.Unicode;
-										Console.SetCursorPosition(80, 13); danhgia = (Console.ReadLine().ToLower());
-										if (danhgia == "đạt" || danhgia == "không đạt")
-										{
-											break;
-										}
-										else
-										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Đánh giá chỉ đạt hoặc không đạt !                                                   ");
-											Console.SetCursorPosition(80, 13); Console.WriteLine("                   ");
-										}
-									}
-									while (true)
-									{
-										Console.SetCursorPosition(80, 16); diem = double.Parse(Console.ReadLine());
-										if (diem >= .0 && diem <= 10.0)
-										{
-											break;
-										}
-										else
-										{
-											Console.SetCursorPosition(50, 20); Console.WriteLine("Điểm 1 sai! điểm chỉ nằm trong khoảng từ 0-10                                       ");
-											Console.SetCursorPosition(80, 16); Console.WriteLine("                   ");
-										}
-									}
-									TuanDetai ta = new TuanDetai(matuan1, madetai1,  danhgia, diem);
-									BL.Edit(ma, ma2, ta);
-									Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                                                          ");
-									Console.ReadKey();
-									break;
-								case 0:
-									return;
-								default:
-									Console.SetCursorPosition(50, 20); Console.WriteLine("Sai cú pháp!");
-									break;
+										TuanDetai ta = new TuanDetai(BL.GetAllData()[i].Matuan, madetai1, danhgia, diem);
+										BL.Edit(ma, ma2, ta);
+										Console.SetCursorPosition(50, 20); Console.WriteLine("Đã sửa thành công !!!                                                                          ");
+										Console.ReadKey();
+										break;
+									case 0:
+										return;
+									default:
+										Console.SetCursorPosition(50, 20); Console.WriteLine("Sai cú pháp!");
+										break;
+								}
 							}
 						}
-					}
-					if (d == 0)
-						Console.SetCursorPosition(5, BL.GetAllData().Count + 10); Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Mã không tồn tại ");
+					}	
+					
 				}
+				else
+				{
+					Console.SetCursorPosition(5, BL.GetAllData().Count + 11); Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Mã không tồn tại ");
+					Console.ReadKey();
+				}
+				if (ma == 0)
+					break;
 			} 
 		}
 		public void Menu()
@@ -431,6 +466,7 @@ namespace Project_1.UI
 			int check = 0;
 			while (check == 0)
 			{
+				Console.Clear();
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.WriteLine();
 				Console.WriteLine();
@@ -490,11 +526,13 @@ namespace Project_1.UI
 				switch (mode)
 				{
 					case 1:
+						Console.Clear();
 						Console.WriteLine("Mời bạn bắt đầu nhập thông tin");
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
-						Hien(BL.GetAllData(), 0, 3, " ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
+						Console.Clear();
+						Hien(BL.GetAllData(), 35, 3, " ", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:
 						Console.Clear();

@@ -34,6 +34,23 @@ namespace Project_1.Business_Layer
             }
             return listlop;
         }
+        // tự động tính tuần
+        public int Tuan(TuanDetai a)
+		{
+           List<TuanDetai> list = tuandtDA.GetAllData();
+            int s=1;
+           foreach(var b in list)
+		    {
+                if(a.Madettai==b.Madettai)
+				{
+                    s= b.Matuan + 1;
+                   
+				}                    
+			}
+            return s;
+
+                
+        }
         //kiểm tra  đề tài đó đã có đủ các tuần hay chưa xem đã tồn tại hay chưa
         public bool ExistKT(int ma)
         {
@@ -54,6 +71,15 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiểm tra một mã đề tài đó xem đã tồn tại hay chưa
+        public bool ExistDT(int ma)
+        {
+            List<Detai> list = chDA.GetAllData();
+            if (list.Find(m => m.Madetai == ma) != null)
+                return true;
+            return false;
+        }
+
         public void Insert(TuanDetai lop)
         {
            
@@ -91,41 +117,22 @@ namespace Project_1.Business_Layer
         }
         public List<TuanDetai> Tim(TuanDetai t)
         {
-            List<TuanDetai> list = tuandtDA.GetAllData();
+            List<TuanDetai> list =GetAllData();
             List<TuanDetai> kq = new List<TuanDetai>();
             //Voi gai tri ngam dinh ban dau
-            if (t.Madettai==0 && t.Matuan==0 )
+            if (t.Madettai==0)
             {
-                kq = list;
+                return list;
             }
             //Tim theo ma de tai
-            else if (t.Madettai != 0 && t.Matuan == 0)
-            {
+           if (t.Madettai != 0 )
+           {
                 foreach (TuanDetai a in list)
-                    if (a.Matuan== t.Matuan)
+                    if (a.Madettai== t.Madettai)
                     {
                         kq.Add(new TuanDetai(a));
                     }
-            }
-            //Tim theo ma tuan
-            else if (t.Madettai == 0 && t.Matuan != 0)
-            {
-                foreach (TuanDetai a in list)
-                    if (a.Madettai == t.Madettai)
-                    {
-                        kq.Add(new TuanDetai(a));
-                    }
-            }
-            //Tim ket hop giua ma va ten lop
-            else if (t.Madettai != 0 && t.Matuan != 0)
-            {
-                foreach (TuanDetai a in list)
-                    if (a.Madettai == t.Madettai && a.Matuan == t.Matuan)
-                    {
-                        kq.Add(new TuanDetai(a));
-                    }
-            }
-            else kq = null;
+           }
             return kq;
         }
     }

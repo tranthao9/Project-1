@@ -24,7 +24,6 @@ namespace Project_1.Entities
 			get { return madetai; }
 			set
 			{
-				if (value > 0)
 					madetai = value;
 			}
 
@@ -34,7 +33,6 @@ namespace Project_1.Entities
 			get { return matuan; }
 			set
 			{
-				if (value > 0)
 					matuan = value;
 			}
 		}
@@ -53,7 +51,6 @@ namespace Project_1.Entities
 			get { return danhgia; }
 			set
 			{
-				if (value.ToLower() == "đạt" || value.ToLower() == "không đạt")
 					danhgia = value;
 			}
 		}
@@ -62,7 +59,6 @@ namespace Project_1.Entities
 			get { return diem; }
 			set
 			{
-				if (value >= .0 && value <= 10.0)
 					diem = value;
 			}
 		}

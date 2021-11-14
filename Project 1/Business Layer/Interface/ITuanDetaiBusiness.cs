@@ -16,5 +16,7 @@ namespace Project_1.Business_Layer.Interface
 		bool Exist(int ma,int m2);
 		bool ExistKT(int ma);
 		void Edit(int id, int ma, TuanDetai newInfo);
+		bool ExistDT(int ma);
+		int Tuan(TuanDetai a);
 	}
 }

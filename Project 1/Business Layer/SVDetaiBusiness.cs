@@ -17,6 +17,7 @@ namespace Project_1.Business_Layer
         private ITuanDetaiBusiness tDA = new TuanDetaiBusiness();
         private IGiangVienDA gvDA = new GiangVienDA();
         private ILopSinhVienBusiness LsvDA = new LopSinhVienBusiness();
+        private IDetaiBusiness dt = new DetaiBusiness();
         //Thực thi các yêu cầu
         public List<SVDetai> GetAllData()
         {
@@ -37,16 +38,16 @@ namespace Project_1.Business_Layer
                             {
                                 if (lop.MaGVHD == gv.MaGV)
                                 {
+                                    lop.GiangvienHD = new GiangVien(gv);
                                     d++;
                                 }
                                 if ( lop.MaGVPB == gv.MaGV)
                                 {
+                                    lop.GiangvienPB = new GiangVien(gv);
                                     d++;
                                 }
                                 if (d == 2)
                                 {
-                                    lop.GiangvienHD = new GiangVien(gv);
-                                    lop.GiangvienPB = new GiangVien(gv);
                                     lop.LopSV = new LopSinhVien(ls);
                                     lop.Tuandt = new TuanDetai(ch);
                                     break;
@@ -125,6 +126,14 @@ namespace Project_1.Business_Layer
         }
         //kiểm tra một mã đề tài xem đã tồn tại hay chưa
         public bool ExistDT(int ma)
+        {
+            List<Detai> list = dt.GetAllData();
+            if (list.Find(m => m.Madetai == ma) != null)
+                return true;
+            return false;
+        }
+        // kiểm tra mã đề tài có trong tuần đề tài không
+        public bool ExistTDT(int ma)
         {
             List<TuanDetai> list = tDA.GetAllData();
             if (list.Find(m => m.Madettai == ma) != null)
@@ -232,24 +241,21 @@ namespace Project_1.Business_Layer
         }
         public double Diemgvpb(SVDetai x)
         {
-            double a = 0, b = 0;
-            if (x.Madetai == x.Tuandt.Madettai)
-            {
-                if (x.Tuandt.Matuan == 8)
-                    a = x.Tuandt.Diem;
-                if (x.Tuandt.Matuan == 12)
-                    b = x.Tuandt.Matuan;
-            }
-            if (a != 0 || b != 0)
-                return (a + b) / 2;
-            else
-                return .0;
+            double s=0;
+            List<TuanDetai> tdt = tDA.GetAllData();
+            foreach(var a in tdt)
+			{
+                if (x.Madetai == a.Madettai)
+                    s = s + a.Diem;
+
+			}
+            return Math.Round( (s / 2),2);
         }
 
 
         public double TongDiem(SVDetai x)
         {
-            return ((x.DiemGVHD + Diemgvpb(x)) / 2 + x.DiemBV) / 2;
+            return Math.Round((((x.DiemGVHD + Diemgvpb(x)) / 2 + x.DiemBV) / 2),2);
         }
         public string xeploai(SVDetai x)
         {
