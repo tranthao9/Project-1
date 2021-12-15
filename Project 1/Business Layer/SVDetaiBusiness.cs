@@ -21,7 +21,7 @@ namespace Project_1.Business_Layer
         //Thực thi các yêu cầu
         public List<SVDetai> GetAllData()
         {
-           
+
             List<LopSinhVien> lsv = LsvDA.GetAllData();
             List<TuanDetai> tdt = tDA.GetAllData();
             List<SVDetai> list = svDA.GetAllData();
@@ -30,9 +30,9 @@ namespace Project_1.Business_Layer
                 foreach (var ch in tdt)
                 {
                     foreach (var ls in lsv)
-					{
-                        if(lop.Madetai == ch.Madettai && lop.MaSV == ls.MaSV)
-						{
+                    {
+                        if (lop.Madetai == ch.Madettai && lop.MaSV == ls.MaSV)
+                        {
                             int d = 0;
                             foreach (var gv in gvDA.GetAllData())
                             {
@@ -41,7 +41,7 @@ namespace Project_1.Business_Layer
                                     lop.GiangvienHD = new GiangVien(gv);
                                     d++;
                                 }
-                                if ( lop.MaGVPB == gv.MaGV)
+                                if (lop.MaGVPB == gv.MaGV)
                                 {
                                     lop.GiangvienPB = new GiangVien(gv);
                                     d++;
@@ -56,12 +56,28 @@ namespace Project_1.Business_Layer
                         }
                     }
                 }
-            }        
+            }
             return list;
-         }
+        }
         public void Insert(SVDetai sv)
         {
             svDA.Insert(sv);
+        }
+        //kiểm tra một chuyên ngành có tồn tại không
+        public bool ExistCN(int ma)
+		{
+            List<SVDetai> list = svDA.GetAllData();
+            if (list.Find(m => m.LopSV.Lop.Mach == ma) != null)
+                return true;
+            return false;
+        }
+        //kiểm tra một ngành có tồn tại không
+        public bool ExistN(int ma)
+        {
+            List<SVDetai> list = svDA.GetAllData();
+            if (list.Find(m => m.LopSV.Lop.Cn.Manganh== ma) != null)
+                return true;
+            return false;
         }
         //kiểm tra một đề tài xem đã có ai làm hay chưa
         public bool ExistSV1(int ma)

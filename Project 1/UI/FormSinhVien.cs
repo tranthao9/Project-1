@@ -13,6 +13,8 @@ namespace Project_1.UI
 	public class FormSinhVien
 	{
 		private ISinhVienBusiness BL = new SinhVienBusiness();
+		private ILopSinhVienBusiness BLL = new LopSinhVienBusiness();
+		private ILopHocBusiness BLLL = new LopHocBusiness();
 		public void Max(List<SinhVien> list, out int maxht, out int maxdc)
 		{
 			if (list.Count == 0)
@@ -85,41 +87,112 @@ namespace Project_1.UI
 				Console.WriteLine();
 				Console.WriteLine("*************************************************************************************");
 				Console.WriteLine();
-				Console.WriteLine("Mã Sinh Viên:                                Họ Tên:                                  Năm sinh:");
+				Console.WriteLine("Mã Chuyên Ngành:                             Họ Tên:                                  Năm sinh:");
 				Console.WriteLine();
 				Console.WriteLine("Giới tính:                                   Địa chỉ:");
 				Console.WriteLine();
 				Console.WriteLine("SDT:                                         Email:");
-				int x = 0, y = 13;
+				Console.WriteLine();
+				Console.WriteLine("Lớp :                                        Năm học bắt đầu : ");
+				int x = 0, y = 15;
 				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count);
 				SinhVien s = new SinhVien();
+				LopHoc cn = new LopHoc();
 				while (true)
 				{
-					s.MaSV = Project_1.Utility.Congcu.Ma(14, 5, 0, 11, s.MaSV, 8, "Nhập sai dữ liệu mã sinh viên gồm 8 chữ số và khác 0 vui lòng nhập lại ! ");
-					if (BL.Exist(s.MaSV))
+					cn.Mach = Project_1.Utility.Congcu.Ma(18, 5, 0, 13, cn.Mach, 4, "Nhập sai dữ liệu mã chuyên ngành gồm 3 chữ số và khác 0 vui lòng nhập lại ! ");
+					if (BLLL.ExistCN(cn.Mach))
 					{
-						Console.SetCursorPosition(0, 11); Console.WriteLine("Mã sinh viên đã tồn tại vui lòng nhập mã khác ");
-						Console.SetCursorPosition(14, 5); Console.WriteLine("                          ");
+						if (!(BL.Exist(cn.Mach)))
+							s.MaSV = int.Parse(cn.Mach + "0001");
+						else
+							s.MaSV = BL.GetMa()+1;
+						break;
+					}	
+					else
+					{
+						Console.SetCursorPosition(0, 13); Console.Write("Mã chuyen ngành chưa tồn tại vui lòng nhập lại ! ");
+						Console.SetCursorPosition(18, 5); Console.Write("                    ");
+					}
+				}
+				s.TenSV = Project_1.Utility.Congcu.Ten(54, 5, 0, 13, s.TenSV, "Tên sinh viên không được bỏ trống !");
+				s.NamsinhSV = Project_1.Utility.Congcu.Namsinh(97, 5, 0, 13, s.NamsinhSV);
+				s.Gioitinh = Project_1.Utility.Congcu.Gioitinh(12, 7, 0, 13, s.Gioitinh);
+				s.Diachi = Project_1.Utility.Congcu.Ten(54, 7, 0, 13, s.Diachi, "Nhập sai dữ liệu, quê quán phải khác rỗng vui lòng nhập lại dữ liệu !");
+				s.Sdt = Project_1.Utility.Congcu.Ma(6, 9, 0, 13, s.Sdt, 9, "Nhập số điện thoại sai định dạng vui lòng nhập lại !");
+				s.Email = Project_1.Utility.Congcu.Email(54, 9, 0, 13, s.Email);
+				LopSinhVien lsv = new LopSinhVien();
+				while (true)
+				{
+					lsv.Malop = Project_1.Utility.Congcu.Ma(12, 11, 0, 13, lsv.Malop, 6, "Định dạng sai, Mã lớp phải gốm 6 chữ số !");
+					if (BLL.ExistL(lsv.Malop))
+						break;
+					else
+					{
+						Console.SetCursorPosition(0, 13); Console.Write("Mã lớp không tồn tại ! vui lòng nhập lại !!! ");
+						Console.SetCursorPosition(12, 11); Console.Write("                    ");
+					}
+				}
+				while (true)
+				{
+					char[] p = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+					Console.SetCursorPosition(65,11); lsv.Namhocbdau = Console.ReadLine();
+					string[] a = lsv.Namhocbdau.Split('-');
+					if (!(lsv.Namhocbdau.Contains('-')))
+					{
+
+						Console.SetCursorPosition(0, 13); Console.WriteLine("Định dạng sai,vui lòng nhập lại ! VD: 2008-2009 ");
+						Console.SetCursorPosition(65,11); Console.Write("                               ");
 					}
 					else
-						break;
+					{
+						int d2 = 0;
+						for (int i = 0; i < a.Length; i++)
+						{
+							int d1 = 0;
+							for (int j = 0; j < a[i].Length; j++)
+							{
+								char z = a[i][j];
+								foreach (char k in p)
+								{
+									if (z == k)
+										d1++;
+								}
+							}
+							if (d1 == 4 && a[i].Length == 4)
+							{
+								if ((int.Parse(a[i]) > 0))
+									d2++;
+							}
+
+						}
+						if (d2 == 2 && a.Length == 2 && int.Parse(a[1]) - int.Parse(a[0]) == 1)
+							break;
+						else
+						{
+							Console.SetCursorPosition(0, 13); Console.WriteLine("Định dạng sai,vui lòng nhập lại ! VD: 2008-2009 ");
+							Console.SetCursorPosition(65,11); Console.Write("                               ");
+						}
+					}
 
 				}
-				s.TenSV = Project_1.Utility.Congcu.Ten(54, 5, 0, 11, s.TenSV, "Tên sinh viên không được bỏ trống !");
-				s.NamsinhSV = Project_1.Utility.Congcu.Namsinh(97, 5, 0, 11, s.NamsinhSV);
-				s.Gioitinh = Project_1.Utility.Congcu.Gioitinh(12, 7, 0, 11, s.Gioitinh);
-				s.Diachi = Project_1.Utility.Congcu.Ten(54, 7, 0, 11, s.Diachi, "Nhập sai dữ liệu, quê quán phải khác rỗng vui lòng nhập lại dữ liệu !");
-				s.Sdt = Project_1.Utility.Congcu.Ma(6, 9, 0, 11, s.Sdt, 9, "Nhập số điện thoại sai định dạng vui lòng nhập lại !");
-				s.Email = Project_1.Utility.Congcu.Email(54, 9, 0, 11, s.Email);
+				lsv.MaSV = s.MaSV;
+				lsv.Hockybdau = 1;
+				lsv.Namhockthuc =lsv.Namhocbdau;
+				lsv.Hockykthuc = lsv.Hockybdau;
 				Console.SetCursorPosition(80, v);
 				ConsoleKeyInfo kt = Console.ReadKey();
 				if (kt.Key == ConsoleKey.Escape)
 				{
 					BL.Insert(s);
+					BLL.Insert(lsv);
 					break;
 				}
 				else if (kt.Key == ConsoleKey.Enter)
+				{
 					BL.Insert(s);
+					BLL.Insert(lsv);
+				}	
 				else
 					break;
 			} while (true);

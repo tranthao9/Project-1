@@ -20,11 +20,13 @@ namespace Project_1.Business_Layer
         public List<LopSinhVien> GetAllData()
         {
             List<LopSinhVien> listng = DA.GetAllData();
+            List<LopHoc> listl = lDA.GetAllData();
+            List<SinhVien> listsv = svDA.GetAllData();
             foreach (var lsv in listng)
             {
-                foreach (var kh in lDA.GetAllData())
+                foreach (var kh in listl)
 				{
-                    foreach(var sv in svDA.GetAllData())
+                    foreach(var sv in listsv)
 					{
                         if(lsv.Malop==kh.Malop && lsv.MaSV==sv.MaSV)
 						{
@@ -72,10 +74,10 @@ namespace Project_1.Business_Layer
             return false;
         }
         // kiểm tra năm học có tồn tại hay không
-        public bool ExistKTNH(int ma)
+        public bool ExistKTNH(string ma)
         {
             List<LopSinhVien> list = GetAllData();
-            if (list.Find(m => m.Namhoc == ma) != null)
+            if (list.Find(m => m.Namhocbdau.Contains(ma)) != null)
                 return true;
             return false;
         }
@@ -83,7 +85,7 @@ namespace Project_1.Business_Layer
         public bool ExistKTHK(int ma)
         {
             List<LopSinhVien> list = GetAllData();
-            if (list.Find(m => m.Hocky == ma) != null)
+            if (list.Find(m => m.Hockybdau == ma) != null)
                 return true;
             return false;
         }
@@ -91,10 +93,10 @@ namespace Project_1.Business_Layer
         {
             DA.Insert(ng);
         }
-        public void Delete(int ma,int m1)
+        public void Delete(int ma)
         {
-            if (KiemTraMa(ma,m1))
-                DA.DeleteLSV(ma,m1);
+            if (KiemTraMa(ma))
+                DA.DeleteSV(ma);
             else
                 throw new Exception("Khong ton tai ma nay");
         }
@@ -107,7 +109,7 @@ namespace Project_1.Business_Layer
             List<LopSinhVien> list = GetAllData();
             List<LopSinhVien> kq = new List<LopSinhVien>();
             //Voi gai tri ngam dinh ban dau
-            if (ng.MaSV == 0 && ng.Malop == 0 && ng.Namhoc==0 && ng.Hocky==0)
+            if (ng.MaSV == 0 && ng.Malop == 0 && ng.Namhocbdau==null && ng.Hockybdau==0)
             {
                 kq = list;
             }
@@ -130,19 +132,19 @@ namespace Project_1.Business_Layer
                     }
             }
             // Tim kiem theo nam hoc
-            else if ( ng.Namhoc != 0 )
+            else if ( ng.Namhocbdau != null )
             {
                 foreach (LopSinhVien lsv in list)
-                    if (lsv.Namhoc == ng.Namhoc)
+                    if (lsv.Namhocbdau.Contains(ng.Namhocbdau))
                     {
                         kq.Add(new LopSinhVien(lsv));
                     }
             }
             // Tim kiem theo hoc ky
-            else if ( ng.Hocky != 0)
+            else if ( ng.Hockybdau != 0)
             {
                 foreach (LopSinhVien lsv in list)
-                    if (lsv.Hocky == ng.Hocky)
+                    if (lsv.Hockybdau == ng.Hockybdau)
                     {
                         kq.Add(new LopSinhVien(lsv));
                     }
@@ -150,11 +152,11 @@ namespace Project_1.Business_Layer
             return kq;
         }
         //Các phương thức hỗ trợ cho việc thực thi các yêu cầu
-        public bool KiemTraMa(int ma,int m1)
+        public bool KiemTraMa(int ma)
         {
             bool ok = false;
             foreach (LopSinhVien ng in DA.GetAllData())
-                if (ng.MaSV == ma && ng.Malop ==m1)
+                if (ng.MaSV == ma)
                 {
                     ok = true; break;
                 }

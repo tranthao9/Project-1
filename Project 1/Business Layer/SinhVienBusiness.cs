@@ -14,7 +14,8 @@ namespace Project_1.Business_Layer
     public class SinhVienBusiness : ISinhVienBusiness
     {
         private ISinhVienDA svDA = new SinhVienDA();
-        private ILopSinhVienDA lsvDA = new LopSinhVienDA();
+        private ILopSinhVienDA lsvA = new LopSinhVienDA();
+        private ILopSinhVienBusiness lsvDA = new LopSinhVienBusiness();
         private ISVDetaiDA svdtDA=new SVDetaiDA();
         //Thực thi các yêu cầu
         public List<SinhVien> GetAllData()
@@ -27,11 +28,18 @@ namespace Project_1.Business_Layer
         //kiểm tra một mã sinh viên xem đã tồn tại hay chưa
         public bool Exist(int ma)
         {
-            List<SinhVien> list = GetAllData();
-            if (list.Find(m => m.MaSV == ma) != null)
+            List<LopSinhVien> list = lsvDA.GetAllData();
+            if (list.Find(m => m.Lop == null) != null)
+                return false;
+            if (list.Find(m => m.Lop.Mach == ma) != null)
                 return true;
             return false;
         }
+        //lấy mã sinh viên cuối cùng
+        public int GetMa()
+		{
+                return GetAllData()[0].MaSV;
+		}
         //kiểm tra một tên sinh viên xem đã tồn tại hay chưa
         public bool ExistTEN(string ma)
         {
@@ -63,7 +71,7 @@ namespace Project_1.Business_Layer
                 foreach (var s in lsv)
                 {
                     if (s.MaSV == masv)
-                        lsvDA.DeleteSV(masv);
+                        lsvDA.Delete(masv);
                 }
                 foreach (var s in ldt)
                 {
@@ -86,7 +94,7 @@ namespace Project_1.Business_Layer
                     if (s.MaSV == id)
                         s.MaSV = newInfo.MaSV;
 				}
-                lsvDA.GhiLaiDanhsach(lsv);
+                lsvA.GhiLaiDanhsach(lsv);
                 foreach(var s in ldt)
 				{
                     if (s.MaSV == id)

@@ -93,7 +93,7 @@ namespace Project_1.UI
             Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
-            Console.WriteLine("\t\t║                           ║     1.Quản Lý Sinh Viên        ║              ║     7.Quản Lý Lớp Sinh Viên    ║                    ║");
+            Console.WriteLine("\t\t║                           ║     1.Quản Lý Sinh Viên        ║              ║     7.Bảo Lưu Sinh Viên        ║                    ║");
             Console.WriteLine("\t\t║                           ╚════════════════════════════════╝              ╚════════════════════════════════╝                    ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
             Console.WriteLine("\t\t║                           ║     2.Quản lý Giảng Viên       ║              ║     8.Quản Lý Đồ Án            ║                    ║");
@@ -105,7 +105,7 @@ namespace Project_1.UI
             Console.WriteLine("\t\t║                           ║     4.Quản Lý Chuyên Ngành     ║              ║     10.Quản lý Tuần Đề Tài     ║                    ║");
             Console.WriteLine("\t\t║                           ╚════════════════════════════════╝              ╚════════════════════════════════╝                    ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
-            Console.WriteLine("\t\t║                           ║     5.Quản Lý Ngành            ║              ║     11.Quản Lý Sinh Viên Đề Tài║                    ║");
+            Console.WriteLine("\t\t║                           ║     5.Quản Lý Ngành            ║              ║     11.Quản Lý Đề Tài Sinh Viên║                    ║");
             Console.WriteLine("\t\t║                           ╚════════════════════════════════╝              ╚════════════════════════════════╝                    ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
             Console.WriteLine("\t\t║                           ║     6.Quản lý Khoa             ║              ║     12.Thống kê                ║                    ║");

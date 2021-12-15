@@ -13,8 +13,10 @@ namespace Project_1.Entities
 		private int malop;
 		private SinhVien sinhvien;
 		private LopHoc lop;
-		private int namhoc;
-		private int hocky;
+		private string namhocbdau;
+		private int hockybdau;
+		private string namhockthuc;
+		private int hockykthuc;
 		#endregion
 
 		#region Các thuộc tính
@@ -53,22 +55,38 @@ namespace Project_1.Entities
 					malop = value;
 			}
 		}
-		public int Namhoc
+		public string Namhocbdau
 		{
-			get { return namhoc; }
+			get { return namhocbdau; }
 			set
 			{
-				if (value >= 1 && value.ToString().Length == 4)
-					namhoc = value;
+					namhocbdau = value;
 			}
 		}
-		public int Hocky
+		public int Hockybdau
 		{
-			get { return hocky; }
+			get { return hockybdau; }
 			set
 			{
 				if (value >= 1)
-					hocky = value;
+					hockybdau = value;
+			}
+		}
+		public string Namhockthuc
+		{
+			get { return namhockthuc; }
+			set
+			{
+				namhockthuc = value;
+			}
+		}
+		public int Hockykthuc
+		{
+			get { return hockykthuc; }
+			set
+			{
+				if (value >= 1)
+					hockykthuc = value;
 			}
 		}
 		#endregion
@@ -79,17 +97,21 @@ namespace Project_1.Entities
 		{
 			this.malop = lsv.malop;
 			this.maSv = lsv.maSv;
-			this.namhoc = lsv.namhoc;
-			this.hocky = lsv.hocky;
+			this.namhocbdau = lsv.namhocbdau;
+			this.hockybdau = lsv.hockybdau;
+			this.namhockthuc = lsv.namhockthuc;
+			this.hockykthuc = lsv.hockykthuc;
 			this.Sinhvien = lsv.Sinhvien;
 			this.Lop = lsv.Lop;
 		}
-		public LopSinhVien(int malop,int masv,int namhoc,int hocky)
+		public LopSinhVien(int malop,int masv,string namhocbdau,int hockybdau,string namhockthuc,int hockykthuc)
 		{
 			this.malop = malop;
 			this.maSv = masv;
-			this.namhoc = namhoc;
-			this.hocky = hocky;
+			this.namhocbdau = namhocbdau;
+			this.hockybdau = hockybdau;
+			this.namhockthuc = namhockthuc;
+			this.hockykthuc = hockykthuc;
 		}
 		#endregion
 	}

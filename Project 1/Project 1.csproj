@@ -112,8 +112,10 @@
     <Compile Include="UI\FormLopHoc.cs" />
     <Compile Include="UI\FormSinhVien.cs" />
     <Compile Include="UI\FormSVdetai.cs" />
+    <Compile Include="UI\FormThongKe.cs" />
     <Compile Include="UI\FormTuanDeTai.cs" />
     <Compile Include="Utility\Congcu.cs" />
+    <Compile Include="Utility\IO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

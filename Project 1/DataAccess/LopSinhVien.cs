@@ -25,7 +25,7 @@ namespace Project_1.DataAccess
                 {
                     s = Project_1.Utility.Congcu.CatXau(s);
                     string[] a = s.Split('#');
-                    list.Add(new LopSinhVien(int.Parse(a[1]), int.Parse(a[2]), int.Parse(a[3]),int.Parse(a[4])));
+                    list.Add(new LopSinhVien(int.Parse(a[1]), int.Parse(a[2]), (a[3]),int.Parse(a[4]),a[5],int.Parse(a[6])));
                 }
                 s = fread.ReadLine();
             }
@@ -57,7 +57,7 @@ namespace Project_1.DataAccess
         {
             int malsv = Sttlsv() + 1;
             StreamWriter fwrite = File.AppendText(txtfile);
-            fwrite.WriteLine(malsv + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc+"#"+lsv.Hocky);
+            fwrite.WriteLine(malsv + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
             fwrite.Close();
         }
         //Xóa một lop sinh vien khi biết mã lop
@@ -69,7 +69,7 @@ namespace Project_1.DataAccess
             foreach (LopSinhVien lsv in list)
                 if (lsv.Malop != malop)
                 {
-                    fwrite.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                    fwrite.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
                 }
             fwrite.Close();
         }
@@ -82,7 +82,7 @@ namespace Project_1.DataAccess
             foreach (LopSinhVien lsv in list)
                 if (lsv.MaSV != ma)
                 {
-                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
                 }
             fwrite.Close();
         }
@@ -95,7 +95,7 @@ namespace Project_1.DataAccess
             foreach (LopSinhVien lsv in list)
                 if (lsv.MaSV != masv && lsv.Malop != malop)
                 {
-                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
                 }
             fwrite.Close();
         }
@@ -106,7 +106,7 @@ namespace Project_1.DataAccess
             int i =1;
             foreach (LopSinhVien lsv in List)
             {
-                fw.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhoc + "#" + lsv.Hocky);
+                fw.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
             }
             fw.Close();
         }
