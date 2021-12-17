@@ -93,7 +93,7 @@ namespace Project_1.UI
             Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
-            Console.WriteLine("\t\t║                           ║     1.Quản Lý Sinh Viên        ║              ║     7.Bảo Lưu Sinh Viên        ║                    ║");
+            Console.WriteLine("\t\t║                           ║     1.Quản Lý Sinh Viên        ║              ║     7.Xét duyệt Sinh Viên      ║                    ║");
             Console.WriteLine("\t\t║                           ╚════════════════════════════════╝              ╚════════════════════════════════╝                    ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
             Console.WriteLine("\t\t║                           ║     2.Quản lý Giảng Viên       ║              ║     8.Quản Lý Đồ Án            ║                    ║");

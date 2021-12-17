@@ -17,6 +17,7 @@ namespace Project_1.Entities
 		private int hockybdau;
 		private string namhockthuc;
 		private int hockykthuc;
+		private int active;
 		#endregion
 
 		#region Các thuộc tính
@@ -44,6 +45,14 @@ namespace Project_1.Entities
 			{
 				if (value >= 1 && value.ToString().Length == 8)
 					maSv = value;
+			}
+		}
+		public int Active
+		{
+			get { return active; }
+			set
+			{
+					active = value;
 			}
 		}
 		public int Malop
@@ -103,8 +112,9 @@ namespace Project_1.Entities
 			this.hockykthuc = lsv.hockykthuc;
 			this.Sinhvien = lsv.Sinhvien;
 			this.Lop = lsv.Lop;
+			this.active = lsv.active;
 		}
-		public LopSinhVien(int malop,int masv,string namhocbdau,int hockybdau,string namhockthuc,int hockykthuc)
+		public LopSinhVien(int malop,int masv,string namhocbdau,int hockybdau,string namhockthuc,int hockykthuc,int active)
 		{
 			this.malop = malop;
 			this.maSv = masv;
@@ -112,6 +122,7 @@ namespace Project_1.Entities
 			this.hockybdau = hockybdau;
 			this.namhockthuc = namhockthuc;
 			this.hockykthuc = hockykthuc;
+			this.active = active;
 		}
 		#endregion
 	}

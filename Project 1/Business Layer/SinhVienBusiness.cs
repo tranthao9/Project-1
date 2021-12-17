@@ -38,7 +38,7 @@ namespace Project_1.Business_Layer
         //lấy mã sinh viên cuối cùng
         public int GetMa()
 		{
-                return GetAllData()[0].MaSV;
+                return GetAllData()[GetAllData().Count-1].MaSV;
 		}
         //kiểm tra một tên sinh viên xem đã tồn tại hay chưa
         public bool ExistTEN(string ma)

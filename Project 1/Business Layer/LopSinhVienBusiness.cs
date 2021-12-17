@@ -73,6 +73,14 @@ namespace Project_1.Business_Layer
                 return true;
             return false;
         }
+        //kiểm tra sv có tồn tại trong lớp đó hay chưa
+        public bool ExistKTSVL(int ma, int lop)
+        {
+            List<LopSinhVien> list = GetAllData();
+            if (list.Find(m => m.MaSV == ma && m.Malop==lop) != null)
+                return true;
+            return false;
+        }
         // kiểm tra năm học có tồn tại hay không
         public bool ExistKTNH(string ma)
         {
@@ -93,16 +101,14 @@ namespace Project_1.Business_Layer
         {
             DA.Insert(ng);
         }
-        public void Delete(int ma)
+        public void Delete(int ma,int lop)
         {
-            if (KiemTraMa(ma))
-                DA.DeleteSV(ma);
-            else
-                throw new Exception("Khong ton tai ma nay");
+                DA.DeleteLSV(ma,lop);
+           
         }
-        public void Edit(int id, LopSinhVien newInfo)
+        public void Edit(int id,int lop, LopSinhVien newInfo)
         {
-            DA.Edit(id, newInfo);
+            DA.Edit(id,lop, newInfo);
         }
         public List<LopSinhVien> Tim(LopSinhVien ng)
         {
@@ -135,32 +141,32 @@ namespace Project_1.Business_Layer
             else if ( ng.Namhocbdau != null )
             {
                 foreach (LopSinhVien lsv in list)
-                    if (lsv.Namhocbdau.Contains(ng.Namhocbdau))
+				{
+                    string[] a = lsv.Namhocbdau.Split('-');
+                    string[] c = lsv.Namhockthuc.Split('-');
+                    string[] b = ng.Namhocbdau.Split('-');
+                    if (lsv.Namhocbdau.Contains(ng.Namhocbdau) || lsv.Namhockthuc.Contains(ng.Namhocbdau))
                     {
                         kq.Add(new LopSinhVien(lsv));
                     }
+                    else
+					{
+                        if (int.Parse(b[0]) >= int.Parse(a[0]) && int.Parse(b[1]) <= int.Parse(c[1]))
+                            kq.Add(new LopSinhVien(lsv));
+					}                        
+                }                    
+                    
             }
             // Tim kiem theo hoc ky
             else if ( ng.Hockybdau != 0)
             {
                 foreach (LopSinhVien lsv in list)
-                    if (lsv.Hockybdau == ng.Hockybdau)
+                    if (ng.Hockybdau >= lsv.Hockybdau && ng.Hockybdau<= lsv.Hockykthuc)
                     {
                         kq.Add(new LopSinhVien(lsv));
                     }
             }
             return kq;
-        }
-        //Các phương thức hỗ trợ cho việc thực thi các yêu cầu
-        public bool KiemTraMa(int ma)
-        {
-            bool ok = false;
-            foreach (LopSinhVien ng in DA.GetAllData())
-                if (ng.MaSV == ma)
-                {
-                    ok = true; break;
-                }
-            return ok;
         }
     }
 }

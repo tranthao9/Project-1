@@ -178,8 +178,9 @@ namespace Project_1.UI
 				}
 				lsv.MaSV = s.MaSV;
 				lsv.Hockybdau = 1;
-				lsv.Namhockthuc =lsv.Namhocbdau;
-				lsv.Hockykthuc = lsv.Hockybdau;
+				lsv.Namhockthuc = lsv.Namhocbdau;
+				lsv.Hockykthuc = 2;
+				lsv.Active = 0;
 				Console.SetCursorPosition(80, v);
 				ConsoleKeyInfo kt = Console.ReadKey();
 				if (kt.Key == ConsoleKey.Escape)

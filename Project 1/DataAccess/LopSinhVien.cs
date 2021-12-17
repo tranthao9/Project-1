@@ -25,7 +25,7 @@ namespace Project_1.DataAccess
                 {
                     s = Project_1.Utility.Congcu.CatXau(s);
                     string[] a = s.Split('#');
-                    list.Add(new LopSinhVien(int.Parse(a[1]), int.Parse(a[2]), (a[3]),int.Parse(a[4]),a[5],int.Parse(a[6])));
+                    list.Add(new LopSinhVien(int.Parse(a[1]), int.Parse(a[2]), (a[3]),int.Parse(a[4]),a[5],int.Parse(a[6]),int.Parse(a[7])));
                 }
                 s = fread.ReadLine();
             }
@@ -57,7 +57,7 @@ namespace Project_1.DataAccess
         {
             int malsv = Sttlsv() + 1;
             StreamWriter fwrite = File.AppendText(txtfile);
-            fwrite.WriteLine(malsv + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
+            fwrite.WriteLine(malsv + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc + "#" + lsv.Active);
             fwrite.Close();
         }
         //Xóa một lop sinh vien khi biết mã lop
@@ -69,7 +69,7 @@ namespace Project_1.DataAccess
             foreach (LopSinhVien lsv in list)
                 if (lsv.Malop != malop)
                 {
-                    fwrite.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
+                    fwrite.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc + "#" + lsv.Active);
                 }
             fwrite.Close();
         }
@@ -82,7 +82,7 @@ namespace Project_1.DataAccess
             foreach (LopSinhVien lsv in list)
                 if (lsv.MaSV != ma)
                 {
-                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
+                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc + "#" + lsv.Active);
                 }
             fwrite.Close();
         }
@@ -95,7 +95,7 @@ namespace Project_1.DataAccess
             foreach (LopSinhVien lsv in list)
                 if (lsv.MaSV != masv && lsv.Malop != malop)
                 {
-                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
+                    fwrite.WriteLine(malh++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc + "#" + lsv.Active);
                 }
             fwrite.Close();
         }
@@ -106,18 +106,18 @@ namespace Project_1.DataAccess
             int i =1;
             foreach (LopSinhVien lsv in List)
             {
-                fw.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc);
+                fw.WriteLine(i++ + "#" + lsv.Malop + "#" + lsv.MaSV + "#" + lsv.Namhocbdau + "#" + lsv.Hockybdau + "#" + lsv.Namhockthuc + "#" + lsv.Hockykthuc + "#" + lsv.Active);
             }
             fw.Close();
         }
-        public void Edit(int id, LopSinhVien newInfo)
+        public void Edit(int id,int lop, LopSinhVien newInfo)
         {
             //Đọc toàn bộ tập lớn về
             List<LopSinhVien> cn = GetAllData();
             //Sửa trên DS và ghi đè vào tệp
             for (int i = 0; i < cn.Count; i++)
             {
-                if (cn[i].MaSV==id)
+                if (cn[i].MaSV==id && cn[i].Malop==lop)
                 {
                     cn[i] = newInfo;
                     break;

@@ -85,7 +85,8 @@ namespace Project_1
 			//			return;
 			//	}
 			//}
-			FormSinhVien a = new FormSinhVien();
+			FormLopSinhVien a = new FormLopSinhVien();
+			//FormSinhVien a = new FormSinhVien();
 			a.Nhap();
 			Console.ReadKey();
 
