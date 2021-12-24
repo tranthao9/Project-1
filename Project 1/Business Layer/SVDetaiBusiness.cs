@@ -282,7 +282,7 @@ namespace Project_1.Business_Layer
             else if (TongDiem(x) >= 7)
                 return "Khá";
             else if (TongDiem(x) >= 6)
-                return "Trung bình khá";
+                return "TB khá";
             else if (TongDiem(x) >= 5)
                 return "Trung bình";
             else

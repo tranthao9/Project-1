@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using Project_1.Business_Layer;
+using Project_1.Business_Layer.Interface;
 
 namespace Project_1.UI
 {
@@ -62,6 +64,7 @@ namespace Project_1.UI
         }
         public void MenuQL()
         {
+            
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Ứng dụng quản lý đồ án sinh viên khoa CNTT";
             Console.Clear();
@@ -93,7 +96,7 @@ namespace Project_1.UI
             Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                                                                                                                                 ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
-            Console.WriteLine("\t\t║                           ║     1.Quản Lý Sinh Viên        ║              ║     7.Xét duyệt Sinh Viên      ║                    ║");
+            Console.WriteLine("\t\t║                           ║     1.Quản Lý Sinh Viên        ║              ║     7.Xét duyệt sinh viên      ║                    ║");
             Console.WriteLine("\t\t║                           ╚════════════════════════════════╝              ╚════════════════════════════════╝                    ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
             Console.WriteLine("\t\t║                           ║     2.Quản lý Giảng Viên       ║              ║     8.Quản Lý Đồ Án            ║                    ║");
@@ -102,7 +105,7 @@ namespace Project_1.UI
             Console.WriteLine("\t\t║                           ║     3.Quản Lý Lớp Học          ║              ║     9.Quản Lý Đề Tài           ║                    ║");
             Console.WriteLine("\t\t║                           ╚════════════════════════════════╝              ╚════════════════════════════════╝                    ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
-            Console.WriteLine("\t\t║                           ║     4.Quản Lý Chuyên Ngành     ║              ║     10.Quản lý Tuần Đề Tài     ║                    ║");
+            Console.WriteLine("\t\t║                           ║     4.Quản Lý Chuyên Ngành     ║              ║     10.Đánh giá đồ án          ║                    ║");
             Console.WriteLine("\t\t║                           ╚════════════════════════════════╝              ╚════════════════════════════════╝                    ║");
             Console.WriteLine("\t\t║                           ╔════════════════════════════════╗              ╔════════════════════════════════╗                    ║");
             Console.WriteLine("\t\t║                           ║     5.Quản Lý Ngành            ║              ║     11.Quản Lý Đề Tài Sinh Viên║                    ║");
@@ -121,9 +124,11 @@ namespace Project_1.UI
             Console.WriteLine("\t\t╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         }
         //ham dang nhap mat khau va tai khoan admin
-        public void Dangnhap()
+        public bool Dangnhap()
         {
             Console.Clear();
+            bool kt = false;
+            IGiangVienBusiness GV = new GiangVienBusiness();
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Đăng nhập";
             int left = 79, top = 2;
@@ -161,7 +166,14 @@ namespace Project_1.UI
                     Console.SetCursorPosition(70 + i, 15); Console.Write("*");
                 }
             }
-            Console.ReadKey();
+            foreach (var a in GV.GetAllData() )
+			{
+                if (a.MaGV.ToString() + "@utehy.vn" == tk)
+                    return true;
+			}
+            return kt;
         }
+        
     }
+    
 }

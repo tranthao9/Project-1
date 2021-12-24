@@ -25,17 +25,17 @@ namespace Project_1.Business_Layer
             foreach (var lsv in listng)
             {
                 foreach (var kh in listl)
-				{
-                    foreach(var sv in listsv)
-					{
-                        if(lsv.Malop==kh.Malop && lsv.MaSV==sv.MaSV)
-						{
+                {
+                    foreach (var sv in listsv)
+                    {
+                        if (lsv.Malop == kh.Malop && lsv.MaSV == sv.MaSV)
+                        {
                             lsv.Lop = new LopHoc(kh);
                             lsv.Sinhvien = new SinhVien(sv);
-                            
-						}                            
-					}
-				}
+
+                        }
+                    }
+                }
             }
             return listng;
         }
@@ -77,7 +77,7 @@ namespace Project_1.Business_Layer
         public bool ExistKTSVL(int ma, int lop)
         {
             List<LopSinhVien> list = GetAllData();
-            if (list.Find(m => m.MaSV == ma && m.Malop==lop) != null)
+            if (list.Find(m => m.MaSV == ma && m.Malop == lop) != null)
                 return true;
             return false;
         }
@@ -101,23 +101,23 @@ namespace Project_1.Business_Layer
         {
             DA.Insert(ng);
         }
-        public void Delete(int ma,int lop)
+        public void Delete(int ma,int lop) 
         {
-                DA.DeleteLSV(ma,lop);
-           
+            DA.DeleteLSV(ma,lop);
         }
         public void Edit(int id,int lop, LopSinhVien newInfo)
         {
             DA.Edit(id,lop, newInfo);
         }
-        public List<LopSinhVien> Tim(LopSinhVien ng)
+        public List<SinhVien> Tim(LopSinhVien ng)
         {
             List<LopSinhVien> list = GetAllData();
-            List<LopSinhVien> kq = new List<LopSinhVien>();
+            List<SinhVien> kq = new List<SinhVien>();
             //Voi gai tri ngam dinh ban dau
             if (ng.MaSV == 0 && ng.Malop == 0 && ng.Namhocbdau==null && ng.Hockybdau==0)
             {
-                kq = list;
+                foreach (var a in list)
+                    kq.Add(a.Sinhvien);
             }
             //Tim theo ma sv
             else if (ng.MaSV != 0)
@@ -125,7 +125,7 @@ namespace Project_1.Business_Layer
                 foreach (LopSinhVien lsv in list)
                     if (lsv.MaSV == ng.MaSV)
                     {
-                        kq.Add(new LopSinhVien(lsv));
+                        kq.Add((new LopSinhVien(lsv).Sinhvien));
                     }
             }
             // Tim theo ma lop
@@ -134,7 +134,7 @@ namespace Project_1.Business_Layer
                 foreach (LopSinhVien lsv in list)
                     if (lsv.Malop == ng.Malop)
                     {
-                        kq.Add(new LopSinhVien(lsv));
+                        kq.Add((new LopSinhVien(lsv).Sinhvien));
                     }
             }
             // Tim kiem theo nam hoc
@@ -147,13 +147,13 @@ namespace Project_1.Business_Layer
                     string[] b = ng.Namhocbdau.Split('-');
                     if (lsv.Namhocbdau.Contains(ng.Namhocbdau) || lsv.Namhockthuc.Contains(ng.Namhocbdau))
                     {
-                        kq.Add(new LopSinhVien(lsv));
+                        kq.Add((new LopSinhVien(lsv).Sinhvien));
                     }
                     else
 					{
                         if (int.Parse(b[0]) >= int.Parse(a[0]) && int.Parse(b[1]) <= int.Parse(c[1]))
-                            kq.Add(new LopSinhVien(lsv));
-					}                        
+                            kq.Add((new LopSinhVien(lsv).Sinhvien));
+                    }                        
                 }                    
                     
             }
@@ -163,7 +163,7 @@ namespace Project_1.Business_Layer
                 foreach (LopSinhVien lsv in list)
                     if (ng.Hockybdau >= lsv.Hockybdau && ng.Hockybdau<= lsv.Hockykthuc)
                     {
-                        kq.Add(new LopSinhVien(lsv));
+                        kq.Add((new LopSinhVien(lsv).Sinhvien));
                     }
             }
             return kq;

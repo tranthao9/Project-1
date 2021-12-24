@@ -56,6 +56,9 @@ namespace Project_1.UI
 			Console.SetCursorPosition(x + 46 + maxht, y); Console.Write("QUÊ QUÁN");
 			Console.SetCursorPosition(x + 50 + maxht + maxdc, y); Console.Write("SĐT");
 			Console.SetCursorPosition(x + 54 + maxdc + maxht + 10, y); Console.Write("Email");
+			Console.SetCursorPosition(x + 54 + maxdc + maxht + 10 + 30, y); Console.Write("LỚP");
+			Console.SetCursorPosition(x + 64 + maxdc + maxht + 10+30, y); Console.Write("NĂM HỌC BẮT ĐẦU");
+			Console.SetCursorPosition(x + 70 + maxdc + maxht + 10 + 30+15, y); Console.Write("HỌC KỲ BẮT ĐẦU");
 			int d = 1;
 			for (int i = list.Count - 1; i >= 0; i--)
 			{
@@ -68,6 +71,19 @@ namespace Project_1.UI
 				Console.SetCursorPosition(x + 46 + maxht, y); Console.Write(list[i].Diachi);
 				Console.SetCursorPosition(x + 50 + maxht + maxdc, y); Console.Write(list[i].Sdt);
 				Console.SetCursorPosition(x + 54 + maxdc + maxht + 10, y); Console.Write(list[i].Email);
+				int a=-1;
+				for(int j= BLL.GetAllData().Count-1; j>=0;--j)
+				{
+					if (BLL.GetAllData()[j].MaSV == list[i].MaSV)
+					{
+						a = j;
+						break;
+					}	
+				}
+				Console.SetCursorPosition(x + 54 + maxdc + maxht + 10 + 30, y); Console.Write(BLL.GetAllData()[a].Malop);
+				Console.SetCursorPosition(x + 64 + maxdc + maxht + 10 + 30, y); Console.Write(BLL.GetAllData()[a].Namhocbdau);
+				Console.SetCursorPosition(x + 70 + maxdc + maxht + 10 + 30 + 15, y); Console.Write(BLL.GetAllData()[a].Hockybdau);
+				
 				if ((d) == n + 1) break;
 			}
 			Console.WriteLine();
@@ -77,7 +93,6 @@ namespace Project_1.UI
 		}
 		public void Nhap()
 		{
-			Console.OutputEncoding = Encoding.Unicode;
 			Console.InputEncoding = Encoding.Unicode;
 			do
 			{
@@ -93,20 +108,20 @@ namespace Project_1.UI
 				Console.WriteLine();
 				Console.WriteLine("SDT:                                         Email:");
 				Console.WriteLine();
-				Console.WriteLine("Lớp :                                        Năm học bắt đầu : ");
+				Console.WriteLine("Lớp :                    Kỳ học :                     Năm học bắt đầu : ");
 				int x = 0, y = 15;
 				int v = Hien(BL.GetAllData(), x, y, "Enter để lưu, Nhấn ESC để thoát và lưu ,phím bất kỳ thoát nhưng không lưu!!! ", BL.GetAllData().Count);
 				SinhVien s = new SinhVien();
 				LopHoc cn = new LopHoc();
 				while (true)
 				{
-					cn.Mach = Project_1.Utility.Congcu.Ma(18, 5, 0, 13, cn.Mach, 4, "Nhập sai dữ liệu mã chuyên ngành gồm 3 chữ số và khác 0 vui lòng nhập lại ! ");
+					cn.Mach = Project_1.Utility.Congcu.Ma(18, 5, 0, 13, cn.Mach, 4, "Nhập sai dữ liệu mã chuyên ngành gồm 4 chữ số và khác 0 vui lòng nhập lại ! ");
 					if (BLLL.ExistCN(cn.Mach))
 					{
-						if (!(BL.Exist(cn.Mach)))
+						if (BL.GetMa(cn.Mach)==0)
 							s.MaSV = int.Parse(cn.Mach + "0001");
 						else
-							s.MaSV = BL.GetMa()+1;
+							s.MaSV = BL.GetMa(cn.Mach)+1;
 						break;
 					}	
 					else
@@ -124,25 +139,36 @@ namespace Project_1.UI
 				LopSinhVien lsv = new LopSinhVien();
 				while (true)
 				{
-					lsv.Malop = Project_1.Utility.Congcu.Ma(12, 11, 0, 13, lsv.Malop, 6, "Định dạng sai, Mã lớp phải gốm 6 chữ số !");
+					lsv.Malop = Project_1.Utility.Congcu.Ma(8, 11, 0, 13, lsv.Malop, 6, "Định dạng sai, Mã lớp phải gốm 6 chữ số !");
 					if (BLL.ExistL(lsv.Malop))
 						break;
 					else
 					{
 						Console.SetCursorPosition(0, 13); Console.Write("Mã lớp không tồn tại ! vui lòng nhập lại !!! ");
-						Console.SetCursorPosition(12, 11); Console.Write("                    ");
+						Console.SetCursorPosition(8, 11); Console.Write("                 ");
 					}
 				}
+				while(true)
+				{
+					Console.SetCursorPosition(35, 11); lsv.Hockybdau = int.Parse(Console.ReadLine());
+					if (lsv.Hockybdau >= 1)
+						break;
+					else
+					{
+						Console.SetCursorPosition(0, 13); Console.Write("kỳ học không hợp lý");
+						Console.SetCursorPosition(35, 11); Console.Write("              ");
+					}	
+				}	
 				while (true)
 				{
 					char[] p = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-					Console.SetCursorPosition(65,11); lsv.Namhocbdau = Console.ReadLine();
+					Console.SetCursorPosition(75,11); lsv.Namhocbdau = Console.ReadLine();
 					string[] a = lsv.Namhocbdau.Split('-');
 					if (!(lsv.Namhocbdau.Contains('-')))
 					{
 
 						Console.SetCursorPosition(0, 13); Console.WriteLine("Định dạng sai,vui lòng nhập lại ! VD: 2008-2009 ");
-						Console.SetCursorPosition(65,11); Console.Write("                               ");
+						Console.SetCursorPosition(75,11); Console.Write("                               ");
 					}
 					else
 					{
@@ -176,10 +202,17 @@ namespace Project_1.UI
 					}
 
 				}
+
 				lsv.MaSV = s.MaSV;
-				lsv.Hockybdau = 1;
+				if ((lsv.Hockybdau % 2) == 0)
+				{
+					lsv.Hockykthuc = lsv.Hockybdau;
+				}
+				else
+				{
+					lsv.Hockykthuc = lsv.Hockybdau + 1;
+				}
 				lsv.Namhockthuc = lsv.Namhocbdau;
-				lsv.Hockykthuc = 2;
 				lsv.Active = 0;
 				Console.SetCursorPosition(80, v);
 				ConsoleKeyInfo kt = Console.ReadKey();
@@ -209,6 +242,32 @@ namespace Project_1.UI
 				else BL.Delete(ma);
 			} while (true);
 		}
+		public void XoaL()
+		{
+			do
+			{
+				Console.Clear();
+				Hien(BL.GetAllData(), 0, 3, "Nhập lớp sinh viên cần xóa, thoát nhập 0!", BL.GetAllData().Count);
+				Console.WriteLine();
+				Console.Write("Nhập mã lớp muốn xóa : ");
+				int ma = int.Parse(Console.ReadLine());
+				Console.Write("Nhập mã sinh viên muốn xóa : ");
+				int ma1 = int.Parse(Console.ReadLine());
+				if (ma == 0 || ma1 == 0) return;
+				else
+				{
+					if (BLL.ExistKTSVL(ma1, ma))
+					{
+						BLL.Delete(ma1, ma);
+					}
+					else
+					{
+						Console.WriteLine("Không tồn tại mã này !");
+					}
+				}
+
+			} while (true);
+		}
 		public void Tim()
 		{
 			Console.WriteLine("\t\t\t\t\t\t\t\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
@@ -222,6 +281,12 @@ namespace Project_1.UI
 			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
 			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
 			Console.WriteLine("\t\t\t\t\t\t\t\t║   2. Theo tên sinh viên      ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   3. Theo năm học            ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
+			Console.WriteLine("\t\t\t\t\t\t\t\t║   4. Theo học kỳ             ║");
 			Console.WriteLine("\t\t\t\t\t\t\t\t║══════════════════════════════║");
 			Console.WriteLine("\t\t\t\t\t\t\t\t║                              ║");
 			Console.WriteLine("\t\t\t\t\t\t\t\t║   0. Exit                    ║");
@@ -275,6 +340,52 @@ namespace Project_1.UI
 						}
 						Console.ReadKey();
 						if (a == null)
+							break;
+					} while (true);
+					break;
+				case 3:
+					string g;
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 3. Nhập năm học             ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(80, 2); Console.SetCursorPosition(80, 2);  g = (Console.ReadLine());
+						if (BLL.ExistKTNH(g))
+						{
+							List<SinhVien> list = BLL.Tim(new LopSinhVien(0, 0, g, 0, null, 0, 0));
+							Hien(list, 0, 6, "Nhấn Enter để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(50, 5); Console.WriteLine("KHông tồn tại năm học này ! Tiếp tục hoặc nhấn Enter để thoát ! ");
+						}
+						Console.ReadKey();
+						
+					} while(g==null);
+					break;
+				case 4:
+					do
+					{
+						Console.Clear();
+						Console.SetCursorPosition(0, 0); Console.WriteLine("\t\t\t\t\t\t╔══════════════════════════════════════════════════════════════════╗");
+						Console.SetCursorPosition(0, 1); Console.WriteLine("\t\t\t\t\t\t║                             ║                                    ║");
+						Console.SetCursorPosition(0, 2); Console.WriteLine("\t\t\t\t\t\t║ 4. Nhập học kỳ              ║                                    ║");
+						Console.SetCursorPosition(0, 3); Console.WriteLine("\t\t\t\t\t\t╚══════════════════════════════════════════════════════════════════╝");
+						Console.SetCursorPosition(90, 2); Console.SetCursorPosition(80, 2); int s = int.Parse(Console.ReadLine());
+						if (BLL.ExistKTHK(s))
+						{
+							List<SinhVien> list = BLL.Tim(new LopSinhVien(0, 0, null, s, null, 0, 0));
+							Hien(list, 0, 6, "Nhấn 0 để thoát! ", list.Count);
+						}
+						else
+						{
+							Console.SetCursorPosition(60, 5); Console.WriteLine("KHông tồn tại học kỳ này ! Tiếp tục hoặc nhấn 0 để thoát ! ");
+						}
+						Console.ReadKey();
+						if (s == 0)
 							break;
 					} while (true);
 					break;
@@ -608,11 +719,34 @@ namespace Project_1.UI
 						break;
 					case 4:
 						Console.Clear();
-						Sua();
+						Console.Write(" BẠN MUỐN SỬA THÔNG TIN CÁ NHÂN (T) HAY THÔNG TIN LỚP HỌC (H) "); char x = char.Parse(Console.ReadLine());
+						switch (x.ToString().ToUpper())
+						{
+							case "T":
+								Sua();
+								break;
+							case "H":
+								FormLopSinhVien s = new FormLopSinhVien();
+								s.Sua();
+								break;
+							default:
+								break;
+						}
 						break;
 					case 5:
 						Console.Clear();
-						Xoa();
+						Console.Write(" BẠN MUỐN XÓA THEO LỚP(L) HAY XÓA TẤT CẢ THÔNG TIN(A) "); char z = char.Parse(Console.ReadLine());
+						switch(z.ToString().ToUpper())
+						{
+							case "A":
+								Xoa();
+								break;
+							case "L":
+								XoaL();
+								break;
+							default:
+								break;
+						}
 						break;
 					case 0:
 						check = 1;

@@ -501,10 +501,12 @@ namespace Project_1.UI
 				switch (mode)
 				{
 					case 1:
+						Console.Clear();
 						Console.WriteLine("Mời bạn bắt đầu nhập thông tin");
 						Nhap(); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 2:
+						Console.Clear();
 						Hien(BL.GetAllData(), 0, 3, "", BL.GetAllData().Count); Console.WriteLine("Nhấn phím bất kì để tiếp tục"); Console.ReadLine(); Console.Clear();
 						break;
 					case 3:

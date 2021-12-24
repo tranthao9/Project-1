@@ -11,11 +11,11 @@ namespace Project_1.Business_Layer.Interface
 	{
 		List<LopSinhVien> GetAllData();
 		void Insert(LopSinhVien ng);
-		void Delete(int ma, int lop);
-		List<LopSinhVien> Tim(LopSinhVien ng);
+		void Delete(int ma,int lop);
+		List<SinhVien> Tim(LopSinhVien ng);
 		bool ExistL(int ma);
 		bool ExistSV(int ma);
-		void Edit(int id, int lop, LopSinhVien newInfo);
+		void Edit(int id,int lop,LopSinhVien newInfo);
 		bool ExistKTL(int ma);
 		bool ExistKTSV(int ma);
 		bool ExistKTNH(string ma);

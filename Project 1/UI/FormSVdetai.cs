@@ -91,7 +91,7 @@ namespace Project_1.UI
 			Console.SetCursorPosition(x + 77 + tsv + tengvpb + tengvhd, y); Console.Write("ĐIỂM GVPB");
 			Console.SetCursorPosition(x + 88 + tsv + tengvpb + tengvhd, y); Console.Write("TỔNG ĐIỂM");
 			Console.SetCursorPosition(x + 100 + tsv + tengvpb + tengvhd, y); Console.Write("XẾP LOẠI");
-			Console.SetCursorPosition(x + 120 + tsv + tengvpb + tengvhd, y); Console.Write("ĐÁNH GIÁ");
+			Console.SetCursorPosition(x + 115 + tsv + tengvpb + tengvhd, y); Console.Write("ĐÁNH GIÁ");
 			int d = 1;
 			for (int i = list.Count - 1; i >= 0; i--)
 			{
@@ -108,7 +108,7 @@ namespace Project_1.UI
 				Console.SetCursorPosition(x + 77 + tsv  + tengvpb + tengvhd, y); Console.Write(BL.Diemgvpb( list[i]));
 				Console.SetCursorPosition(x + 88 + tsv  + tengvpb + tengvhd, y); Console.Write(BL.TongDiem( list[i]));
 				Console.SetCursorPosition(x + 100 + tsv  + tengvpb + tengvhd, y); Console.Write(BL.xeploai( list[i]));
-				Console.SetCursorPosition(x + 120 + tsv  + tengvpb + tengvhd, y); Console.Write(BL.Danhgia( list[i]));
+				Console.SetCursorPosition(x + 115 + tsv  + tengvpb + tengvhd, y); Console.Write(BL.Danhgia( list[i]));
 				if ((d) == n + 1) break;
 			}
 			Console.WriteLine();
@@ -285,7 +285,7 @@ namespace Project_1.UI
 			Console.WriteLine("\t\t\t\t\t\t\t\t╚══════════════════════════════╝");
 			Console.WriteLine();
 			Console.WriteLine();
-			Console.SetCursorPosition(65, 42); Console.Write("Nhập lựa chọn : "); int n = int.Parse(Console.ReadLine());
+			Console.SetCursorPosition(65, 32); Console.Write("Nhập lựa chọn : "); int n = int.Parse(Console.ReadLine());
 			switch (n)
 			{
 				case 1:
@@ -505,7 +505,7 @@ namespace Project_1.UI
 							
 							foreach (var a in BL.GetAllData())
 							{
-								if (BL.xeploai(a) == "Trung bình khá")
+								if (BL.xeploai(a) == "TB khá")
 									list.Add(a);
 
 							}

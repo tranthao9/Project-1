@@ -25,20 +25,36 @@ namespace Project_1.Business_Layer
             
             return listSV;
         }
-        //kiểm tra một mã sinh viên xem đã tồn tại hay chưa
-        public bool Exist(int ma)
-        {
-            List<LopSinhVien> list = lsvDA.GetAllData();
-            if (list.Find(m => m.Lop == null) != null)
-                return false;
-            if (list.Find(m => m.Lop.Mach == ma) != null)
-                return true;
-            return false;
-        }
-        //lấy mã sinh viên cuối cùng
-        public int GetMa()
+		//kiểm tra một mã sinh viên xem đã tồn tại hay chưa
+		public bool Exist(int ma)
 		{
-                return GetAllData()[GetAllData().Count-1].MaSV;
+			List<LopSinhVien> list = lsvDA.GetAllData();
+			if (list.Find(m => m.Lop == null) != null)
+				return false;
+			if (list.Find(m => m.Lop.Mach == ma) != null)
+				return true;
+			return false;
+		}
+		//lấy mã sinh viên cuối cùng
+		public int GetMa(int ma)
+		{
+            List<LopSinhVien> list = lsvDA.GetAllData();
+            int s = 0;
+            if (!(Exist(ma)))
+                return s;
+            else
+			{
+                for (int i = list.Count - 1; i >= 0; i--)
+                {
+                    if(list[i].Lop.Mach==ma)
+                    {
+                        s = list[i].MaSV;
+                        break;
+                    }
+                }
+            }                
+            
+            return s;
 		}
         //kiểm tra một tên sinh viên xem đã tồn tại hay chưa
         public bool ExistTEN(string ma)
@@ -51,14 +67,9 @@ namespace Project_1.Business_Layer
         public void Insert(SinhVien sv)
 		{
             Console.InputEncoding = Encoding.UTF8;
-            if (sv.TenSV != "" && sv.Diachi != "")
-            {
-                sv.TenSV = Project_1.Utility.Congcu.Chuanhoaxau(sv.TenSV);
-                sv.Diachi = Project_1.Utility.Congcu.Chuanhoaxau(sv.Diachi);
-                svDA.Insert(sv);
-            }
-            else
-                throw new Exception("Du lieu sai");
+            sv.TenSV = Project_1.Utility.Congcu.Chuanhoaxau(sv.TenSV);
+            sv.Diachi = Project_1.Utility.Congcu.Chuanhoaxau(sv.Diachi);
+            svDA.Insert(sv);
         }
     
         public void Delete(int masv)
@@ -71,7 +82,7 @@ namespace Project_1.Business_Layer
                 foreach (var s in lsv)
                 {
                     if (s.MaSV == masv)
-                        lsvDA.Delete(masv);
+                        lsvDA.Delete(masv,s.Malop);
                 }
                 foreach (var s in ldt)
                 {

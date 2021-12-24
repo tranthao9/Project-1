@@ -43,7 +43,7 @@ namespace Project_1.Utility
 			string s = hoten.Substring(0, hoten.LastIndexOf(' '));
 			return s;
 		}
-		public static int Ma(int x, int y, int i, int j, int s,int ma,string m)
+		public static int Ma(int x, int y, int i, int j,int s,int ma,string m)
 		{
 			while (true)
 			{

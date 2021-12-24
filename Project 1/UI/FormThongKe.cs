@@ -12,9 +12,11 @@ namespace Project_1.UI
 {
 	class FormThongKe
 	{
+		
 		ISVDetaiBusiness BL = new SVDetaiBusiness();
 		public void Menu()
 		{
+			Console.Clear();
 			Console.WriteLine("\t\t                                              ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
 			Console.WriteLine("\t\t                                              ▐  CHỌN THÔNG TIN MUỐN THỐNG KÊ  ▌");
 			Console.WriteLine("\t\t                                              ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
@@ -336,7 +338,7 @@ namespace Project_1.UI
 
 							foreach (var a in BL.GetAllData())
 							{
-								if (BL.xeploai(a) == "Trung bình khá")
+								if (BL.xeploai(a) == "TB khá")
 									list.Add(a);
 
 							}
